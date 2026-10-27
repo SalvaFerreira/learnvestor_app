@@ -123,7 +123,7 @@ O resultado tem cerca de 22 MB, porque o CanvasKit vem do CDN da Google. A demo 
 
 ## 10. Website, waitlist e feedback
 
-O website (repositório LearnVestor_Website, GitHub Pages) apresenta o produto e liga à demo. A waitlist e a caixa de feedback são do website, não da demo. Gravam num pequeno projeto Supabase do website, através de duas RPCs públicas (`join_waitlist` e `submit_feedback`) que só permitem inserir e não deixam ler nada. A configuração está em `LearnVestor_Website/supabase/`.
+O website (repositório LearnVestor_Website, GitHub Pages) apresenta o produto e liga à demo. A waitlist e a caixa de feedback são do website, não da demo. Os dois formulários enviam para o Formspree (`FORMSPREE_ENDPOINT` em `docs/script.js`), que manda cada envio por email e o guarda no painel do Formspree. Cada envio leva o tipo (`waitlist` ou `feedback`), a origem (`website` ou `demo`) e o idioma do browser. Não há base de dados nem servidor do website.
 
 ## 11. Limitações conhecidas
 
