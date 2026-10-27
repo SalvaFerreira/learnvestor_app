@@ -2,7 +2,7 @@
 
 ## Contexto
 
-**O que já existe:** o MVP técnico em `App/`. O backend Supabase faz a lógica de jogo no servidor, com RLS e testes. Há Edge Functions para dados de mercado, pagamentos e eliminação de conta, e uma app Flutter com login, onboarding, lições, carteira virtual, perfil e paywall. A app corre de ponta a ponta com o servidor de demonstração.
+**O que já existe:** o MVP técnico em `App/`. O backend Supabase faz a lógica de jogo no servidor, com RLS e testes. Há Edge Functions para dados de mercado e eliminação de dados, e uma app Flutter sem login (utilizador anónimo por dispositivo) com onboarding, lições, carteira virtual e perfil. A app corre de ponta a ponta com o servidor de demonstração.
 
 **O que falta**, em três dimensões:
 1. **Usável:** a app nunca correu numa infraestrutura real, nem num telemóvel, nem nas lojas.
@@ -10,6 +10,7 @@
 3. **Escalável:** a base está preparada, mas há pontos que só aguentam até alguns milhares de utilizadores ativos.
 
 **Decisões tomadas:**
+- **App pública e gratuita** (decidido a 2026-10-27): sem login, sem subscrição, sem compras e sem paywall. Cada dispositivo tem um utilizador anónimo do Supabase; todas as lições são gratuitas. As vidas e as gemas mantêm-se como mecânica de jogo, mas só se ganham a jogar.
 - Lançar **primeiro em Portugal**, com conteúdo PT-PT e temas locais.
 - O conteúdo é criado com **rascunhos de IA e revisão humana**.
 - O **B2B** (escolas e empresas) só avança **depois** de o B2C provar que retém utilizadores.
@@ -36,7 +37,7 @@
 - **Conteúdo:** 13 lições novas em rascunho (23 no total) para revisão humana.
 - **Qualidade:** E2E no browser a correr no CI; ícones, splash e nome da app.
 
-**À espera das contas:** P0 #1 a #6, #8 a #10 (ambientes, emails, login social, builds das lojas, dados de mercado, legal, observabilidade, analytics e push).
+**À espera das contas:** P0 #1, #2, #4 a #6, #8 a #10 (ambientes, proteção contra abuso, builds das lojas, dados de mercado, legal, observabilidade, analytics e push).
 
 ## 1. Lacunas por prioridade
 
@@ -45,11 +46,11 @@
 | # | Lacuna | O que fazer | Onde |
 |---|---|---|---|
 | 1 | Sem ambientes reais | Projetos Supabase staging e prod (UE), Vault, secrets, deploy por GitHub Actions | `App/.github/workflows/deploy.yml`, `App/README.md` |
-| 2 | Email de login | Domínio `learnvestor.app` com SPF/DKIM, SMTP Resend, templates PT/EN, **captcha Turnstile no pedido de código** (evita abuso de envio de emails) | `supabase/config.toml` (`[auth.captcha]`), `sign_in_screen.dart` |
-| 3 | Login social | Sign in with Apple e Google, porque aumenta muito a conversão no registo. A Apple é obrigatória quando há Google. | `sign_in_screen.dart`, `config.toml` |
+| 2 | Abuso de utilizadores anónimos | **Captcha Turnstile no início de sessão anónimo**, limite por IP (`anonymous_users`) e limpeza periódica de utilizadores anónimos inativos | `supabase/config.toml` (`[auth.captcha]`, `[auth.rate_limit]`), `start_screen.dart` |
+| 3 | ~~Login~~ | Removido: a app não tem contas. O progresso fica ligado ao dispositivo e não passa para outro telemóvel. | — |
 | 4 | Builds das lojas | Android SDK, Codemagic para iOS (sem Mac), bundle ids, assinatura, ícones e splash (`flutter_launcher_icons`, `flutter_native_splash`), `PrivacyInfo.xcprivacy`, formulário Data Safety, classificação etária, TestFlight e Play Internal Testing | `apps/mobile/android`, `apps/mobile/ios`, novo `codemagic.yaml` |
 | 5 | Dados de mercado licenciados | Contratar um plano com direitos de exibição que cubra a **Euronext Lisboa**, e confirmar que a Galp, a EDP, o BCP e a Jerónimo Martins vêm com dados | `supabase/functions/_shared/market.ts` |
-| 6 | Legal | Constituir a empresa. Atualizar a privacidade (a atual fala em Google Analytics; faltam RevenueCat, Sentry, PostHog e Resend). Termos com subscrições, gemas e reembolsos. Registo de atividades RGPD, DPAs e revisão por um jurista. O tom tem de ser educativo, sem recomendações (risco CMVM). | `LearnVestor_Website/docs/*.html`, `lib/core/config.dart` (`termsVersion`) |
+| 6 | Legal | Constituir a empresa. A privacidade e os termos do website já descrevem a app gratuita e sem conta (2026-10-27); falta acrescentar Sentry e PostHog quando forem ativados. Registo de atividades RGPD, DPAs e revisão por um jurista. O tom tem de ser educativo, sem recomendações (risco CMVM). | `LearnVestor_Website/docs/*.html`, `lib/core/config.dart` (`termsVersion`) |
 | 7 | Nomes de utilizador públicos | A classificação mostra usernames, por isso é preciso uma lista de palavras proibidas, a opção de reportar e um admin para renomear | Nova migração (`private.is_username_allowed` + `username_reports`), `complete_onboarding` |
 | 8 | Observabilidade | Sentry com DSN, alertas quando o `market-data-sync` falha ou as cotações ficam velhas, uptime monitor, PITR ativo e um runbook de incidentes | `market-data-sync/index.ts`, `20261023120700_cron.sql` |
 | 9 | Analytics com consentimento | PostHog UE, ativado só se `consents.analytics = true`, com um plano de eventos (secção 4) | Novo `lib/services/analytics.dart` |
@@ -104,13 +105,10 @@
 - Feedback dentro da app e FAQ.
 
 **Backoffice:**
-- Pesquisar utilizadores, dar Plus promocional e moderar usernames e reports.
+- Pesquisar utilizadores e moderar usernames e reports.
 - **Qualidade do conteúdo:** taxa de erro por exercício e abandono por lição, numa view SQL sobre `lesson_attempts`.
 
-**Monetização a funcionar:**
-- Produtos nas lojas: Plus mensal e anual com trial de 7 dias, e packs de gemas.
-- Paywall nos momentos certos (sem vidas, lição Avançada).
-- Preços a testar (por exemplo 5,99 €/mês e 39,99 €/ano) com A/B no PostHog.
+**Sem monetização:** a app é gratuita para todos. Os custos de infraestrutura e de dados de mercado têm de ser cobertos por outra via (a decidir).
 
 **Acessibilidade:** semântica e labels, texto dinâmico, contraste e testes com leitor de ecrã.
 
@@ -128,18 +126,17 @@
 **Novos mercados:** PT-BR (conteúdo regional próprio: Tesouro Direto, IR, B3), depois EN e ES.
 
 **Tutor de IA ("explica o meu erro"):**
-- Edge Function com Claude, com limite diário por plano e sem conselhos de investimento personalizados.
+- Edge Function com Claude, com limite diário por utilizador e sem conselhos de investimento personalizados.
 
 **B2B:**
 - Organizações, turmas e lugares (seats).
 - Painel do professor em Next.js, com atribuição de trilhos e relatórios.
-- Faturação Stripe.
 - Contas geridas por escolas para menores de 16, com consentimento da escola.
 - Piloto com 1 ou 2 escolas portuguesas.
 
 **Aquisição:**
 - Website em Next.js com SEO (glossário financeiro, calculadoras, artigos).
-- ASO e checkout web (RevenueCat Web Billing).
+- ASO.
 
 ---
 
@@ -153,7 +150,7 @@
 | **Impostos e Estado** (PT) | Recibo de vencimento (bruto vs líquido, Segurança Social, retenção na fonte) · IRS (escalões, deduções, IRS Jovem, mais-valias a 28 %) · Poupança do Estado (Certificados de Aforro e do Tesouro) · Reforma (Segurança Social, PPR e benefícios fiscais) |
 | **Investimento** | Fundamentos (o que já existe) · Ações e bolsa (ordens, dividendos, Euronext Lisboa) · Obrigações e juros · ETFs (acumulação vs distribuição, domicílio, custos) |
 | **Mente do investidor** | Enviesamentos (FOMO, aversão à perda, ancoragem) · Burlas (esquemas Ponzi, alertas CMVM, "demasiado bom para ser verdade") · Cripto: riscos |
-| **Avançado** (Plus) | Ler as contas de uma empresa · Avaliação (P/E, dividend yield) · Construir e rebalancear uma carteira · Independência financeira e longo prazo |
+| **Avançado** | Ler as contas de uma empresa · Avaliação (P/E, dividend yield) · Construir e rebalancear uma carteira · Independência financeira e longo prazo |
 
 **Fluxo:**
 1. **Currículo como código.** Um ficheiro `packages/content/curriculum.yaml` define trilhos, unidades e lições, com objetivos de aprendizagem e factos-chave.
@@ -179,10 +176,10 @@
 
 | Fase | Quando (1 a 3 devs) | Entregáveis | Só avança quando |
 |---|---|---|---|
-| **A. Fundações de produção** | Semanas 1 a 3 | P0 1, 2, 5, 7, 8; empresa e legal iniciados; pipeline de conteúdo a funcionar | Staging com deploy automático; login por email real; cotações reais da Euronext Lisboa |
+| **A. Fundações de produção** | Semanas 1 a 3 | P0 1, 2, 5, 7, 8; empresa e legal iniciados; pipeline de conteúdo a funcionar | Staging com deploy automático; início anónimo com captcha; cotações reais da Euronext Lisboa |
 | **B. Beta fechado** (com a waitlist) | Semanas 4 a 10 | P0 3, 4, 9, 10; 60 lições; prática; ficha de ação; missões; reportar erro; backoffice mínimo; TestFlight e Play Internal | Ativação (1ª lição no dia 0) ≥ 60 %; D7 ≥ 20 %; crash-free ≥ 99,5 %; zero erros de conteúdo graves por resolver |
-| **C. Lançamento público em Portugal** | Semanas 11 a 18 | 120 a 150 lições; monetização ligada; ligas; ferramentas e calculadoras; offline; legal final; ASO; email de lançamento para a waitlist | D30 ≥ 10 %; início de trial ≥ 5 % dos ativos; conversão trial→pago ≥ 30 %; estabilidade com 10 mil utilizadores (load test) |
-| **D. Crescimento** | Meses 5 a 9 | P2 por ordem de impacto: escala conforme as métricas, PT-BR, tutor de IA, referral, website SEO e piloto B2B | Retenção estável e receita a cobrir os custos de infraestrutura e de dados |
+| **C. Lançamento público em Portugal** | Semanas 11 a 18 | 120 a 150 lições; ligas; ferramentas e calculadoras; offline; legal final; ASO; email de lançamento para a waitlist | D30 ≥ 10 %; estabilidade com 10 mil utilizadores (load test) |
+| **D. Crescimento** | Meses 5 a 9 | P2 por ordem de impacto: escala conforme as métricas, PT-BR, tutor de IA, referral, website SEO e piloto B2B | Retenção estável e financiamento a cobrir os custos de infraestrutura e de dados |
 
 As metas de retenção são referências para apps de aprendizagem e devem ser ajustadas com os dados reais da beta.
 
@@ -190,17 +187,17 @@ As metas de retenção são referências para apps de aprendizagem e devem ser a
 
 ## 4. Analytics (eventos mínimos, só com consentimento)
 
-- **Aquisição e ativação:** `signup_started`, `signup_completed`, `onboarding_completed` (objetivo, nível), `lesson_started`, `lesson_completed` (lição, estrelas, erros, duração), `lesson_failed`.
+- **Aquisição e ativação:** `first_open`, `onboarding_completed` (objetivo, nível), `lesson_started`, `lesson_completed` (lição, estrelas, erros, duração), `lesson_failed`.
 - **Hábito:** `streak_extended`, `streak_lost`, `practice_completed`, `notification_opened`.
 - **Valor:** `trade_placed`, `quest_completed`, `tool_used` (calculadora).
-- **Monetização:** `paywall_viewed` (gatilho), `trial_started`, `purchase_completed`, `out_of_hearts`.
-- **Funis a acompanhar:** registo → 1ª lição → D1 → D7; paywall → trial → pago; lição → missão → trade.
+- **Vidas:** `out_of_hearts`, `hearts_refilled`.
+- **Funis a acompanhar:** 1ª abertura → 1ª lição → D1 → D7; lição → missão → trade.
 
 ---
 
 ## 5. Custos mensais estimados no lançamento (a confirmar nas páginas de preços)
 
-Supabase Pro com compute pequeno (cerca de 25 a 60 €), dados de mercado com licença (cerca de 50 a 200 €), Resend, Sentry e PostHog nos escalões gratuitos ou baixos (0 a 50 €), RevenueCat (grátis até um patamar de receita), Codemagic (free tier ou cerca de 50 €) e domínio. **Total: cerca de 150 a 400 € por mês.**
+Supabase Pro com compute pequeno (cerca de 25 a 60 €), dados de mercado com licença (cerca de 50 a 200 €), Sentry e PostHog nos escalões gratuitos ou baixos (0 a 50 €), Codemagic (free tier ou cerca de 50 €) e domínio. **Total: cerca de 150 a 400 € por mês.**
 
 Custos únicos: Apple Developer 99 $/ano, Google Play 25 $, jurista e constituição da empresa.
 
@@ -215,13 +212,13 @@ Custos únicos: Apple Developer 99 $/ano, Google Play 25 $, jurista e constitui�
 | Licença de dados de mercado | Contrato antes da beta pública; fornecedor trocável via `MarketDataProvider` |
 | Retenção fraca ("cansaço de gamificação") | Prática, missões, ferramentas úteis e conteúdo local; decidir com base nos dados da beta |
 | Revisão das lojas (apps de finanças) | Aviso educativo bem visível; nada de dinheiro real; eliminação de conta; política de privacidade completa |
-| Abuso (bots e emails) | Captcha no OTP; rate limits já nas RPCs; App Check / Play Integrity na fase C |
+| Abuso (bots a criar utilizadores anónimos) | Captcha no início anónimo; rate limits já nas RPCs; App Check / Play Integrity na fase C |
 
 ---
 
 ## 7. Verificação contínua
 
 - **Cada nova RPC ou tabela:** testes em `App/tools/db-tests/tests/`, grants em `*_api_grants.sql` e `npm run fixtures` para o teste de contrato da app.
-- **E2E no CI:** transformar o percurso Playwright (feito à mão nesta sessão) em `App/tools/e2e/`. Corre no CI contra o `dev-server.mjs`: login, onboarding, lição, trade e perfil.
+- **E2E no CI:** transformar o percurso Playwright (feito à mão nesta sessão) em `App/tools/e2e/`. Corre no CI contra o `dev-server.mjs`: 1ª abertura sem login, onboarding, lição, trade e perfil.
 - **Staging:** smoke test após cada deploy, cron de mercado monitorizado e load test k6 antes do lançamento.
 - **Beta:** painel PostHog com os funis da secção 4 e crash-free no Sentry, revistos todas as semanas.

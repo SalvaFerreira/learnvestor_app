@@ -1,5 +1,11 @@
 # LearnVestor: arquitetura técnica para um produto global
 
+> **Atualização de 2026-10-27: app pública e gratuita.** O LearnVestor deixou de ter login e monetização.
+> - **Sem login:** no primeiro arranque, a app cria um utilizador anónimo do Supabase (`signInAnonymously`) para o dispositivo. Não há email, código, Apple ou Google. O servidor continua a decidir tudo (RPCs, RLS); o progresso fica ligado ao dispositivo.
+> - **Sem pagamentos:** foram removidos o Plus, o RevenueCat, o paywall, as compras de gemas e as tabelas `entitlements` e `purchases`. Todas as lições são gratuitas. As vidas e as gemas continuam como mecânica de jogo e só se ganham a jogar.
+>
+> O que este documento diz sobre monetização, subscrições, Stripe, paywall e login por email ou social (sobretudo no Contexto e nas secções 2, 3, 6, 7, 10 e 12) fica como histórico e já não se aplica.
+
 ## Contexto
 
 **O que existe hoje:** só o website estático em `LearnVestor_Website/docs/`, alojado no GitHub Pages. A página tem uma waitlist que **não guarda emails**: em [script.js:260-280](LearnVestor_Website/docs/script.js#L260-L280) o envio é simulado com `setTimeout` e `console.log`. Há também 4 mockups da app e documentos legais (privacidade, termos, disclaimer). Estes documentos já referem Supabase e Finnhub e fixam a idade mínima em 16 anos. Ainda não existe código da app.

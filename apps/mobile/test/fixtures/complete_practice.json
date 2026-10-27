@@ -5,7 +5,6 @@
   "hearts": {
     "gems": 20,
     "hearts": 6,
-    "unlimited": false,
     "max_hearts": 6,
     "next_heart_at": null
   },

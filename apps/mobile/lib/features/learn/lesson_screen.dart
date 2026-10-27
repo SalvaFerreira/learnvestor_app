@@ -151,7 +151,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
     }
   }
 
-  /// Returns true when the learner can keep going (refilled or became Plus). Choosing
+  /// Returns true when the learner can keep going (refilled with gems). Choosing
   /// practice replaces this lesson with a practice session.
   Future<bool> _showOutOfHearts() async {
     final choice = await showModalBottomSheet<_OutOfHeartsChoice>(
@@ -170,7 +170,6 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
         setState(() => _hearts = HeartsInfo(
               hearts: state.stats.hearts,
               maxHearts: state.stats.maxHearts,
-              unlimited: state.isPlus,
               gems: state.stats.gems,
             ));
       }
@@ -469,13 +468,6 @@ class _OutOfHeartsSheetState extends ConsumerState<_OutOfHeartsSheet> {
     }
   }
 
-  Future<void> _plus() async {
-    await context.push('/plus');
-    ref.invalidate(playerStateProvider);
-    final state = await ref.read(playerStateProvider.future);
-    if (mounted && (state?.isPlus ?? false)) Navigator.pop(context, _OutOfHeartsChoice.resume);
-  }
-
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
@@ -514,8 +506,6 @@ class _OutOfHeartsSheetState extends ConsumerState<_OutOfHeartsSheet> {
               icon: const Icon(Icons.fitness_center),
               label: Text(l.practiceToEarnHeart),
             ),
-            const SizedBox(height: 10),
-            OutlinedButton(onPressed: _busy ? null : _plus, child: Text(l.getPlus)),
             TextButton(onPressed: () => Navigator.pop(context), child: Text(l.quit)),
           ],
         ),
@@ -546,16 +536,12 @@ class _LoadError extends StatelessWidget {
             const SizedBox(height: 16),
             Text(errorMessage(l, error), textAlign: TextAlign.center, style: const TextStyle(fontSize: 18)),
             const SizedBox(height: 24),
-            if (code == AppError.outOfHearts) ...[
+            if (code == AppError.outOfHearts)
               FilledButton.icon(
                 onPressed: () => context.pushReplacement('/practice'),
                 icon: const Icon(Icons.fitness_center),
                 label: Text(l.practiceToEarnHeart),
-              ),
-              const SizedBox(height: 10),
-              OutlinedButton(onPressed: () => context.pushReplacement('/plus'), child: Text(l.getPlus)),
-            ] else if (code == AppError.premiumRequired)
-              FilledButton(onPressed: () => context.pushReplacement('/plus'), child: Text(l.getPlus))
+              )
             else if (code != AppError.lessonLocked && code != AppError.lessonNotFound && code != AppError.nothingToPractice)
               FilledButton(onPressed: onRetry, child: Text(l.retry)),
             TextButton(onPressed: () => context.pop(), child: Text(l.close)),

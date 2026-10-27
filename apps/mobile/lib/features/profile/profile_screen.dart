@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/config.dart';
@@ -83,10 +82,6 @@ class _Header extends StatelessWidget {
             children: [
               Text('@$name', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
               Text('${l.levelLabel(player.stats.level)} · ${rankTitle(l, player.stats.level)}', style: const TextStyle(color: AppColors.textSecondary)),
-              if (player.isPlus) ...[
-                const SizedBox(height: 6),
-                Row(children: [const PlusBadge(), const SizedBox(width: 6), Text(l.plusMember)]),
-              ],
             ],
           ),
         ),
@@ -220,7 +215,6 @@ class _Settings extends ConsumerWidget {
     final l = context.l10n;
     final repo = ref.read(repositoryProvider);
     final economy = player.economy;
-    final purchases = ref.read(purchasesProvider);
 
     return Column(
       children: [
@@ -257,24 +251,6 @@ class _Settings extends ConsumerWidget {
         ),
         ListTile(
           contentPadding: EdgeInsets.zero,
-          leading: const Icon(Icons.workspace_premium, color: AppColors.pink),
-          title: Text(l.plusTitle),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => context.push('/plus'),
-        ),
-        if (purchases.isSupported)
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Icons.restore),
-            title: Text(l.restorePurchases),
-            onTap: () => _guard(context, () async {
-              await purchases.restore();
-              ref.invalidate(playerStateProvider);
-              if (context.mounted) showMessage(context, l.restoreDone);
-            }),
-          ),
-        ListTile(
-          contentPadding: EdgeInsets.zero,
           leading: const Icon(Icons.download),
           title: Text(l.exportData),
           onTap: () => _guard(context, () async {
@@ -303,12 +279,9 @@ class _Settings extends ConsumerWidget {
         const Divider(height: 32),
         ListTile(
           contentPadding: EdgeInsets.zero,
-          leading: const Icon(Icons.logout),
-          title: Text(l.signOut),
-          onTap: () => _guard(context, () async {
-            await purchases.reset();
-            await ref.read(supabaseProvider).auth.signOut();
-          }),
+          leading: const Icon(Icons.smartphone),
+          title: Text(l.noAccountTitle),
+          subtitle: Text(l.noAccountBody),
         ),
         ListTile(
           contentPadding: EdgeInsets.zero,
@@ -340,7 +313,7 @@ class _Settings extends ConsumerWidget {
     if (confirmed != true || !context.mounted) return;
     await _guard(context, () async {
       await ref.read(repositoryProvider).deleteAccount();
-      await ref.read(purchasesProvider).reset();
+      // Back to the start screen, which creates a fresh anonymous user.
       await ref.read(supabaseProvider).auth.signOut();
     });
   }

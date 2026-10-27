@@ -1,5 +1,5 @@
 // End-to-end walkthrough of the app in a browser:
-//   sign in → onboarding → lesson (with one mistake) → practice (earns the heart back)
+//   first launch (no login) → onboarding → lesson (with one mistake) → practice (earns the heart back)
 //   → tools → buy a stock → portfolio → profile
 //
 // Needs the web build served at APP_URL (default http://127.0.0.1:51973), built with
@@ -109,14 +109,8 @@ const steps = [
     await page.goto(APP_URL);
     await wait(5000);
     await page.locator('flt-semantics-placeholder').dispatchEvent('click'); // enable the accessibility tree
-    await expectText('Send code');
   }],
-  ['sign in with an email code', async () => {
-    await type('Email', `e2e${RUN}@learnvestor.test`);
-    await tap('Send code');
-    await expectText('We sent a code');
-    await type('6-digit code', '123456');
-    await tap('Verify');
+  ['go straight to onboarding, without logging in', async () => {
     await expectText("Let's set up your profile");
   }],
   ['complete onboarding', async () => {
@@ -172,6 +166,14 @@ const steps = [
     await tap('Profile', { exact: true });
     await expectText(`@e2e_${RUN}`);
     await expectText('First Trade');
+  }],
+  ['settings explain there is no account', async () => {
+    await page.mouse.move(206, 500);
+    for (let i = 0; i < 20 && !(await visible('No account needed')); i++) {
+      await page.mouse.wheel(0, 600);
+      await wait(250);
+    }
+    await expectText('No account needed');
   }],
 ];
 

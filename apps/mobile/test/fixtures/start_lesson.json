@@ -3,7 +3,6 @@
   "hearts": {
     "gems": 0,
     "hearts": 6,
-    "unlimited": false,
     "max_hearts": 6,
     "next_heart_at": null
   },
@@ -67,7 +66,7 @@
   ],
   "lesson_id": "what-is-a-bank",
   "xp_reward": 20,
-  "attempt_id": "33a2ef3f-bf1c-44a8-8e28-3133141c0f99",
+  "attempt_id": "f572fb9e-a31d-4561-b596-836de1635526",
   "coin_reward": 30,
   "description": "Depósitos, empréstimos e porque é que o teu dinheiro está seguro"
 }

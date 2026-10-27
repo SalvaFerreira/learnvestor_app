@@ -17,7 +17,6 @@ dependencies:
   flutter_timezone: ^5.1.1
   go_router: ^17.5.0
   intl: ^0.20.2
-  purchases_flutter: ^10.18.1
   sentry_flutter: ^9.30.1
   shared_preferences: ^2.5.5
   supabase_flutter: ^2.18.3

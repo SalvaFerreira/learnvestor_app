@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' show AuthException;
 
 import '../core/theme.dart';
 import '../data/models.dart';
@@ -12,7 +11,6 @@ extension L10nContext on BuildContext {
 }
 
 String errorMessage(AppLocalizations l, Object error) {
-  if (error is AuthException) return l.invalidCode;
   if (error is! AppException) {
     final text = error.toString();
     if (text.contains('SocketException') || text.contains('ClientException') || text.contains('Failed host lookup')) {
@@ -23,7 +21,6 @@ String errorMessage(AppLocalizations l, Object error) {
   return switch (error.error) {
     AppError.lessonLocked => l.errorLessonLocked,
     AppError.lessonNotFound => l.errorLessonNotFound,
-    AppError.premiumRequired => l.errorPremiumRequired,
     AppError.outOfHearts => l.errorOutOfHearts,
     AppError.tooFast => l.errorTooFast,
     AppError.rateLimited => l.errorRateLimited,
@@ -118,14 +115,12 @@ class AsyncBody<T> extends StatelessWidget {
 }
 
 class HeartsBadge extends StatelessWidget {
-  const HeartsBadge({super.key, required this.hearts, required this.maxHearts, this.unlimited = false});
+  const HeartsBadge({super.key, required this.hearts, required this.maxHearts});
 
-  factory HeartsBadge.fromInfo(HeartsInfo info) =>
-      HeartsBadge(hearts: info.hearts, maxHearts: info.maxHearts, unlimited: info.unlimited);
+  factory HeartsBadge.fromInfo(HeartsInfo info) => HeartsBadge(hearts: info.hearts, maxHearts: info.maxHearts);
 
   final int hearts;
   final int maxHearts;
-  final bool unlimited;
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +129,7 @@ class HeartsBadge extends StatelessWidget {
       children: [
         const Icon(Icons.favorite, color: AppColors.red, size: 22),
         const SizedBox(width: 4),
-        Text(unlimited ? '∞' : '$hearts/$maxHearts', style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+        Text('$hearts/$maxHearts', style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
       ],
     );
   }
@@ -221,19 +216,6 @@ class InstrumentAvatar extends StatelessWidget {
       child: logoUrl == null
           ? fallback
           : Image.network(logoUrl!, fit: BoxFit.contain, errorBuilder: (_, _, _) => fallback),
-    );
-  }
-}
-
-class PlusBadge extends StatelessWidget {
-  const PlusBadge({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(gradient: AppColors.brandGradient, borderRadius: BorderRadius.circular(8)),
-      child: Text(context.l10n.plusBadge, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Colors.white)),
     );
   }
 }

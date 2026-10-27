@@ -15,7 +15,6 @@
             "title": "Como Funcionam os Bancos",
             "status": "completed",
             "xp_reward": 20,
-            "is_premium": false,
             "coin_reward": 30,
             "description": "Depósitos, empréstimos e porque é que o teu dinheiro está seguro"
           },
@@ -25,7 +24,6 @@
             "title": "O Teu Fundo de Emergência",
             "status": "unlocked",
             "xp_reward": 20,
-            "is_premium": false,
             "coin_reward": 30,
             "description": "A rede de segurança que todo o investidor precisa primeiro"
           },
@@ -35,7 +33,6 @@
             "title": "A Magia dos Juros Compostos",
             "status": "locked",
             "xp_reward": 25,
-            "is_premium": false,
             "coin_reward": 35,
             "description": "Porque é que os teus juros podem render juros"
           },
@@ -45,7 +42,6 @@
             "title": "Inflação",
             "status": "locked",
             "xp_reward": 20,
-            "is_premium": false,
             "coin_reward": 30,
             "description": "Porque é que o dinheiro parado perde valor"
           },
@@ -55,7 +51,6 @@
             "title": "Rentabilidade Real vs Nominal",
             "status": "locked",
             "xp_reward": 20,
-            "is_premium": false,
             "coin_reward": 30,
             "description": "O que ganhas realmente depois da inflação"
           }
@@ -72,7 +67,6 @@
             "title": "A Regra 50/30/20",
             "status": "locked",
             "xp_reward": 25,
-            "is_premium": false,
             "coin_reward": 40,
             "description": "Um ponto de partida simples para o teu orçamento"
           },
@@ -82,7 +76,6 @@
             "title": "Registar Despesas",
             "status": "locked",
             "xp_reward": 25,
-            "is_premium": false,
             "coin_reward": 40,
             "description": "Descobre para onde vai realmente o dinheiro"
           },
@@ -92,7 +85,6 @@
             "title": "Necessidades vs Desejos",
             "status": "locked",
             "xp_reward": 25,
-            "is_premium": false,
             "coin_reward": 40,
             "description": "Gasta com intenção, não por impulso"
           },
@@ -102,7 +94,6 @@
             "title": "Objetivos de Poupança",
             "status": "locked",
             "xp_reward": 25,
-            "is_premium": false,
             "coin_reward": 40,
             "description": "Transforma desejos em valores mensais"
           },
@@ -112,7 +103,6 @@
             "title": "Paga-te Primeiro a Ti",
             "status": "locked",
             "xp_reward": 25,
-            "is_premium": false,
             "coin_reward": 40,
             "description": "Poupa no dia do salário, não com o que sobra"
           }
@@ -129,7 +119,6 @@
             "title": "Cartão de Débito vs Crédito",
             "status": "locked",
             "xp_reward": 30,
-            "is_premium": false,
             "coin_reward": 45,
             "description": "O teu dinheiro ou dinheiro emprestado?"
           },
@@ -139,7 +128,6 @@
             "title": "Phishing e Mensagens Falsas",
             "status": "locked",
             "xp_reward": 30,
-            "is_premium": false,
             "coin_reward": 45,
             "description": "Identifica burlas antes que te custem caro"
           }
@@ -147,7 +135,6 @@
         "description": "Paga em segurança e identifica burlas"
       }
     ],
-    "is_premium": false,
     "description": "Bancos, orçamento, pagamentos e crédito sem surpresas",
     "stars_total": 36,
     "stars_earned": 2
@@ -168,7 +155,6 @@
             "title": "Salário Bruto vs Líquido",
             "status": "unlocked",
             "xp_reward": 25,
-            "is_premium": false,
             "coin_reward": 40,
             "description": "Do contrato à tua conta"
           },
@@ -178,7 +164,6 @@
             "title": "Descontos para a Segurança Social",
             "status": "locked",
             "xp_reward": 25,
-            "is_premium": false,
             "coin_reward": 40,
             "description": "O que pagas e o que te protege"
           }
@@ -186,7 +171,6 @@
         "description": "Do salário bruto ao líquido"
       }
     ],
-    "is_premium": false,
     "description": "Recibo de vencimento, IRS, poupança do Estado e reforma em Portugal",
     "stars_total": 6,
     "stars_earned": 0
@@ -207,7 +191,6 @@
             "title": "Risco vs. Retorno",
             "status": "unlocked",
             "xp_reward": 30,
-            "is_premium": false,
             "coin_reward": 45,
             "description": "Perceber os compromissos de cada investimento"
           },
@@ -217,7 +200,6 @@
             "title": "Tipos de Investimentos",
             "status": "locked",
             "xp_reward": 35,
-            "is_premium": false,
             "coin_reward": 50,
             "description": "Ações, obrigações, ETFs e mais"
           },
@@ -227,7 +209,6 @@
             "title": "Diversificação",
             "status": "locked",
             "xp_reward": 35,
-            "is_premium": false,
             "coin_reward": 50,
             "description": "Não ponhas os ovos todos no mesmo cesto"
           },
@@ -237,7 +218,6 @@
             "title": "Como Funciona a Bolsa",
             "status": "locked",
             "xp_reward": 40,
-            "is_premium": false,
             "coin_reward": 55,
             "description": "Preços, tickers e bolsas de valores"
           }
@@ -245,7 +225,6 @@
         "description": "Risco, tipos de ativos e como funciona a bolsa"
       }
     ],
-    "is_premium": false,
     "description": "Começa a tua jornada de investimento com bases sólidas",
     "stars_total": 12,
     "stars_earned": 0
@@ -266,7 +245,6 @@
             "title": "Esquemas Ponzi",
             "status": "unlocked",
             "xp_reward": 30,
-            "is_premium": false,
             "coin_reward": 45,
             "description": "Quando os \"lucros\" são o dinheiro dos outros"
           },
@@ -276,7 +254,6 @@
             "title": "Rentabilidades Garantidas",
             "status": "locked",
             "xp_reward": 30,
-            "is_premium": false,
             "coin_reward": 45,
             "description": "Retorno alto sem risco não existe"
           }
@@ -284,7 +261,6 @@
         "description": "Se parece bom demais para ser verdade..."
       }
     ],
-    "is_premium": false,
     "description": "Enviesamentos, burlas e riscos das cripto",
     "stars_total": 6,
     "stars_earned": 0
@@ -303,9 +279,8 @@
             "id": "etfs-and-index-funds",
             "stars": null,
             "title": "ETFs e Fundos de Índice",
-            "status": "premium",
+            "status": "unlocked",
             "xp_reward": 40,
-            "is_premium": true,
             "coin_reward": 60,
             "description": "Investe no mercado inteiro com um clique"
           },
@@ -313,9 +288,8 @@
             "id": "fees-matter",
             "stars": null,
             "title": "Porque é que os Custos Importam",
-            "status": "premium",
+            "status": "locked",
             "xp_reward": 40,
-            "is_premium": true,
             "coin_reward": 60,
             "description": "Percentagens pequenas, diferenças grandes"
           },
@@ -323,9 +297,8 @@
             "id": "dollar-cost-averaging",
             "stars": null,
             "title": "Investir com Regularidade (DCA)",
-            "status": "premium",
+            "status": "locked",
             "xp_reward": 45,
-            "is_premium": true,
             "coin_reward": 65,
             "description": "Deixa de tentar adivinhar o mercado"
           }
@@ -333,7 +306,6 @@
         "description": "Fundos de índice, custos e investir com regularidade"
       }
     ],
-    "is_premium": true,
     "description": "Estratégias de longo prazo usadas por investidores informados",
     "stars_total": 9,
     "stars_earned": 0

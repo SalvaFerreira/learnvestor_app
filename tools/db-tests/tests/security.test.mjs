@@ -15,7 +15,7 @@ before(async () => {
 
 describe('anonymous visitors', () => {
   test('cannot read any user data', async () => {
-    for (const table of ['profiles', 'user_stats', 'portfolios', 'trades', 'waitlist_signups', 'entitlements']) {
+    for (const table of ['profiles', 'user_stats', 'portfolios', 'trades', 'waitlist_signups']) {
       await assert.rejects(as(db, null, (q) => q(`select * from public.${table}`)), /permission denied/, table);
     }
   });
@@ -50,10 +50,6 @@ describe('signed-in users', () => {
       as(db, alice, (q) => q(`insert into public.xp_events (user_id, amount, reason, local_date) values ($1, 500, 'x', current_date)`, [alice])),
       /permission denied/,
     );
-    await assert.rejects(
-      as(db, alice, (q) => q(`insert into public.entitlements (user_id, entitlement, source) values ($1, 'plus', 'stripe')`, [alice])),
-      /permission denied/,
-    );
   });
 
   test('can edit only whitelisted profile columns of their own profile', async () => {
@@ -78,13 +74,9 @@ describe('signed-in users', () => {
     );
   });
 
-  test('cannot read answer keys or call service functions', async () => {
+  test('cannot read answer keys', async () => {
     await assert.rejects(as(db, alice, (q) => q('select * from public.lesson_versions')), /permission denied/);
     await assert.rejects(as(db, alice, (q) => q('select * from public.lesson_translations')), /permission denied/);
-    await assert.rejects(
-      rpc(db, alice, 'svc_credit_gems', { p_user: alice, p_gems: 1000, p_source: 'x', p_transaction_id: 't', p_product_id: 'p' }),
-      /permission denied/,
-    );
   });
 
   test('can read reference data', async () => {

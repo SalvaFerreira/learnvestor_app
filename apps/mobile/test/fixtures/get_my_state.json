@@ -22,9 +22,8 @@
     "refill_hearts_gem_cost": 50,
     "streak_freeze_gem_cost": 100
   },
-  "is_plus": false,
   "profile": {
-    "id": "ee52b7ff-c444-4af9-b6b3-66c3c6299bd9",
+    "id": "6ec2d5ef-9ef0-4a06-a678-14043b2995e5",
     "locale": "pt",
     "timezone": "Europe/Lisbon",
     "username": "fixture_user",

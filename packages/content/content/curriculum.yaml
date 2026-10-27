@@ -1,5 +1,5 @@
-# LearnVestor curriculum: the single source of truth for tracks, units, lesson order,
-# regions and premium access. Each lesson listed here is "planned" until a file exists in
+# LearnVestor curriculum: the single source of truth for tracks, units, lesson order
+# and regions. Every lesson is free. Each lesson listed here is "planned" until a file exists in
 # content/lessons/<track>/<lesson-id>.json ("draft"), and only "reviewed" lessons are
 # published to production.
 #
@@ -488,7 +488,6 @@ tracks:
     position: 5
     icon: insights
     color: "#A855F7"
-    premium: true
     title: { en: "Advanced", pt: "Avançado" }
     description:
       en: Long-term strategies used by smart investors

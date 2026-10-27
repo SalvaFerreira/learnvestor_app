@@ -122,7 +122,6 @@ class PlayerState {
     required this.cash,
     required this.holdingsValue,
     required this.totalValue,
-    required this.isPlus,
     required this.economy,
   });
 
@@ -134,7 +133,6 @@ class PlayerState {
       cash: toDouble(portfolio['cash']),
       holdingsValue: toDouble(portfolio['holdings_value']),
       totalValue: toDouble(portfolio['total_value']),
-      isPlus: j['is_plus'] as bool,
       economy: Economy.fromJson(j['economy'] as Json),
     );
   }
@@ -144,33 +142,30 @@ class PlayerState {
   final double cash;
   final double holdingsValue;
   final double totalValue;
-  final bool isPlus;
   final Economy economy;
 }
 
 class HeartsInfo {
-  const HeartsInfo({required this.hearts, required this.maxHearts, required this.unlimited, required this.gems, this.nextHeartAt});
+  const HeartsInfo({required this.hearts, required this.maxHearts, required this.gems, this.nextHeartAt});
 
   factory HeartsInfo.fromJson(Json j) => HeartsInfo(
         hearts: toInt(j['hearts']),
         maxHearts: toInt(j['max_hearts']),
-        unlimited: j['unlimited'] as bool? ?? false,
         gems: toInt(j['gems']),
         nextHeartAt: _date(j['next_heart_at']),
       );
 
   final int hearts;
   final int maxHearts;
-  final bool unlimited;
   final int gems;
   final DateTime? nextHeartAt;
 
-  bool get isEmpty => !unlimited && hearts <= 0;
+  bool get isEmpty => hearts <= 0;
 }
 
 // ---- learning path -----------------------------------------------------------------------
 
-enum LessonStatus { completed, unlocked, locked, premium }
+enum LessonStatus { completed, unlocked, locked }
 
 class LessonNode {
   const LessonNode({
@@ -227,7 +222,6 @@ class Track {
     required this.description,
     required this.icon,
     required this.color,
-    required this.isPremium,
     required this.starsEarned,
     required this.starsTotal,
     required this.units,
@@ -239,7 +233,6 @@ class Track {
         description: j['description'] as String,
         icon: j['icon'] as String,
         color: j['color'] as String,
-        isPremium: j['is_premium'] as bool,
         starsEarned: toInt(j['stars_earned']),
         starsTotal: toInt(j['stars_total']),
         units: [for (final u in j['units'] as List) UnitNode.fromJson(u as Json)],
@@ -250,7 +243,6 @@ class Track {
   final String description;
   final String icon;
   final String color;
-  final bool isPremium;
   final int starsEarned;
   final int starsTotal;
   final List<UnitNode> units;

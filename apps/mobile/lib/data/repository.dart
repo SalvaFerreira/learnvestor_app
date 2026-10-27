@@ -31,7 +31,6 @@ class Repository {
     required int dailyGoalXp,
     required String? countryCode,
     required String termsVersion,
-    required bool marketingOptIn,
     required bool analyticsOptIn,
   }) async =>
       PlayerState.fromJson(await _rpc<Json>('complete_onboarding', {
@@ -40,7 +39,6 @@ class Repository {
         'p_daily_goal_xp': dailyGoalXp,
         'p_country_code': countryCode,
         'p_terms_version': termsVersion,
-        'p_marketing_opt_in': marketingOptIn,
         'p_analytics_opt_in': analyticsOptIn,
       }));
 
@@ -180,7 +178,6 @@ enum AppError {
   notAuthenticated,
   lessonLocked,
   lessonNotFound,
-  premiumRequired,
   outOfHearts,
   tooFast,
   rateLimited,
@@ -210,7 +207,6 @@ class AppException implements Exception {
           'not_authenticated' => AppError.notAuthenticated,
           'lesson_locked' => AppError.lessonLocked,
           'lesson_not_found' => AppError.lessonNotFound,
-          'premium_required' => AppError.premiumRequired,
           'out_of_hearts' => AppError.outOfHearts,
           'too_fast' => AppError.tooFast,
           'rate_limited' => AppError.rateLimited,

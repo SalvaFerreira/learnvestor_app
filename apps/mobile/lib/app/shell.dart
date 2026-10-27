@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:go_router/go_router.dart';
 
-import '../core/theme.dart';
 import '../state/providers.dart';
 import '../ui/common.dart';
 
@@ -24,12 +23,11 @@ class _AppShellState extends ConsumerState<AppShell> {
     _syncAccount();
   }
 
-  /// Once per session: link purchases to the account and keep the profile's time zone
-  /// (used for streak days) in line with the device.
+  /// Once per session: keep the profile's time zone (used for streak days) in line with
+  /// the device.
   Future<void> _syncAccount() async {
     final player = await ref.read(playerStateProvider.future);
     if (player == null) return;
-    await ref.read(purchasesProvider).identify(player.profile.id).catchError((_) {});
     try {
       final tz = (await FlutterTimezone.getLocalTimezone()).identifier;
       if (tz != player.profile.timezone) {
@@ -87,17 +85,8 @@ class TopBar extends ConsumerWidget implements PreferredSizeWidget {
         if (player != null) ...[
           GemsBadge(gems: player.stats.gems),
           const SizedBox(width: 14),
-          HeartsBadge(hearts: player.stats.hearts, maxHearts: player.stats.maxHearts, unlimited: player.isPlus),
-          const SizedBox(width: 8),
-          IconButton(
-            tooltip: context.l10n.plusTitle,
-            onPressed: () => context.push('/plus'),
-            icon: const CircleAvatar(
-              backgroundColor: Color(0x33F97316),
-              child: Icon(Icons.rocket_launch, color: AppColors.orange),
-            ),
-          ),
-          const SizedBox(width: 8),
+          HeartsBadge(hearts: player.stats.hearts, maxHearts: player.stats.maxHearts),
+          const SizedBox(width: 20),
         ],
       ],
     );

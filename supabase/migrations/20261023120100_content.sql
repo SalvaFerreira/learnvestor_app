@@ -4,14 +4,13 @@
 -- Lesson versions are immutable: changing a lesson means publishing a new version, so
 -- attempts always reference exactly what the learner saw.
 -- Clients never read lesson_versions/lesson_translations directly; exercises are served
--- by start_lesson(), which enforces unlock order, premium access and regions.
+-- by start_lesson(), which enforces unlock order and regions.
 
 create table public.tracks (
   id          text primary key check (id ~ '^[a-z0-9-]+$'),
   position    int not null unique,
   icon        text not null,
   color       text not null check (color ~ '^#[0-9A-Fa-f]{6}$'),
-  is_premium  boolean not null default false,
   created_at  timestamptz not null default now()
 );
 
@@ -44,7 +43,6 @@ create table public.lessons (
   position          int not null,
   xp_reward         int not null check (xp_reward between 1 and 200),
   coin_reward       numeric(12,2) not null check (coin_reward >= 0),
-  is_premium        boolean not null default false,
   -- ISO country codes where the lesson applies (e.g. country-specific banking); null = global.
   regions           text[],
   published_version int,

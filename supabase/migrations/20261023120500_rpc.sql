@@ -74,7 +74,6 @@ begin
     'hearts', e.hearts,
     'max_hearts', (private.config()).max_hearts,
     'next_heart_at', e.next_heart_at,
-    'unlimited', private.has_plus(p_user),
     'gems', s.gems);
 end;
 $$;
@@ -139,7 +138,6 @@ begin
       'cash', pf.cash,
       'holdings_value', v_holdings,
       'total_value', pf.cash + v_holdings),
-    'is_plus', private.has_plus(v_uid),
     'economy', jsonb_build_object(
       'refill_hearts_gem_cost', c.refill_hearts_gem_cost,
       'streak_freeze_gem_cost', c.streak_freeze_gem_cost,
@@ -207,16 +205,14 @@ declare
   v_uid uuid := private.require_user();
   v_locale text := private.normalize_locale(p_locale);
   v_country text;
-  v_plus boolean := private.has_plus(v_uid);
   v_result jsonb;
 begin
   select country_code into v_country from public.profiles where id = v_uid;
 
   with visible as (
-    select l.*, u.track_id, u.position as unit_position, t.is_premium as track_premium
+    select l.*, u.track_id, u.position as unit_position
     from public.lessons l
     join public.units u on u.id = l.unit_id
-    join public.tracks t on t.id = u.track_id
     where l.published_version is not null
       and (l.regions is null or v_country = any (l.regions))
   ), ordered as (
@@ -224,7 +220,6 @@ begin
     from visible v
   ), lesson_rows as (
     select o.id, o.unit_id, o.track_id, o.position, o.xp_reward, o.coin_reward,
-           (o.is_premium or o.track_premium) as premium,
            lp.best_stars,
            lp.lesson_id is not null as completed,
            (o.prev_id is null or exists (
@@ -247,7 +242,6 @@ begin
              'id', t.id,
              'icon', t.icon,
              'color', t.color,
-             'is_premium', t.is_premium,
              'title', coalesce(tt.title, tte.title),
              'description', coalesce(tt.description, tte.description),
              'stars_earned', (select coalesce(sum(lr.best_stars), 0) from lesson_rows lr where lr.track_id = t.id),
@@ -264,11 +258,9 @@ begin
                                    'description', lr.description,
                                    'xp_reward', lr.xp_reward,
                                    'coin_reward', lr.coin_reward,
-                                   'is_premium', lr.premium,
                                    'stars', lr.best_stars,
                                    'status', case
                                                when lr.completed then 'completed'
-                                               when lr.premium and not v_plus then 'premium'
                                                when lr.prev_done then 'unlocked'
                                                else 'locked'
                                              end)
@@ -307,7 +299,6 @@ declare
   t public.tracks;
   tr public.lesson_translations;
   v_country text;
-  v_plus boolean := private.has_plus(v_uid);
   v_prev text;
   v_recent int;
   v_hearts int;
@@ -323,9 +314,6 @@ begin
 
   if l.regions is not null and (v_country is null or not v_country = any (l.regions)) then
     raise exception 'lesson_not_found';
-  end if;
-  if (l.is_premium or t.is_premium) and not v_plus then
-    raise exception 'premium_required';
   end if;
 
   -- Unlock order: the previous lesson of the same track must be completed (replays are fine).
@@ -355,7 +343,7 @@ begin
 
   perform 1 from public.user_stats where user_id = v_uid for update;
   v_hearts := private.sync_hearts(v_uid);
-  if not v_plus and v_hearts <= 0 then
+  if v_hearts <= 0 then
     raise exception 'out_of_hearts';
   end if;
 
@@ -405,11 +393,9 @@ begin
   if not found then raise exception 'attempt_not_found'; end if;
   if a.status <> 'started' then raise exception 'attempt_closed'; end if;
 
-  if not private.has_plus(v_uid) then
-    perform 1 from public.user_stats where user_id = v_uid for update;
-    if private.deduct_hearts(v_uid, 1) > 0 then
-      update public.lesson_attempts set hearts_lost = hearts_lost + 1 where id = a.id;
-    end if;
+  perform 1 from public.user_stats where user_id = v_uid for update;
+  if private.deduct_hearts(v_uid, 1) > 0 then
+    update public.lesson_attempts set hearts_lost = hearts_lost + 1 where id = a.id;
   end if;
 
   return private.hearts_json(v_uid);
@@ -432,7 +418,6 @@ declare
   v_correct int := 0;
   v_mistakes int;
   v_k text;
-  v_plus boolean := private.has_plus(v_uid);
   v_hearts int;
   v_to_deduct int;
   v_first boolean;
@@ -478,18 +463,16 @@ begin
   perform 1 from public.user_stats where user_id = v_uid for update;
 
   -- Hearts not yet taken by lose_heart() are reconciled here, so skipping those calls does not help.
-  if not v_plus then
-    v_hearts := private.sync_hearts(v_uid);
-    v_to_deduct := greatest(v_mistakes - a.hearts_lost, 0);
-    if v_to_deduct > v_hearts then
-      perform private.deduct_hearts(v_uid, v_hearts);
-      update public.lesson_attempts
-         set status = 'failed', completed_at = now(), correct = v_correct, mistakes = v_mistakes, answers = p_answers
-       where id = a.id;
-      return jsonb_build_object('status', 'failed', 'reason', 'out_of_hearts', 'hearts', private.hearts_json(v_uid));
-    end if;
-    perform private.deduct_hearts(v_uid, v_to_deduct);
+  v_hearts := private.sync_hearts(v_uid);
+  v_to_deduct := greatest(v_mistakes - a.hearts_lost, 0);
+  if v_to_deduct > v_hearts then
+    perform private.deduct_hearts(v_uid, v_hearts);
+    update public.lesson_attempts
+       set status = 'failed', completed_at = now(), correct = v_correct, mistakes = v_mistakes, answers = p_answers
+     where id = a.id;
+    return jsonb_build_object('status', 'failed', 'reason', 'out_of_hearts', 'hearts', private.hearts_json(v_uid));
   end if;
+  perform private.deduct_hearts(v_uid, v_to_deduct);
 
   select * into l from public.lessons where id = a.lesson_id;
   v_first := not exists (select 1 from public.lesson_progress where user_id = v_uid and lesson_id = l.id);
@@ -891,62 +874,6 @@ begin
     'achievements', (select coalesce(jsonb_agg(to_jsonb(x)), '[]') from public.user_achievements x where x.user_id = v_uid),
     'portfolio', (select to_jsonb(x) from public.portfolios x where x.user_id = v_uid),
     'positions', (select coalesce(jsonb_agg(to_jsonb(x)), '[]') from public.positions x where x.user_id = v_uid),
-    'trades', (select coalesce(jsonb_agg(to_jsonb(x) order by x.executed_at), '[]') from public.trades x where x.user_id = v_uid),
-    'entitlements', (select coalesce(jsonb_agg(to_jsonb(x)), '[]') from public.entitlements x where x.user_id = v_uid),
-    'purchases', (select coalesce(jsonb_agg(to_jsonb(x)), '[]') from public.purchases x where x.user_id = v_uid));
-end;
-$$;
-
--- Service functions (webhooks, service_role only) ------------------------------------------
-
-create or replace function public.svc_apply_entitlement(
-  p_user uuid,
-  p_entitlement text,
-  p_source text,
-  p_product_id text,
-  p_is_active boolean,
-  p_expires_at timestamptz,
-  p_original_transaction_id text)
-returns void
-language plpgsql
-security definer
-set search_path = ''
-as $$
-begin
-  insert into public.entitlements as e
-    (user_id, entitlement, source, product_id, is_active, expires_at, original_transaction_id)
-  values (p_user, p_entitlement, p_source, p_product_id, p_is_active, p_expires_at, p_original_transaction_id)
-  on conflict (user_id, entitlement) do update
-    set source = excluded.source,
-        product_id = excluded.product_id,
-        is_active = excluded.is_active,
-        expires_at = excluded.expires_at,
-        original_transaction_id = coalesce(excluded.original_transaction_id, e.original_transaction_id);
-end;
-$$;
-
--- Returns false when the transaction was already credited (webhook retries).
-create or replace function public.svc_credit_gems(
-  p_user uuid,
-  p_gems int,
-  p_source text,
-  p_transaction_id text,
-  p_product_id text)
-returns boolean
-language plpgsql
-security definer
-set search_path = ''
-as $$
-begin
-  if p_gems <= 0 then raise exception 'invalid_gems'; end if;
-  insert into public.purchases (user_id, source, transaction_id, product_id, kind, quantity)
-  values (p_user, p_source, p_transaction_id, p_product_id, 'gems', p_gems)
-  on conflict (transaction_id) do nothing;
-  if not found then return false; end if;
-
-  update public.user_stats set gems = gems + p_gems where user_id = p_user;
-  insert into public.currency_ledger (user_id, currency, amount, reason, ref_id)
-  values (p_user, 'gems', p_gems, 'purchase', p_transaction_id);
-  return true;
+    'trades', (select coalesce(jsonb_agg(to_jsonb(x) order by x.executed_at), '[]') from public.trades x where x.user_id = v_uid));
 end;
 $$;

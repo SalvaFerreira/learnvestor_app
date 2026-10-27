@@ -23,8 +23,7 @@ grant select on
   public.profiles, public.consents,
   public.user_stats, public.lesson_attempts, public.lesson_progress,
   public.xp_events, public.currency_ledger, public.user_achievements,
-  public.portfolios, public.positions, public.trades, public.portfolio_snapshots,
-  public.entitlements, public.purchases
+  public.portfolios, public.positions, public.trades, public.portfolio_snapshots
 to authenticated;
 
 -- Profile fields the user may edit directly (validated by trigger and check constraints).
@@ -52,9 +51,3 @@ to authenticated;
 
 -- Public website
 grant execute on function public.join_waitlist(text, text, text) to anon, authenticated;
-
--- Webhook handlers only
-grant execute on function
-  public.svc_apply_entitlement(uuid, text, text, text, boolean, timestamptz, text),
-  public.svc_credit_gems(uuid, int, text, text, text)
-to service_role;

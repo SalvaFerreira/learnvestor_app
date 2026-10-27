@@ -5,9 +5,8 @@
   "hearts": {
     "gems": 10,
     "hearts": 5,
-    "unlimited": false,
     "max_hearts": 6,
-    "next_heart_at": "2026-10-27T17:21:57.338+00:00"
+    "next_heart_at": "2026-10-27T18:27:48.229+00:00"
   },
   "status": "completed",
   "streak": {

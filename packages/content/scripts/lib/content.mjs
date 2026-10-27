@@ -29,7 +29,7 @@ export function loadContent() {
     .sort();
   const lessons = files.map((file) => ({ file: relative(ROOT, file).replaceAll('\\', '/'), data: readJson(file) }));
 
-  // planned lessons in curriculum order, with derived position, regions and premium
+  // planned lessons in curriculum order, with derived position and regions
   const planned = new Map();
   for (const track of curriculum.tracks) {
     track.units.forEach((unit, unitIndex) => {
@@ -41,7 +41,6 @@ export function loadContent() {
           unit,
           position: lessonIndex + 1,
           regions: entry.regions ?? track.regions ?? null,
-          premium: Boolean(entry.premium),
         });
       });
     });
@@ -225,8 +224,8 @@ export function compileSql(content, { reviewedOnly = false } = {}) {
   sql.push('-- tracks & units');
   for (const t of curriculum.tracks) {
     sql.push(
-      `insert into public.tracks (id, position, icon, color, is_premium) values (${lit(t.id)}, ${t.position}, ${lit(t.icon)}, ${lit(t.color)}, ${Boolean(t.premium)})\n` +
-        `  on conflict (id) do update set position = excluded.position, icon = excluded.icon, color = excluded.color, is_premium = excluded.is_premium;`,
+      `insert into public.tracks (id, position, icon, color) values (${lit(t.id)}, ${t.position}, ${lit(t.icon)}, ${lit(t.color)})\n` +
+        `  on conflict (id) do update set position = excluded.position, icon = excluded.icon, color = excluded.color;`,
     );
     for (const l of LOCALES) {
       sql.push(
@@ -255,8 +254,8 @@ export function compileSql(content, { reviewedOnly = false } = {}) {
     const answerKey = Object.fromEntries(lesson.exercises.filter((e) => e.type !== 'info').map((e) => [e.id, answerFor(e)]));
     const id = lit(lesson.id);
     sql.push(
-      `insert into public.lessons (id, unit_id, position, xp_reward, coin_reward, is_premium, regions) values (${id}, ${lit(lesson.unit)}, ${entry.position}, ${lesson.xp}, ${lesson.coins}, ${entry.premium}, ${textArray(entry.regions)})\n` +
-        `  on conflict (id) do update set unit_id = excluded.unit_id, position = excluded.position, xp_reward = excluded.xp_reward, coin_reward = excluded.coin_reward, is_premium = excluded.is_premium, regions = excluded.regions;`,
+      `insert into public.lessons (id, unit_id, position, xp_reward, coin_reward, regions) values (${id}, ${lit(lesson.unit)}, ${entry.position}, ${lesson.xp}, ${lesson.coins}, ${textArray(entry.regions)})\n` +
+        `  on conflict (id) do update set unit_id = excluded.unit_id, position = excluded.position, xp_reward = excluded.xp_reward, coin_reward = excluded.coin_reward, regions = excluded.regions;`,
     );
     sql.push(
       `do $$ begin\n` +

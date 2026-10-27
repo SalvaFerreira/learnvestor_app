@@ -26,7 +26,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   String? _age;
   int _goal = 20;
   bool _terms = false;
-  bool _marketing = false;
   bool _analytics = false;
   bool _busy = false;
   String? _error;
@@ -55,7 +54,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             dailyGoalXp: _goal,
             countryCode: country,
             termsVersion: AppConfig.termsVersion,
-            marketingOptIn: _marketing,
             analyticsOptIn: _analytics,
           );
       ref.invalidate(playerStateProvider); // router moves on to /home
@@ -131,13 +129,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   ],
                 ),
               ),
-            ),
-            CheckboxListTile(
-              value: _marketing,
-              onChanged: (v) => setState(() => _marketing = v ?? false),
-              contentPadding: EdgeInsets.zero,
-              controlAffinity: ListTileControlAffinity.leading,
-              title: Text(l.marketingOptIn),
             ),
             CheckboxListTile(
               value: _analytics,

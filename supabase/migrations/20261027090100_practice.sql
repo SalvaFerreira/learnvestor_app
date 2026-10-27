@@ -124,7 +124,6 @@ declare
   v_today date := private.local_today(v_uid);
   v_hearts int;
   v_heart boolean := false;
-  v_plus boolean := private.has_plus(v_uid);
   v_level_before int;
   v_level_after int;
   v_streak jsonb;
@@ -171,7 +170,7 @@ begin
   returning level into v_level_after;
 
   -- A good session earns one heart back.
-  if not v_plus and v_total > 0 and v_correct::numeric / v_total >= c.practice_heart_min_accuracy then
+  if v_total > 0 and v_correct::numeric / v_total >= c.practice_heart_min_accuracy then
     v_hearts := private.sync_hearts(v_uid);
     if v_hearts < c.max_hearts then
       update public.user_stats

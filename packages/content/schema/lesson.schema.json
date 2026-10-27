@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://learnvestor.app/schemas/lesson.json",
   "title": "LearnVestor lesson",
-  "description": "One lesson, all locales. Order, regions and premium access come from content/curriculum.yaml. Option, item and match order is shuffled by the app, so authors list the correct option first and items/pairs in the correct order.",
+  "description": "One lesson, all locales. Order and regions come from content/curriculum.yaml. Option, item and match order is shuffled by the app, so authors list the correct option first and items/pairs in the correct order.",
   "type": "object",
   "additionalProperties": false,
   "required": ["id", "version", "unit", "status", "xp", "coins", "title", "description", "exercises"],

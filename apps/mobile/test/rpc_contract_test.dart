@@ -19,7 +19,6 @@ void main() {
     expect(state.stats.hearts, state.stats.maxHearts, reason: 'the practice session gave back the heart lost in the lesson');
     expect(state.stats.levelProgress, inInclusiveRange(0, 1));
     expect(state.totalValue, closeTo(state.cash + state.holdingsValue, 0.01));
-    expect(state.isPlus, isFalse);
   });
 
   test('get_learning_path', () {
@@ -29,7 +28,7 @@ void main() {
     expect(banks.first.status, LessonStatus.completed);
     expect(banks.first.stars, 2);
     expect(banks[1].status, LessonStatus.unlocked);
-    expect(tracks.last.lessons.every((l) => l.status == LessonStatus.premium), isTrue);
+    expect(tracks.last.lessons.first.status, LessonStatus.unlocked, reason: 'every track is free');
   });
 
   test('start_lesson → a LessonSession that the answer key solves', () {

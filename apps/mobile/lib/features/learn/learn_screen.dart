@@ -30,7 +30,7 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
           if (player != null)
             Padding(
               padding: const EdgeInsets.only(right: 20),
-              child: HeartsBadge(hearts: player.stats.hearts, maxHearts: player.stats.maxHearts, unlimited: player.isPlus),
+              child: HeartsBadge(hearts: player.stats.hearts, maxHearts: player.stats.maxHearts),
             ),
         ],
       ),
@@ -172,7 +172,6 @@ class _TrackChip extends StatelessWidget {
             Icon(iconFor(track.icon), color: selected ? Colors.white : AppColors.textSecondary),
             const SizedBox(width: 8),
             Text(track.title, style: TextStyle(fontWeight: FontWeight.w700, color: selected ? Colors.white : AppColors.textSecondary)),
-            if (track.isPremium) ...[const SizedBox(width: 8), const PlusBadge()],
           ],
         ),
       ),
@@ -241,8 +240,6 @@ class _LessonCard extends StatelessWidget {
     switch (lesson.status) {
       case LessonStatus.completed || LessonStatus.unlocked:
         context.push('/lesson/${lesson.id}');
-      case LessonStatus.premium:
-        context.push('/plus');
       case LessonStatus.locked:
         showMessage(context, context.l10n.errorLessonLocked);
     }
@@ -278,7 +275,6 @@ class _LessonCard extends StatelessWidget {
                       switch (lesson.status) {
                         LessonStatus.completed => Icons.check_rounded,
                         LessonStatus.unlocked => Icons.play_arrow_rounded,
-                        LessonStatus.premium => Icons.workspace_premium,
                         LessonStatus.locked => Icons.lock,
                       },
                       color: Colors.white,

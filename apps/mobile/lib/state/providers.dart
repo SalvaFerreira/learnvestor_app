@@ -4,18 +4,16 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../data/models.dart';
 import '../data/repository.dart';
-import '../services/purchases.dart';
 
 final supabaseProvider = Provider<SupabaseClient>((ref) => Supabase.instance.client);
 
 final repositoryProvider = Provider<Repository>((ref) => Repository(ref.watch(supabaseProvider)));
 
-final purchasesProvider = Provider<PurchasesService>((ref) => PurchasesService());
-
 final _authEventsProvider = StreamProvider<AuthState>((ref) => ref.watch(supabaseProvider).auth.onAuthStateChange);
 
-/// Signed-in user id. Only changes on sign-in/sign-out (not on token refresh), so
-/// everything keyed on it reloads exactly when the account changes.
+/// Id of this device's anonymous user (there are no logins). Only changes when the
+/// session is created or removed (not on token refresh), so everything keyed on it
+/// reloads exactly when the user changes.
 final userIdProvider = Provider<String?>((ref) {
   ref.watch(_authEventsProvider);
   return ref.watch(supabaseProvider).auth.currentUser?.id;
@@ -27,7 +25,7 @@ final playerStateProvider = FutureProvider<PlayerState?>((ref) async {
   return ref.watch(repositoryProvider).getState();
 });
 
-/// UI and content language: the profile's choice once signed in, otherwise the device's.
+/// UI and content language: the profile's choice once it exists, otherwise the device's.
 final contentLocaleProvider = Provider<String>((ref) {
   final fromProfile = ref.watch(playerStateProvider).value?.profile.locale;
   if (fromProfile != null) return fromProfile;

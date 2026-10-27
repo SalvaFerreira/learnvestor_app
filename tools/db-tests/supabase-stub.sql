@@ -11,6 +11,7 @@ create schema auth;
 create table auth.users (
   id                 uuid primary key default gen_random_uuid(),
   email              text unique,
+  is_anonymous       boolean not null default false,
   raw_user_meta_data jsonb not null default '{}'::jsonb,
   created_at         timestamptz not null default now()
 );

@@ -1,6 +1,6 @@
 # LearnVestor: app
 
-Monorepo da app LearnVestor (o "Duolingo da literacia financeira"). A arquitetura e as decisões estão em [ARCHITECTURE.md](ARCHITECTURE.md).
+Monorepo da app LearnVestor (o "Duolingo da literacia financeira"). A app é **pública e gratuita**: não tem login nem pagamentos. A arquitetura e as decisões estão em [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ```
 App/
@@ -8,8 +8,7 @@ App/
 ├── supabase/
 │   ├── migrations/         Schema, RLS, lógica de jogo (RPCs), cron e permissões da API
 │   ├── seeds/              10_content.sql (gerado) + 20_dev_market_data.sql (só local)
-│   ├── functions/          Edge Functions: market-data-sync, revenuecat-webhook, delete-account
-│   └── templates/          Emails de login com código de 6 dígitos
+│   └── functions/          Edge Functions: market-data-sync, delete-account
 ├── packages/content/       Currículo, lições, conquistas e instrumentos como código (EN + PT)
 ├── tools/db-tests/         Testes da base de dados em PGlite (sem Docker) + API de demonstração
 ├── tools/e2e/              Percurso completo no browser (Playwright) contra a API de demonstração
@@ -20,7 +19,7 @@ App/
 
 - **O servidor é que decide.** XP, vidas, streaks, dinheiro virtual e trades mudam apenas através de RPCs Postgres (`supabase/migrations/*_rpc.sql`). O cliente nunca escreve diretamente em saldos.
 - **Tudo fechado por omissão.** Todas as tabelas têm RLS. Tudo o que fica exposto à API (tabelas e RPCs por role) está num só ficheiro: [`*_api_grants.sql`](supabase/migrations/20261023120800_api_grants.sql).
-- **Dinheiro real só na monetização.** Os euros da carteira são virtuais e ganham-se nas lições. Subscrições e gemas passam pelas lojas (RevenueCat), e só o webhook escreve `entitlements` e `purchases`.
+- **Sem contas e sem dinheiro real.** No primeiro arranque a app cria um utilizador anónimo do Supabase para o dispositivo, por isso não há email, código nem login. Os euros da carteira são virtuais e ganham-se nas lições. Não há subscrições nem compras: todas as lições são gratuitas, e as vidas e gemas só se ganham a jogar.
 
 ## Testar (não precisa de Docker nem de contas)
 
@@ -29,7 +28,7 @@ App/
 cd packages/content && npm ci && npm run check
 
 # Base de dados: aplica todas as migrações e seeds num Postgres em memória e testa
-# RLS, permissões, lições, vidas, streaks, Plus, trades, câmbio, idempotência e RGPD
+# RLS, permissões, lições, vidas, streaks, trades, câmbio, idempotência e RGPD
 cd tools/db-tests && npm ci && npm test
 
 # Edge Functions: type-check e testes
@@ -55,13 +54,13 @@ cd apps/mobile
 flutter run -d chrome --dart-define=SUPABASE_URL=http://127.0.0.1:54321 --dart-define=SUPABASE_PUBLISHABLE_KEY=dev
 ```
 
-Entra com qualquer email: o código é sempre **123456**. Os preços são de exemplo e não há Realtime nem pagamentos. Serve só para demonstração e não substitui o Supabase.
+A app entra logo no onboarding, sem login. Os preços são de exemplo e não há Realtime. Serve só para demonstração e não substitui o Supabase.
 
 ## Conteúdos: currículo → rascunho com IA → revisão → publicação
 
 Tudo em `packages/content`:
 
-1. **Currículo** ([`content/curriculum.yaml`](packages/content/content/curriculum.yaml)). É a fonte única de trilhos, unidades, ordem das lições, regiões (por exemplo, o trilho de Impostos é só para PT) e acesso Plus. Cada lição planeada tem objetivos, factos-chave e fontes oficiais. `npm run status` mostra o que está planeado, em rascunho e revisto.
+1. **Currículo** ([`content/curriculum.yaml`](packages/content/content/curriculum.yaml)). É a fonte única de trilhos, unidades, ordem das lições e regiões (por exemplo, o trilho de Impostos é só para PT). Cada lição planeada tem objetivos, factos-chave e fontes oficiais. `npm run status` mostra o que está planeado, em rascunho e revisto.
 2. **Rascunho com IA.**
    - `npm run draft -- --next 5` (ou `-- <id-da-lição>` / `-- --unit <unidade>`) gera a lição em PT e EN com a Claude, já validada, com `status: "draft"`.
    - Precisa de `ANTHROPIC_API_KEY`.
@@ -80,7 +79,7 @@ Tipos de exercício: `info`, `multiple_choice`, `true_false`, `fill_blank`, `ord
 ## Correr localmente com o Supabase completo (precisa de Docker)
 
 ```bash
-npx supabase start                      # Postgres, Auth, Realtime, Studio e Inbucket (emails)
+npx supabase start                      # Postgres, Auth, Realtime e Studio
 npx supabase db reset                   # migrações + seeds (conteúdo + preços de exemplo)
 cp supabase/functions/.env.example supabase/functions/.env   # e preenche
 npx supabase functions serve --env-file supabase/functions/.env
@@ -90,8 +89,6 @@ flutter run -d chrome \
   --dart-define=SUPABASE_URL=http://127.0.0.1:54321 \
   --dart-define=SUPABASE_PUBLISHABLE_KEY=<publishable key do "supabase start">
 ```
-
-Os emails de login aparecem no Inbucket (http://127.0.0.1:54324).
 
 ## Pôr na cloud (uma vez por ambiente: staging e produção)
 
@@ -108,15 +105,10 @@ Os emails de login aparecem no Inbucket (http://127.0.0.1:54324).
    select vault.create_secret('https://<ref>.supabase.co', 'project_url');
    select vault.create_secret('<mesmo valor do CRON_SECRET>', 'cron_secret');
    ```
-3. **Auth.** Em Authentication > Emails, usa os templates de `supabase/templates/` (têm de mostrar `{{ .Token }}`). Configura também um **SMTP próprio** (Resend, Postmark…), porque o SMTP por omissão do Supabase tem um limite muito baixo de emails por hora e não serve para produção.
+3. **Auth.** Em Authentication > Sign In / Providers, ativa **Allow anonymous sign-ins** e desativa o email. Ativa também um **captcha** (Turnstile) e confirma o limite de inícios anónimos por IP, para evitar que bots criem utilizadores em massa.
 4. **Dados de mercado.** Cria uma conta Finnhub (ou outro fornecedor) com um **plano comercial que permita mostrar cotações numa app**. O plano gratuito não permite redistribuição. Para trocar de fornecedor, basta implementar `MarketDataProvider` em `supabase/functions/_shared/market.ts`.
-5. **RevenueCat:**
-   - Entitlement `plus`.
-   - A offering *current* com os pacotes da subscrição (mensal e anual).
-   - A offering `gems` com os consumíveis `gems_100`, `gems_500` e `gems_1200`.
-   - Webhook para `https://<ref>.supabase.co/functions/v1/revenuecat-webhook`, com o header `Authorization` igual a `REVENUECAT_WEBHOOK_AUTH`.
-6. **Website.** Preenche `SUPABASE_URL` e `SUPABASE_PUBLISHABLE_KEY` no início de `LearnVestor_Website/docs/script.js`, para a waitlist passar a gravar.
-7. **GitHub.** Cria os environments `staging` e `production` com os secrets listados em [`deploy.yml`](.github/workflows/deploy.yml). A partir daí, o deploy faz-se em Actions > Deploy backend.
+5. **Website.** Preenche `SUPABASE_URL` e `SUPABASE_PUBLISHABLE_KEY` no início de `LearnVestor_Website/docs/script.js`, para a waitlist passar a gravar.
+6. **GitHub.** Cria os environments `staging` e `production` com os secrets listados em [`deploy.yml`](.github/workflows/deploy.yml). A partir daí, o deploy faz-se em Actions > Deploy backend.
 
 ## Builds da app
 
@@ -124,10 +116,10 @@ Ver [apps/mobile/README.md](apps/mobile/README.md).
 
 ## O que ainda não está feito (próximas fases do roadmap)
 
-- **Login social** (Apple e Google). O login por código de email já cobre todas as plataformas.
+- **Captcha no início anónimo** (Turnstile) e limpeza periódica de utilizadores anónimos inativos.
 - **Modo offline das lições** (fila local com Drift). As RPCs já são idempotentes e reconciliam vidas, por isso o servidor está preparado.
 - **Ligas semanais com promoção e despromoção.** Já existe a classificação semanal global, em Postgres, com moderação de nomes. O Redis só faz falta quando a escala o justificar.
 - **Revisão humana das 23 lições em rascunho** e redação das restantes 66 do currículo.
-- **Painel B2B** (Next.js), faturação Stripe, SSO e contas geridas por escolas.
+- **Painel B2B** (Next.js) e contas geridas por escolas.
 - **Analytics de produto** (PostHog, respeitando o consentimento de analytics que já é registado no onboarding), notificações push de streak e tutor de IA.
 - **Particionamento** das tabelas de eventos, quando passarem as dezenas de milhões de linhas.

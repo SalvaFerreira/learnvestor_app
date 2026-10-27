@@ -3,9 +3,8 @@
   "hearts": {
     "gems": 20,
     "hearts": 5,
-    "unlimited": false,
     "max_hearts": 6,
-    "next_heart_at": "2026-10-27T17:21:57.338+00:00"
+    "next_heart_at": "2026-10-27T18:27:48.229+00:00"
   },
   "exercises": [
     {
@@ -29,18 +28,6 @@
       "explanation": "Esta diferença chama-se margem financeira e é o negócio principal de um banco."
     },
     {
-      "id": "what-is-a-bank/current-account",
-      "type": "fill_blank",
-      "answer": 0,
-      "options": [
-        "à ordem",
-        "crédito habitação",
-        "reforma"
-      ],
-      "sentence": "Uma conta ___ serve para o dia a dia, enquanto uma conta poupança serve para guardar dinheiro.",
-      "explanation": "As contas à ordem dão acesso imediato ao dinheiro para pagamentos e cartões."
-    },
-    {
       "id": "what-is-a-bank/liquidity-order",
       "type": "order",
       "items": [
@@ -57,8 +44,20 @@
       ],
       "prompt": "Ordena do mais fácil de usar de imediato ao mais difícil (mais líquido para menos líquido):",
       "explanation": "Liquidez é a rapidez com que algo pode ser convertido em dinheiro sem perder valor."
+    },
+    {
+      "id": "what-is-a-bank/current-account",
+      "type": "fill_blank",
+      "answer": 0,
+      "options": [
+        "à ordem",
+        "crédito habitação",
+        "reforma"
+      ],
+      "sentence": "Uma conta ___ serve para o dia a dia, enquanto uma conta poupança serve para guardar dinheiro.",
+      "explanation": "As contas à ordem dão acesso imediato ao dinheiro para pagamentos e cartões."
     }
   ],
   "lesson_id": null,
-  "attempt_id": "81db6228-8033-4b11-a606-50f3de2ff7ae"
+  "attempt_id": "b8fa2704-a588-43c1-af80-d8969d5e7dfb"
 }

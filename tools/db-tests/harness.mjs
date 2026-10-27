@@ -26,14 +26,11 @@ export async function createDb() {
   return db;
 }
 
-let counter = 0;
-
-/** Simulates a Supabase Auth signup (fires the on_auth_user_created trigger). */
+/** Simulates a Supabase anonymous sign-in (no email; fires the on_auth_user_created trigger). */
 export async function createUser(db, meta = {}) {
-  counter += 1;
   const { rows } = await db.query(
-    'insert into auth.users (email, raw_user_meta_data) values ($1, $2) returning id',
-    [`user${counter}@test.dev`, JSON.stringify(meta)],
+    'insert into auth.users (is_anonymous, raw_user_meta_data) values (true, $1) returning id',
+    [JSON.stringify(meta)],
   );
   return rows[0].id;
 }

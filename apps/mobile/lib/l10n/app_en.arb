@@ -10,7 +10,6 @@
   "errorNetwork": "No connection. Check your internet and try again.",
   "errorLessonLocked": "Complete the previous lesson first.",
   "errorLessonNotFound": "This lesson is not available.",
-  "errorPremiumRequired": "This lesson is part of LearnVestor Plus.",
   "errorOutOfHearts": "You're out of hearts.",
   "errorTooFast": "That was too fast! Take your time to read each question.",
   "errorRateLimited": "Too many attempts. Take a short break and try again.",
@@ -25,23 +24,6 @@
   "errorUsernameTaken": "That username is already taken.",
   "errorInvalidProfile": "Please check your details.",
   "errorTimezone": "You can only change your time zone once a day.",
-  "signInTitle": "Learn to invest, one lesson at a time",
-  "signInSubtitle": "Enter your email and we'll send you a 6-digit code.",
-  "emailLabel": "Email",
-  "sendCode": "Send code",
-  "codeSentTo": "We sent a code to {email}",
-  "@codeSentTo": {
-    "placeholders": {
-      "email": {
-        "type": "String"
-      }
-    }
-  },
-  "codeLabel": "6-digit code",
-  "verify": "Verify",
-  "changeEmail": "Use a different email",
-  "invalidEmail": "Enter a valid email address.",
-  "invalidCode": "Invalid or expired code.",
   "authNotConfigured": "This build has no backend configured. Run it with --dart-define=SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY (see apps/mobile/README.md).",
   "onboardingTitle": "Let's set up your profile",
   "usernameLabel": "Username",
@@ -63,7 +45,6 @@
   "goalSerious": "Serious",
   "goalIntense": "Intense",
   "acceptTerms": "I accept the Terms of Service and the Privacy Policy",
-  "marketingOptIn": "Send me tips and product news by email",
   "analyticsOptIn": "Help improve LearnVestor with anonymous usage analytics",
   "startLearning": "Start learning",
   "educationalNotice": "LearnVestor is educational only. All investing in the app uses virtual money and nothing here is financial advice.",
@@ -161,7 +142,6 @@
       }
     }
   },
-  "plusBadge": "PLUS",
   "xpReward": "+{xp} XP",
   "@xpReward": {
     "placeholders": {
@@ -192,7 +172,7 @@
   "quit": "Quit",
   "keepLearning": "Keep learning",
   "outOfHeartsTitle": "Out of hearts",
-  "outOfHeartsBody": "Wait for your hearts to refill, use gems, or get unlimited hearts with Plus.",
+  "outOfHeartsBody": "Wait for your hearts to refill, use gems, or practise to earn one back.",
   "refillWithGems": "Refill for {gems} gems",
   "@refillWithGems": {
     "placeholders": {
@@ -201,7 +181,6 @@
       }
     }
   },
-  "getPlus": "Get LearnVestor Plus",
   "nextHeartIn": "Next heart in {minutes} min",
   "@nextHeartIn": {
     "placeholders": {
@@ -350,7 +329,6 @@
     }
   },
   "profileTitle": "Profile",
-  "plusMember": "Plus member",
   "statsXp": "Total XP",
   "statsStreak": "Best streak",
   "statsLessons": "Lessons",
@@ -385,31 +363,17 @@
       }
     }
   },
-  "restorePurchases": "Restore purchases",
   "exportData": "Export my data",
   "exportDone": "Your data was copied to the clipboard as JSON.",
-  "deleteAccount": "Delete account",
-  "deleteAccountBody": "This permanently deletes your account, progress and portfolio. If you have a subscription, cancel it in your App Store or Google Play settings.",
+  "deleteAccount": "Delete my progress",
+  "deleteAccountBody": "This permanently deletes your progress, portfolio and username. The app then starts again from scratch.",
   "deleteConfirm": "Delete permanently",
-  "signOut": "Sign out",
+  "noAccountTitle": "No account needed",
+  "noAccountBody": "LearnVestor is free. Your progress is saved for this device: uninstalling the app or clearing its data starts over.",
   "legal": "Legal",
   "privacyPolicy": "Privacy Policy",
   "termsOfService": "Terms of Service",
   "investmentDisclaimer": "Investment Disclaimer",
-  "plusTitle": "LearnVestor Plus",
-  "plusHeadline": "Learn faster with Plus",
-  "plusBenefitHearts": "Unlimited hearts: learn without waiting",
-  "plusBenefitAdvanced": "The Advanced track and every new premium lesson",
-  "plusBenefitSupport": "Support an independent financial education app",
-  "plusActive": "You're a Plus member. Thank you!",
-  "purchasesUnavailable": "Purchases are available in the iOS and Android apps.",
-  "purchasesNotConfigured": "Purchases are not configured in this build.",
-  "activatingPlus": "Activating your subscription…",
-  "purchaseFailed": "The purchase did not complete. You have not been charged.",
-  "gemPacks": "Gem packs",
-  "restoreDone": "Purchases restored.",
-  "noOffers": "No offers are available right now.",
-  "subscriptionTerms": "Subscriptions renew automatically until cancelled in your App Store or Google Play settings.",
   "matchHint": "Match each term to its meaning",
   "numericHint": "Calculate and type the answer",
   "answerLabel": "Answer",

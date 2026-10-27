@@ -38,16 +38,15 @@ describe('signup', () => {
 });
 
 describe('learning path', () => {
-  test('first lesson of each free track is unlocked, the rest locked, premium gated', async () => {
+  test('first lesson of every track is unlocked and the rest locked, all free', async () => {
     const uid = await newLearner();
     const path = await rpc(db, uid, 'get_learning_path', { p_locale: 'pt' });
     const statuses = Object.fromEntries(path.map((t) => [t.id, t.units.flatMap((u) => u.lessons.map((l) => l.status))]));
-    for (const track of ['banks', 'taxes', 'investment', 'mindset']) {
+    for (const track of ['banks', 'taxes', 'investment', 'mindset', 'advanced']) {
       const [first, ...rest] = statuses[track];
       assert.equal(first, 'unlocked', track);
       assert.ok(rest.every((s) => s === 'locked'), track);
     }
-    assert.ok(statuses.advanced.every((s) => s === 'premium'));
     assert.equal(path[0].title, 'Dinheiro no Dia a Dia');
     assert.deepEqual(path[0].units[0].lessons.slice(0, 3).map((l) => l.id), ['what-is-a-bank', 'emergency-fund', 'compound-interest']);
   });
@@ -62,10 +61,10 @@ describe('learning path', () => {
     await assert.rejects(rpc(db, uid, 'start_lesson', { p_lesson_id: 'gross-vs-net' }), /lesson_not_found/);
   });
 
-  test('locked and premium lessons cannot be started', async () => {
+  test('locked lessons cannot be started', async () => {
     const uid = await newLearner();
     await assert.rejects(rpc(db, uid, 'start_lesson', { p_lesson_id: 'emergency-fund' }), /lesson_locked/);
-    await assert.rejects(rpc(db, uid, 'start_lesson', { p_lesson_id: 'fees-matter' }), /premium_required/);
+    await assert.rejects(rpc(db, uid, 'start_lesson', { p_lesson_id: 'fees-matter' }), /lesson_locked/);
     await assert.rejects(rpc(db, uid, 'start_lesson', { p_lesson_id: 'does-not-exist' }), /lesson_not_found/);
   });
 
@@ -268,34 +267,15 @@ describe('streaks', () => {
   });
 });
 
-describe('plus subscribers', () => {
-  test('get premium lessons and unlimited hearts', async () => {
+describe('free for everyone', () => {
+  test('the advanced track is open to every learner', async () => {
     const uid = await newLearner();
-    // Applied as the webhook would (service role); users cannot call this (see security tests).
-    await sql(db, `select public.svc_apply_entitlement($1, 'plus', 'app_store', 'plus_monthly', true, now() + interval '30 days', 'tx1')`, [uid]);
-
-    const s = await state(uid);
-    assert.equal(s.is_plus, true);
     const lesson = await rpc(db, uid, 'start_lesson', { p_lesson_id: 'etfs-and-index-funds' });
+    assert.ok(lesson.attempt_id);
     const h = await rpc(db, uid, 'lose_heart', { p_attempt_id: lesson.attempt_id });
-    assert.equal(h.hearts, 6);
-    assert.equal(h.unlimited, true);
-  });
-
-  test('expired subscriptions lose access', async () => {
-    const uid = await newLearner();
-    await sql(db, `select public.svc_apply_entitlement($1, 'plus', 'play_store', 'plus_yearly', true, now() - interval '1 day', 'tx2')`, [uid]);
-    assert.equal((await state(uid)).is_plus, false);
-    await assert.rejects(rpc(db, uid, 'start_lesson', { p_lesson_id: 'etfs-and-index-funds' }), /premium_required/);
-  });
-
-  test('gem purchases are credited once per transaction', async () => {
-    const uid = await newLearner();
-    const first = await sql(db, `select public.svc_credit_gems($1, 500, 'app_store', 'txn-abc', 'gems_500') as ok`, [uid]);
-    const retry = await sql(db, `select public.svc_credit_gems($1, 500, 'app_store', 'txn-abc', 'gems_500') as ok`, [uid]);
-    assert.equal(first[0].ok, true);
-    assert.equal(retry[0].ok, false);
-    assert.equal((await state(uid)).stats.gems, 500);
+    assert.equal(h.hearts, 5);
+    assert.equal('unlimited' in h, false);
+    assert.equal('is_plus' in (await state(uid)), false);
   });
 });
 
