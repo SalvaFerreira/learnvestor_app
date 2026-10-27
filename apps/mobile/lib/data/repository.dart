@@ -28,23 +28,6 @@ class Repository {
 
   Future<PlayerState> getState() async => PlayerState.fromJson(await _rpc<Json>('get_my_state'));
 
-  Future<PlayerState> completeOnboarding({
-    required String username,
-    required String ageBracket,
-    required int dailyGoalXp,
-    required String? countryCode,
-    required String termsVersion,
-    required bool analyticsOptIn,
-  }) async =>
-      PlayerState.fromJson(await _rpc<Json>('complete_onboarding', {
-        'p_username': username,
-        'p_age_bracket': ageBracket,
-        'p_daily_goal_xp': dailyGoalXp,
-        'p_country_code': countryCode,
-        'p_terms_version': termsVersion,
-        'p_analytics_opt_in': analyticsOptIn,
-      }));
-
   Future<void> updateProfile(Map<String, dynamic> fields) async {
     final uid = _client.auth.currentUser!.id;
     try {
@@ -89,11 +72,7 @@ class Repository {
         'p_message': message,
       });
 
-  Future<void> reportUsername(String username) => _rpc<void>('report_username', {'p_username': username});
-
   Future<HeartsInfo> refillHearts() async => HeartsInfo.fromJson(await _rpc<Json>('refill_hearts'));
-
-  Future<void> buyStreakFreeze() => _rpc<Json>('buy_streak_freeze');
 
   Future<Portfolio> getPortfolio() async => Portfolio.fromJson(await _rpc<Json>('get_portfolio'));
 
@@ -167,10 +146,6 @@ class Repository {
     final data = await _rpc<List<dynamic>>('get_my_achievements', {'p_locale': locale});
     return [for (final a in data) Achievement.fromJson(a as Json)];
   }
-
-  Future<Leaderboard> getLeaderboard() async => Leaderboard.fromJson(await _rpc<Json>('get_weekly_leaderboard'));
-
-  Future<Json> exportMyData() => _rpc<Json>('export_my_data');
 
   Future<void> deleteAccount() async {
     final res = await _client.functions.invoke('delete-account', method: HttpMethod.post);

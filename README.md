@@ -76,7 +76,7 @@ cd apps/mobile
 flutter run -d chrome --dart-define=SUPABASE_URL=http://127.0.0.1:54321 --dart-define=SUPABASE_PUBLISHABLE_KEY=dev
 ```
 
-A app entra logo no onboarding, sem login. Os preços são de exemplo e não há Realtime. Serve só para demonstração e não substitui o Supabase.
+A app abre logo no menu principal, sem login. Os preços são de exemplo e não há Realtime. Serve só para demonstração e não substitui o Supabase.
 
 ## Conteúdos: currículo → rascunho com IA → revisão → publicação
 
@@ -112,7 +112,9 @@ flutter run -d chrome \
   --dart-define=SUPABASE_PUBLISHABLE_KEY=<publishable key do "supabase start">
 ```
 
-## Pôr na cloud (uma vez por ambiente: staging e produção)
+## Opcional: correr o mesmo backend num Supabase real
+
+A demo não precisa disto. As migrações são de um projeto Supabase normal, por isso o mesmo backend pode correr na cloud (por exemplo, para uma futura app nas lojas):
 
 1. **Projeto Supabase** na região **UE (Frankfurt)**, com o plano Pro em produção (backups com PITR). Depois:
    ```bash
@@ -129,19 +131,13 @@ flutter run -d chrome \
    ```
 3. **Auth.** Em Authentication > Sign In / Providers, ativa **Allow anonymous sign-ins** e desativa o email. Ativa também um **captcha** (Turnstile) e confirma o limite de inícios anónimos por IP, para evitar que bots criem utilizadores em massa.
 4. **Dados de mercado.** Cria uma conta Finnhub (ou outro fornecedor) com um **plano comercial que permita mostrar cotações numa app**. O plano gratuito não permite redistribuição. Para trocar de fornecedor, basta implementar `MarketDataProvider` em `supabase/functions/_shared/market.ts`.
-5. **Website.** Preenche `SUPABASE_URL` e `SUPABASE_PUBLISHABLE_KEY` no início de `LearnVestor_Website/docs/script.js`, para a waitlist passar a gravar.
-6. **GitHub.** Cria os environments `staging` e `production` com os secrets listados em [`deploy.yml`](.github/workflows/deploy.yml). A partir daí, o deploy faz-se em Actions > Deploy backend.
+5. **GitHub.** Cria os environments `staging` e `production` com os secrets listados em [`deploy.yml`](.github/workflows/deploy.yml). A partir daí, o deploy faz-se em Actions > Deploy backend.
 
 ## Builds da app
 
 Ver [apps/mobile/README.md](apps/mobile/README.md).
 
-## O que ainda não está feito (próximas fases do roadmap)
+## O que ainda não está feito
 
-- **Captcha no início anónimo** (Turnstile) e limpeza periódica de utilizadores anónimos inativos.
-- **Modo offline das lições** (fila local com Drift). As RPCs já são idempotentes e reconciliam vidas, por isso o servidor está preparado.
-- **Ligas semanais com promoção e despromoção.** Já existe a classificação semanal global, em Postgres, com moderação de nomes. O Redis só faz falta quando a escala o justificar.
 - **Revisão humana das 23 lições em rascunho** e redação das restantes 66 do currículo.
-- **Painel B2B** (Next.js) e contas geridas por escolas.
-- **Analytics de produto** (PostHog, respeitando o consentimento de analytics que já é registado no onboarding), notificações push de streak e tutor de IA.
-- **Particionamento** das tabelas de eventos, quando passarem as dezenas de milhões de linhas.
+- **Preços de exemplo:** os preços das ações estão fixos em `supabase/seeds/20_dev_market_data.sql`; convém atualizá-los de vez em quando.

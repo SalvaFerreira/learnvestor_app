@@ -20,20 +20,22 @@ before(async () => {
 
 describe('signup', () => {
   test('creates profile, full hearts and a welcome portfolio', async () => {
-    const uid = await createUser(db, { locale: 'pt', timezone: 'Europe/Lisbon' });
+    const uid = await createUser(db, { locale: 'pt', timezone: 'Europe/Lisbon', country: 'pt' });
     const s = await state(uid);
     assert.equal(s.profile.locale, 'pt');
     assert.equal(s.profile.timezone, 'Europe/Lisbon');
+    assert.equal(s.profile.country_code, 'PT');
     assert.equal(s.stats.hearts, 6);
     assert.equal(Number(s.portfolio.cash), 100);
     assert.equal(s.profile.onboarded, false);
   });
 
   test('falls back to safe defaults for invalid metadata', async () => {
-    const uid = await createUser(db, { locale: 'xx', timezone: 'Nowhere/Land' });
+    const uid = await createUser(db, { locale: 'xx', timezone: 'Nowhere/Land', country: 'Portugal' });
     const s = await state(uid);
     assert.equal(s.profile.locale, 'en');
     assert.equal(s.profile.timezone, 'UTC');
+    assert.equal(s.profile.country_code, null);
   });
 });
 

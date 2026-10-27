@@ -48,6 +48,3 @@ grant execute on function
   public.get_my_achievements(text),
   public.export_my_data()
 to authenticated;
-
--- Public website
-grant execute on function public.join_waitlist(text, text, text) to anon, authenticated;

@@ -6,8 +6,8 @@ import '../../core/theme.dart';
 import '../../state/providers.dart';
 import '../../ui/common.dart';
 
-/// There are no logins: on first launch the app creates an anonymous Supabase user for
-/// this device and goes straight to onboarding. This screen only shows while that
+/// There are no logins: on first launch the app creates an anonymous user for this browser
+/// and goes straight to the main menu. This screen only shows while that
 /// session is being created, or when it failed (e.g. offline) so the learner can retry.
 class StartScreen extends ConsumerStatefulWidget {
   const StartScreen({super.key});
@@ -29,9 +29,10 @@ class _StartScreenState extends ConsumerState<StartScreen> {
     setState(() => _error = null);
     try {
       final timezone = await FlutterTimezone.getLocalTimezone().then((t) => t.identifier).catchError((_) => 'UTC');
+      final country = WidgetsBinding.instance.platformDispatcher.locale.countryCode;
       await ref.read(supabaseProvider).auth.signInAnonymously(
         // Read once by the signup trigger to initialise the profile.
-        data: {'locale': ref.read(contentLocaleProvider), 'timezone': timezone},
+        data: {'locale': ref.read(contentLocaleProvider), 'timezone': timezone, 'country': ?country},
       );
       // The router redirects once the session exists.
     } catch (e) {

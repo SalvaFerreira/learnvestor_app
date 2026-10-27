@@ -15,17 +15,9 @@ before(async () => {
 
 describe('anonymous visitors', () => {
   test('cannot read any user data', async () => {
-    for (const table of ['profiles', 'user_stats', 'portfolios', 'trades', 'waitlist_signups']) {
+    for (const table of ['profiles', 'user_stats', 'portfolios', 'trades']) {
       await assert.rejects(as(db, null, (q) => q(`select * from public.${table}`)), /permission denied/, table);
     }
-  });
-
-  test('can join the waitlist, idempotently, without reading it', async () => {
-    await rpc(db, null, 'join_waitlist', { p_email: '  Someone@Example.com ' });
-    await rpc(db, null, 'join_waitlist', { p_email: 'someone@example.com' });
-    const rows = await sql(db, `select email from public.waitlist_signups where email = 'someone@example.com'`);
-    assert.equal(rows.length, 1);
-    await assert.rejects(rpc(db, null, 'join_waitlist', { p_email: 'not-an-email' }), /invalid_email/);
   });
 
   test('cannot call game RPCs', async () => {

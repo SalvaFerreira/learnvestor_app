@@ -55,18 +55,12 @@ final achievementsProvider = FutureProvider<List<Achievement>>((ref) {
   return ref.watch(repositoryProvider).getAchievements(ref.watch(contentLocaleProvider));
 });
 
-final leaderboardProvider = FutureProvider<Leaderboard>((ref) {
-  ref.watch(userIdProvider);
-  return ref.watch(repositoryProvider).getLeaderboard();
-});
-
 /// Reload everything a finished lesson can change.
 void refreshAfterLesson(WidgetRef ref) {
   ref
     ..invalidate(playerStateProvider)
     ..invalidate(learningPathProvider)
-    ..invalidate(achievementsProvider)
-    ..invalidate(leaderboardProvider);
+    ..invalidate(achievementsProvider);
 }
 
 /// Reload everything a trade can change.

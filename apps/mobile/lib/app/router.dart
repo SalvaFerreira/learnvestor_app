@@ -6,15 +6,13 @@ import '../features/explore/explore_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/learn/learn_screen.dart';
 import '../features/learn/lesson_screen.dart';
-import '../features/onboarding/onboarding_screen.dart';
 import '../features/portfolio/portfolio_screen.dart';
-import '../features/profile/profile_screen.dart';
 import '../features/start/start_screen.dart';
 import '../features/tools/tools_screen.dart';
 import '../state/providers.dart';
 import 'shell.dart';
 
-/// Re-runs the router's redirect whenever the session or onboarding status changes.
+/// Re-runs the router's redirect whenever the session or the player state changes.
 class _RouterRefresh extends ChangeNotifier {
   _RouterRefresh(Ref ref) {
     ref
@@ -36,16 +34,13 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       final player = ref.read(playerStateProvider);
       if (player.isLoading && !player.hasValue) return location == '/splash' ? null : '/splash';
-      final profile = player.value?.profile;
-      if (profile == null) return null; // error state: let the screen show retry
-      if (!profile.onboarded) return location == '/onboarding' ? null : '/onboarding';
-      if (const {'/start', '/onboarding', '/splash'}.contains(location)) return '/home';
+      // No onboarding in the demo: straight to the main menu.
+      if (const {'/start', '/splash'}.contains(location)) return '/home';
       return null;
     },
     routes: [
       GoRoute(path: '/splash', builder: (_, _) => const _Splash()),
       GoRoute(path: '/start', builder: (_, _) => const StartScreen()),
-      GoRoute(path: '/onboarding', builder: (_, _) => const OnboardingScreen()),
       GoRoute(path: '/lesson/:id', builder: (_, state) => LessonScreen(lessonId: state.pathParameters['id']!)),
       GoRoute(path: '/practice', builder: (_, _) => const LessonScreen.practice()),
       GoRoute(path: '/tools', builder: (_, _) => const ToolsScreen()),
@@ -56,7 +51,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(routes: [GoRoute(path: '/learn', builder: (_, _) => const LearnScreen())]),
           StatefulShellBranch(routes: [GoRoute(path: '/explore', builder: (_, _) => const ExploreScreen())]),
           StatefulShellBranch(routes: [GoRoute(path: '/portfolio', builder: (_, _) => const PortfolioScreen())]),
-          StatefulShellBranch(routes: [GoRoute(path: '/profile', builder: (_, _) => const ProfileScreen())]),
         ],
       ),
     ],

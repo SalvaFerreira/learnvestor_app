@@ -22,7 +22,7 @@ async function fetchBytes(file) {
 }
 
 async function openDb(assets, dataDir) {
-  const db = await PGlite.create(dataDir, { ...assets, relaxedDurability: true });
+  const db = await PGlite.create(dataDir, assets);
   const [{ ready }] = (await db.query("select to_regclass('auth.demo_ready') is not null as ready")).rows;
   if (ready) return db;
   const [{ partial }] = (await db.query("select to_regclass('auth.users') is not null as partial")).rows;
@@ -65,11 +65,11 @@ async function start() {
   }
   await refreshDemoData(db);
   removeOldDatabases().catch(() => {});
-  return createApi(db);
+  return { db, api: createApi(db) };
 }
 
-const api = start();
-api.catch((error) => console.error('LearnVestor demo failed to start', error));
+const demo = start();
+demo.catch((error) => console.error('LearnVestor demo failed to start', error));
 
 /**
  * (method, url, headersJson, body) → Promise<{ status, body }>.
@@ -78,7 +78,12 @@ api.catch((error) => console.error('LearnVestor demo failed to start', error));
 window.learnvestorDemoApi = async (method, url, headersJson, body) => {
   try {
     const headers = Object.fromEntries(Object.entries(JSON.parse(headersJson)).map(([k, v]) => [k.toLowerCase(), v]));
-    return await (await api).handle({ method, url, headers, body: body ?? '' });
+    const { db, api } = await demo;
+    const response = await api.handle({ method, url, headers, body: body ?? '' });
+    // Writes made inside transactions (every RPC) are only flushed to IndexedDB on request:
+    // flush before answering, so whatever the app shows as done survives a page reload.
+    if (method !== 'GET') await db.syncToFs();
+    return response;
   } catch (error) {
     console.error(error);
     return { status: 500, body: JSON.stringify({ message: String(error?.message ?? error) }) };

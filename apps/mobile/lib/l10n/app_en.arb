@@ -25,34 +25,11 @@
   "errorInvalidProfile": "Please check your details.",
   "errorTimezone": "You can only change your time zone once a day.",
   "authNotConfigured": "This build has no backend configured. Run it with --dart-define=SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY (see apps/mobile/README.md).",
-  "onboardingTitle": "Let's set up your profile",
-  "usernameLabel": "Username",
-  "usernameHint": "3–20 letters, numbers or _",
-  "ageLabel": "Age",
-  "ageUnder16": "Under 16",
-  "ageBlocked": "LearnVestor is for people aged 16 and over.",
-  "dailyGoalLabel": "Daily goal",
-  "goalOption": "{xp} XP per day",
-  "@goalOption": {
-    "placeholders": {
-      "xp": {
-        "type": "int"
-      }
-    }
-  },
-  "goalCasual": "Casual",
-  "goalRegular": "Regular",
-  "goalSerious": "Serious",
-  "goalIntense": "Intense",
-  "acceptTerms": "I accept the Terms of Service and the Privacy Policy",
-  "analyticsOptIn": "Help improve LearnVestor with anonymous usage analytics",
-  "startLearning": "Start learning",
   "educationalNotice": "LearnVestor is educational only. All investing in the app uses virtual money and nothing here is financial advice.",
   "navHome": "Home",
   "navLearn": "Learn",
   "navExplore": "Explore",
   "navPortfolio": "Portfolio",
-  "navProfile": "Profile",
   "levelLabel": "Level {level}",
   "@levelLabel": {
     "placeholders": {
@@ -121,7 +98,6 @@
   },
   "continueLearning": "Continue learning",
   "yourAchievements": "Your Achievements",
-  "seeAll": "See all",
   "learnTitle": "Learn",
   "percentComplete": "{percent}% Complete",
   "@percentComplete": {
@@ -302,7 +278,6 @@
     }
   },
   "virtualMoneyNotice": "Virtual money only. No real trades are made.",
-  "portfolioTitle": "Portfolio",
   "totalValue": "Total Value",
   "cash": "Cash",
   "stocks": "Stocks",
@@ -328,51 +303,13 @@
       }
     }
   },
-  "profileTitle": "Profile",
-  "statsXp": "Total XP",
-  "statsStreak": "Best streak",
-  "statsLessons": "Lessons",
-  "statsGems": "Gems",
-  "achievementsTitle": "Achievements",
-  "leaderboardTitle": "This week's leaderboard",
-  "leaderboardEmpty": "No one has earned XP this week yet. Be the first!",
-  "yourRank": "You are #{rank} this week",
-  "@yourRank": {
-    "placeholders": {
-      "rank": {
-        "type": "int"
-      }
-    }
-  },
-  "settingsTitle": "Settings",
-  "language": "Language",
-  "streakFreeze": "Streak freeze",
-  "streakFreezeBody": "Protects your streak if you miss a day. You have {count}.",
-  "@streakFreezeBody": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "buyForGems": "Buy for {gems} gems",
-  "@buyForGems": {
-    "placeholders": {
-      "gems": {
-        "type": "int"
-      }
-    }
-  },
-  "exportData": "Export my data",
-  "exportDone": "Your data was copied to the clipboard as JSON.",
-  "deleteAccount": "Delete my progress",
-  "deleteAccountBody": "This permanently deletes your progress, portfolio and username. The app then starts again from scratch.",
-  "deleteConfirm": "Delete permanently",
-  "noAccountTitle": "No account needed",
-  "noAccountBody": "LearnVestor is free. Your progress is saved for this device: uninstalling the app or clearing its data starts over.",
   "demoBadge": "DEMO",
-  "demoNoAccountBody": "This is the free browser demo. Your progress is saved only in this browser.",
-  "legal": "Legal",
+  "demoTitle": "LearnVestor demo",
+  "demoBody": "This free demo runs entirely in your browser. Your progress is saved only in this browser.",
+  "sendFeedback": "Send feedback",
+  "resetProgress": "Reset progress",
+  "resetProgressBody": "This erases your lessons, XP, gems and portfolio and refills your hearts, so you can start the demo from scratch.",
+  "resetConfirm": "Reset",
   "privacyPolicy": "Privacy Policy",
   "termsOfService": "Terms of Service",
   "investmentDisclaimer": "Investment Disclaimer",
@@ -394,7 +331,6 @@
   "reportMessageHint": "Details (optional)",
   "reportSend": "Send",
   "reportThanks": "Thank you! The team will review it.",
-  "reportUsername": "Report name",
   "toolsTitle": "Tools",
   "toolsSubtitle": "Calculators for real-life money decisions",
   "toolCompound": "Compound interest",
@@ -425,18 +361,10 @@
   "resultFeeDifference": "Cost of the higher fee",
   "toolsDisclaimer": "Simulations for learning only. Real returns vary and are not guaranteed.",
   "resultMonthsToGoal": "{months, plural, =0{Goal reached!} =1{1 month to go} other{{months} months to go}}",
-  "reportUsernameConfirm": "Report @{username} as an inappropriate name?",
   "@resultMonthsToGoal": {
     "placeholders": {
       "months": {
         "type": "int"
-      }
-    }
-  },
-  "@reportUsernameConfirm": {
-    "placeholders": {
-      "username": {
-        "type": "String"
       }
     }
   }

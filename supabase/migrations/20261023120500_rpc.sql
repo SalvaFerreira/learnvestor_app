@@ -13,12 +13,15 @@ declare
   c private.game_config := private.config();
   v_locale text := coalesce(new.raw_user_meta_data ->> 'locale', 'en');
   v_tz text := coalesce(new.raw_user_meta_data ->> 'timezone', 'UTC');
+  -- From the device locale; decides which country-specific lessons are shown.
+  v_country text := upper(new.raw_user_meta_data ->> 'country');
   v_portfolio uuid;
 begin
   if v_locale not in ('en', 'pt') then v_locale := 'en'; end if;
   if not private.is_valid_timezone(v_tz) then v_tz := 'UTC'; end if;
+  if v_country !~ '^[A-Z]{2}$' then v_country := null; end if;
 
-  insert into public.profiles (id, locale, timezone) values (new.id, v_locale, v_tz);
+  insert into public.profiles (id, locale, timezone, country_code) values (new.id, v_locale, v_tz, v_country);
   insert into public.user_stats (user_id, hearts) values (new.id, c.max_hearts);
   insert into public.portfolios (user_id, cash) values (new.id, c.starting_cash) returning id into v_portfolio;
   insert into public.currency_ledger (user_id, currency, amount, reason)

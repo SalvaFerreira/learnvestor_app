@@ -17,6 +17,7 @@ abstract final class AppConfig {
   static const privacyUrl = 'https://salvaferreira.github.io/LearnVestor_Website/privacy.html';
   static const termsUrl = 'https://salvaferreira.github.io/LearnVestor_Website/terms.html';
   static const disclaimerUrl = 'https://salvaferreira.github.io/LearnVestor_Website/disclaimer.html';
+  static const feedbackUrl = 'https://salvaferreira.github.io/LearnVestor_Website/?from=demo#feedback';
 
   static bool get isConfigured => demo || (supabaseUrl.isNotEmpty && supabasePublishableKey.isNotEmpty);
 }

@@ -1,6 +1,7 @@
 // End-to-end walkthrough of the app in a browser:
-//   first launch (no login) → onboarding → lesson (with one mistake) → practice (earns the heart back)
-//   → tools → buy a stock → portfolio → profile → reload (progress is kept)
+//   main menu (no login, no onboarding) → EN/PT switch → lesson (with one mistake)
+//   → practice (earns the heart back) → tools → buy a stock → portfolio
+//   → reload (progress is kept) → reset progress
 //
 // Needs a web build served at APP_URL (default http://127.0.0.1:51973): either the browser
 // demo (tools/web-demo, `npm run build`), or a normal build with SUPABASE_URL pointing to the
@@ -12,7 +13,6 @@ import { mkdirSync } from 'node:fs';
 import { chromium } from 'playwright';
 
 const APP_URL = process.env.APP_URL ?? 'http://127.0.0.1:51973';
-const RUN = Date.now() % 1_000_000;
 const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || undefined, headless: true });
 const page = await browser.newPage({ viewport: { width: 412, height: 915 }, locale: 'en-US' });
 page.setDefaultTimeout(10_000);
@@ -44,14 +44,6 @@ async function tap(name, { exact = false, timeout = 10_000 } = {}) {
     await wait(250);
   }
   throw new Error(`nothing to tap named "${name}"`);
-}
-
-/** Focuses the text field labelled [field] (falls back to the only/last field on screen). */
-async function type(field, text) {
-  const named = page.getByRole('textbox', { name: field });
-  const target = (await named.count()) ? named.first() : page.getByRole('textbox').last();
-  await target.click();
-  await page.keyboard.type(text);
 }
 
 /** Text may be a DOM text node or merged into a semantics node's aria-label. */
@@ -111,14 +103,13 @@ const steps = [
     await wait(5000);
     await page.locator('flt-semantics-placeholder').dispatchEvent('click'); // enable the accessibility tree
   }],
-  ['go straight to onboarding, without logging in', async () => {
-    await expectText("Let's set up your profile");
+  ['open straight on the main menu, without logging in', async () => {
+    await expectText('Experience Progress');
   }],
-  ['complete onboarding', async () => {
-    await type('Username', `e2e_${RUN}`);
-    await tap('18-24');
-    await tap('I accept the Terms');
-    await tap('Start learning');
+  ['switch the language to Portuguese and back', async () => {
+    await tap('PT', { exact: true });
+    await expectText('Progresso de Experiência');
+    await tap('EN', { exact: true });
     await expectText('Experience Progress');
   }],
   ['finish a lesson with one mistake', async () => {
@@ -163,26 +154,25 @@ const steps = [
     await expectText('Apple Inc.');
     await expectText('1 holding');
   }],
-  ['profile shows progress and achievements', async () => {
-    await tap('Profile', { exact: true });
-    await expectText(`@e2e_${RUN}`);
-    await expectText('First Trade');
-  }],
-  ['settings explain there is no account', async () => {
-    await page.mouse.move(206, 500);
-    for (let i = 0; i < 20 && !(await visible('No account needed')); i++) {
-      await page.mouse.wheel(0, 600);
-      await wait(250);
-    }
-    await expectText('No account needed');
-  }],
   ['a page reload keeps the progress', async () => {
     await page.reload();
     await wait(5000);
     await page.locator('flt-semantics-placeholder').dispatchEvent('click');
-    await tap('Profile', { exact: true });
-    await expectText(`@e2e_${RUN}`);
-    await expectText('First Trade');
+    await tap('Portfolio', { exact: true });
+    await expectText('1 holding');
+  }],
+  ['reset progress from the main menu', async () => {
+    await tap('Home', { exact: true });
+    await page.mouse.move(206, 500);
+    for (let i = 0; i < 20 && !(await visible('Reset progress')); i++) {
+      await page.mouse.wheel(0, 600);
+      await wait(250);
+    }
+    await tap('Reset progress');
+    await tap('Reset', { exact: true });
+    await expectText('Experience Progress');
+    await tap('Portfolio', { exact: true });
+    await expectText("You don't own any stocks yet");
   }],
 ];
 

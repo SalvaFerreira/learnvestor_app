@@ -8,7 +8,7 @@ import '../core/theme.dart';
 import '../state/providers.dart';
 import '../ui/common.dart';
 
-/// Bottom navigation + the top bar shared by the five main tabs.
+/// Bottom navigation + the top bar shared by the main tabs.
 class AppShell extends ConsumerStatefulWidget {
   const AppShell({super.key, required this.shell});
 
@@ -54,14 +54,13 @@ class _AppShellState extends ConsumerState<AppShell> {
           NavigationDestination(icon: const Icon(Icons.school_outlined), selectedIcon: const Icon(Icons.school), label: l.navLearn),
           NavigationDestination(icon: const Icon(Icons.explore_outlined), selectedIcon: const Icon(Icons.explore), label: l.navExplore),
           NavigationDestination(icon: const Icon(Icons.pie_chart_outline), selectedIcon: const Icon(Icons.pie_chart), label: l.navPortfolio),
-          NavigationDestination(icon: const Icon(Icons.person_outline), selectedIcon: const Icon(Icons.person), label: l.navProfile),
         ],
       ),
     );
   }
 }
 
-/// Logo, hearts and gems, as in the mockups.
+/// Logo, gems, hearts and the EN/PT language switch.
 class TopBar extends ConsumerWidget implements PreferredSizeWidget {
   const TopBar({super.key, this.title});
 
@@ -79,8 +78,11 @@ class TopBar extends ConsumerWidget implements PreferredSizeWidget {
       title: Row(
         children: [
           Image.asset('assets/logo.png', height: 32),
-          const SizedBox(width: 10),
-          Text(title ?? context.l10n.appName, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 22)),
+          // On narrow screens the logo is enough, so everything fits next to the language switch.
+          if (MediaQuery.sizeOf(context).width >= 420) ...[
+            const SizedBox(width: 10),
+            Text(title ?? context.l10n.appName, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 22)),
+          ],
           if (AppConfig.demo) ...[
             const SizedBox(width: 8),
             Container(
@@ -96,9 +98,55 @@ class TopBar extends ConsumerWidget implements PreferredSizeWidget {
           GemsBadge(gems: player.stats.gems),
           const SizedBox(width: 14),
           HeartsBadge(hearts: player.stats.hearts, maxHearts: player.stats.maxHearts),
-          const SizedBox(width: 20),
+          const SizedBox(width: 8),
+          _LanguageButton(current: player.profile.locale),
+          const SizedBox(width: 12),
         ],
       ],
+    );
+  }
+}
+
+/// Switches the whole app (texts and lesson content) between English and Portuguese.
+class _LanguageButton extends ConsumerStatefulWidget {
+  const _LanguageButton({required this.current});
+
+  final String current;
+
+  @override
+  ConsumerState<_LanguageButton> createState() => _LanguageButtonState();
+}
+
+class _LanguageButtonState extends ConsumerState<_LanguageButton> {
+  bool _busy = false;
+
+  Future<void> _switch() async {
+    setState(() => _busy = true);
+    try {
+      await ref.read(repositoryProvider).updateProfile({'locale': widget.current == 'pt' ? 'en' : 'pt'});
+      ref
+        ..invalidate(playerStateProvider)
+        ..invalidate(learningPathProvider)
+        ..invalidate(achievementsProvider);
+    } catch (e) {
+      if (mounted) showError(context, e);
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton.icon(
+      onPressed: _busy ? null : _switch,
+      style: OutlinedButton.styleFrom(
+        minimumSize: const Size(0, 36),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        visualDensity: VisualDensity.compact,
+      ),
+      icon: const Icon(Icons.translate, size: 18),
+      // Shows the language it switches to.
+      label: Text(widget.current == 'pt' ? 'EN' : 'PT', style: const TextStyle(fontWeight: FontWeight.w800)),
     );
   }
 }

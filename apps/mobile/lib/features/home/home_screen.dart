@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../app/shell.dart';
+import '../../core/config.dart';
 import '../../core/format.dart';
 import '../../core/theme.dart';
 import '../../data/models.dart';
@@ -134,14 +136,11 @@ class _HomeContent extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 28),
-        Row(
-          children: [
-            Expanded(child: Text('${l.yourAchievements} 🏆', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800))),
-            TextButton(onPressed: () => context.go('/profile'), child: Text(l.seeAll)),
-          ],
-        ),
-        const SizedBox(height: 8),
+        Text('${l.yourAchievements} 🏆', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+        const SizedBox(height: 12),
         _AchievementsStrip(),
+        const SizedBox(height: 28),
+        const _DemoCard(),
       ],
     );
   }
@@ -247,7 +246,7 @@ class _AchievementsStrip extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final achievements = ref.watch(achievementsProvider).value ?? const <Achievement>[];
-    final shown = [...achievements.where((a) => a.unlocked), ...achievements.where((a) => !a.unlocked)].take(8).toList();
+    final shown = [...achievements.where((a) => a.unlocked), ...achievements.where((a) => !a.unlocked)];
     return SizedBox(
       height: 112,
       child: ListView.separated(
@@ -295,6 +294,80 @@ class AchievementBadge extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Demo controls: start over, send feedback, and the educational notice with the legal pages.
+class _DemoCard extends ConsumerWidget {
+  const _DemoCard();
+
+  Future<void> _reset(BuildContext context, WidgetRef ref) async {
+    final l = context.l10n;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l.resetProgress),
+        content: Text(l.resetProgressBody),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l.cancel)),
+          FilledButton(
+            style: FilledButton.styleFrom(backgroundColor: AppColors.red),
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(l.resetConfirm),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !context.mounted) return;
+    try {
+      await ref.read(repositoryProvider).deleteAccount();
+      // Back to the start screen, which creates a fresh learner with full hearts.
+      await ref.read(supabaseProvider).auth.signOut();
+    } catch (e) {
+      if (context.mounted) showError(context, e);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = context.l10n;
+    return SectionCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(l.demoTitle, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
+          const SizedBox(height: 6),
+          Text(l.demoBody, style: const TextStyle(color: AppColors.textSecondary)),
+          const SizedBox(height: 16),
+          OutlinedButton.icon(
+            onPressed: () => launchUrl(Uri.parse(AppConfig.feedbackUrl)),
+            icon: const Icon(Icons.rate_review_outlined),
+            label: Text(l.sendFeedback),
+          ),
+          const SizedBox(height: 10),
+          OutlinedButton.icon(
+            style: OutlinedButton.styleFrom(foregroundColor: AppColors.red),
+            onPressed: () => _reset(context, ref),
+            icon: const Icon(Icons.restart_alt),
+            label: Text(l.resetProgress),
+          ),
+          const SizedBox(height: 16),
+          Text(l.educationalNotice, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+          const SizedBox(height: 4),
+          Wrap(
+            spacing: 4,
+            children: [
+              for (final (label, url) in [
+                (l.privacyPolicy, AppConfig.privacyUrl),
+                (l.termsOfService, AppConfig.termsUrl),
+                (l.investmentDisclaimer, AppConfig.disclaimerUrl),
+              ])
+                TextButton(onPressed: () => launchUrl(Uri.parse(url)), child: Text(label, style: const TextStyle(fontSize: 13))),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -26,11 +26,11 @@ flutter build ipa --release --obfuscate --split-debug-info=build/symbols --dart-
 
 ```
 lib/
-├── app/          MaterialApp, router (redireciona entre arranque, onboarding e app) e shell com navegação
+├── app/          MaterialApp, router (arranque → menu principal) e shell com navegação
 ├── core/         configuração, tema (cores dos mockups), formatação
 ├── data/         modelos (JSON das RPCs) e Repository (única porta para o Supabase)
 ├── state/        providers Riverpod
-├── features/     start (cria o utilizador anónimo), onboarding, home, learn (+ lição), explore (+ trade), portfolio, profile, tools
+├── features/     start (cria o utilizador anónimo), home (menu principal, com reiniciar progresso e feedback), learn (+ lição), explore (+ trade), portfolio, tools
 └── ui/           componentes partilhados e mensagens de erro localizadas
 ```
 
@@ -44,8 +44,6 @@ flutter test
 - `test/lesson_session_test.dart` testa o motor da lição: repetição dos exercícios errados e envio apenas das respostas à primeira tentativa.
 - `test/rpc_contract_test.dart` converte respostas **reais** das RPCs com os modelos da app. Para regenerar as fixtures: `cd ../../tools/db-tests && npm run fixtures`.
 
-## Antes de publicar nas lojas
+## Ligações externas
 
-- Ícones, splash screen e nomes da app: `app.learnvestor.learnvestor` em `android/app/build.gradle.kts` e no projeto iOS.
-- A app já cumpre dois requisitos de revisão das lojas: a eliminação dos dados está no Perfil e o aviso educativo aparece no onboarding. Como não há login nem compras, não é preciso Sign in with Apple nem IAP.
-- Ligações para os documentos legais: `lib/core/config.dart`.
+Os documentos legais e a caixa de feedback do website estão em `lib/core/config.dart`.
