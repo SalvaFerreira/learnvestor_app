@@ -10,9 +10,12 @@ import 'models.dart';
 /// authoritative; the only direct table access is read-only reference data and the few
 /// profile fields users may edit.
 class Repository {
-  Repository(this._client);
+  Repository(this._client, {this.realtime = true});
 
   final SupabaseClient _client;
+
+  /// False in the browser demo, which has no Realtime server.
+  final bool realtime;
   static const _uuid = Uuid();
 
   Future<T> _rpc<T>(String fn, [Map<String, dynamic>? params]) async {
@@ -131,6 +134,7 @@ class Repository {
         } catch (e, st) {
           controller.addError(e, st);
         }
+        if (!realtime) return;
         channel = _client
             .channel('public:quotes_latest')
             .onPostgresChanges(

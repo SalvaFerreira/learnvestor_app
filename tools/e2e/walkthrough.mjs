@@ -1,9 +1,10 @@
 // End-to-end walkthrough of the app in a browser:
 //   first launch (no login) → onboarding → lesson (with one mistake) → practice (earns the heart back)
-//   → tools → buy a stock → portfolio → profile
+//   → tools → buy a stock → portfolio → profile → reload (progress is kept)
 //
-// Needs the web build served at APP_URL (default http://127.0.0.1:51973), built with
-// SUPABASE_URL pointing to the demo API started with `npm run dev` in tools/db-tests.
+// Needs a web build served at APP_URL (default http://127.0.0.1:51973): either the browser
+// demo (tools/web-demo, `npm run build`), or a normal build with SUPABASE_URL pointing to the
+// demo API started with `npm run dev` in tools/db-tests.
 // CHROME_PATH uses an installed Chrome; otherwise Playwright's Chromium is used.
 // On failure a screenshot is saved to tools/e2e/artifacts/.
 
@@ -174,6 +175,14 @@ const steps = [
       await wait(250);
     }
     await expectText('No account needed');
+  }],
+  ['a page reload keeps the progress', async () => {
+    await page.reload();
+    await wait(5000);
+    await page.locator('flt-semantics-placeholder').dispatchEvent('click');
+    await tap('Profile', { exact: true });
+    await expectText(`@e2e_${RUN}`);
+    await expectText('First Trade');
   }],
 ];
 

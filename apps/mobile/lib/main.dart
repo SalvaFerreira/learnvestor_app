@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'app/app.dart';
 import 'core/config.dart';
+import 'services/demo_http_client.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,8 +16,10 @@ Future<void> main() async {
   }
 
   await Supabase.initialize(
-    url: AppConfig.supabaseUrl,
-    publishableKey: AppConfig.supabasePublishableKey,
+    // The demo answers every request in the browser; the URL only has to be well formed.
+    url: AppConfig.demo ? 'https://demo.learnvestor.local' : AppConfig.supabaseUrl,
+    publishableKey: AppConfig.demo ? 'demo' : AppConfig.supabasePublishableKey,
+    httpClient: AppConfig.demo ? DemoHttpClient() : null,
     authOptions: const FlutterAuthClientOptions(authFlowType: AuthFlowType.pkce),
   );
 

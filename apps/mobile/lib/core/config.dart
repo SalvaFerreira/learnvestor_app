@@ -7,12 +7,16 @@ abstract final class AppConfig {
   static const sentryDsn = String.fromEnvironment('SENTRY_DSN');
   static const environment = String.fromEnvironment('APP_ENV', defaultValue: 'development');
 
+  /// Browser demo (tools/web-demo): the whole backend runs inside the page, so no
+  /// Supabase URL or key is needed.
+  static const demo = bool.fromEnvironment('DEMO');
+
   /// Version of the terms the user accepts during onboarding (stored with the consent).
   static const termsVersion = '2026-10-27';
 
-  static const privacyUrl = 'https://salvaferreira.github.io/LearnVestor/privacy.html';
-  static const termsUrl = 'https://salvaferreira.github.io/LearnVestor/terms.html';
-  static const disclaimerUrl = 'https://salvaferreira.github.io/LearnVestor/disclaimer.html';
+  static const privacyUrl = 'https://salvaferreira.github.io/LearnVestor_Website/privacy.html';
+  static const termsUrl = 'https://salvaferreira.github.io/LearnVestor_Website/terms.html';
+  static const disclaimerUrl = 'https://salvaferreira.github.io/LearnVestor_Website/disclaimer.html';
 
-  static bool get isConfigured => supabaseUrl.isNotEmpty && supabasePublishableKey.isNotEmpty;
+  static bool get isConfigured => demo || (supabaseUrl.isNotEmpty && supabasePublishableKey.isNotEmpty);
 }

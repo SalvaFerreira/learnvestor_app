@@ -53,7 +53,7 @@ jobs:
       - run: flutter test
 
   e2e:
-    name: End-to-end (web build + demo API)
+    name: End-to-end (browser demo)
     runs-on: ubuntu-latest
     needs: [database, mobile]
     steps:
@@ -66,23 +66,16 @@ jobs:
           channel: stable
           flutter-version: 3.38.3
           cache: true
-      - name: Start the demo API (real migrations and RPCs on PGlite)
+      - name: Build the browser demo (Flutter web + demo API on PGlite, no server)
         run: |
           npm ci --prefix tools/db-tests
-          (npm run dev --prefix tools/db-tests > dev-api.log 2>&1 &)
-      - name: Build and serve the web app (profile build keeps readable stack traces)
-        working-directory: apps/mobile
+          npm ci --prefix tools/web-demo
+          npm run build --prefix tools/web-demo
+      - name: Serve the demo
         run: |
-          flutter pub get
-          flutter build web --profile --dart-define=SUPABASE_URL=http://127.0.0.1:54321 --dart-define=SUPABASE_PUBLISHABLE_KEY=ci
-          (npx --yes http-server build/web -p 51973 -a 127.0.0.1 -s > ../../web.log 2>&1 &)
-      - name: Wait for both servers
-        run: |
-          for i in $(seq 1 60); do
-            curl -sf -X OPTIONS http://127.0.0.1:54321/ >/dev/null && curl -sf http://127.0.0.1:51973/ >/dev/null && exit 0
-            sleep 2
-          done
-          cat dev-api.log web.log; exit 1
+          (npx --yes http-server tools/web-demo/dist -p 51973 -a 127.0.0.1 -c-1 > web.log 2>&1 &)
+          for i in $(seq 1 60); do curl -sf http://127.0.0.1:51973/ >/dev/null && exit 0; sleep 2; done
+          cat web.log; exit 1
       - name: Run the walkthrough
         run: |
           npm ci --prefix tools/e2e

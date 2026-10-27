@@ -2,12 +2,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../core/config.dart';
 import '../data/models.dart';
 import '../data/repository.dart';
 
 final supabaseProvider = Provider<SupabaseClient>((ref) => Supabase.instance.client);
 
-final repositoryProvider = Provider<Repository>((ref) => Repository(ref.watch(supabaseProvider)));
+final repositoryProvider = Provider<Repository>((ref) => Repository(ref.watch(supabaseProvider), realtime: !AppConfig.demo));
 
 final _authEventsProvider = StreamProvider<AuthState>((ref) => ref.watch(supabaseProvider).auth.onAuthStateChange);
 

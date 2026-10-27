@@ -1,0 +1,13 @@
+{
+  "name": "@learnvestor/web-demo",
+  "private": true,
+  "type": "module",
+  "description": "Builds the browser demo: the Flutter web app with the demo API (tools/db-tests/api.mjs) running on PGlite inside the browser. No server needed.",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.3.0",
+    "esbuild": "^0.25.0"
+  }
+}

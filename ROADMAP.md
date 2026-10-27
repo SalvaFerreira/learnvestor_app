@@ -1,5 +1,7 @@
 # LearnVestor: o que falta para ir para produção
 
+> **Atualização de 2026-10-27:** este repositório passou a ser a **demo gratuita no browser** (ver [README.md](README.md)), publicada no website. A app para descarregar das lojas será um projeto à parte, e é a esse projeto que se aplica o plano de produção abaixo (lojas, Supabase na cloud, dados de mercado licenciados, notificações).
+
 ## Contexto
 
 **O que já existe:** o MVP técnico em `App/`. O backend Supabase faz a lógica de jogo no servidor, com RLS e testes. Há Edge Functions para dados de mercado e eliminação de dados, e uma app Flutter sem login (utilizador anónimo por dispositivo) com onboarding, lições, carteira virtual e perfil. A app corre de ponta a ponta com o servidor de demonstração.

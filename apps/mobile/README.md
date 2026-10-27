@@ -6,8 +6,9 @@ Flutter 3.38, com Riverpod 3 (estado), go_router (navegação), supabase_flutter
 
 | Variável | Obrigatória | Notas |
 |---|---|---|
-| `SUPABASE_URL` | sim | `https://<ref>.supabase.co` |
-| `SUPABASE_PUBLISHABLE_KEY` | sim | Chave pública do projeto (publishable/anon). Nunca uses a secret/service-role. |
+| `SUPABASE_URL` | sim (exceto na demo) | `https://<ref>.supabase.co` |
+| `SUPABASE_PUBLISHABLE_KEY` | sim (exceto na demo) | Chave pública do projeto (publishable/anon). Nunca uses a secret/service-role. |
+| `DEMO` | não | `true` gera a demo no browser: a app fala com a API de demonstração dentro da página e não precisa de `SUPABASE_URL` nem de chave. Usada pelo `tools/web-demo`. |
 | `SENTRY_DSN` | não | Ativa o reporte de erros, sem dados pessoais. |
 | `APP_ENV` | não | `development`, `staging` ou `production` (aparece no Sentry). |
 

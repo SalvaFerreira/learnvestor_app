@@ -162,6 +162,8 @@
   "deleteConfirm": "Eliminar para sempre",
   "noAccountTitle": "Sem conta",
   "noAccountBody": "O LearnVestor é gratuito. O teu progresso fica guardado para este dispositivo: se desinstalares a app ou apagares os dados, recomeças do zero.",
+  "demoBadge": "DEMO",
+  "demoNoAccountBody": "Esta é a demo gratuita no browser. O teu progresso fica guardado só neste browser.",
   "legal": "Legal",
   "privacyPolicy": "Política de Privacidade",
   "termsOfService": "Termos de Serviço",

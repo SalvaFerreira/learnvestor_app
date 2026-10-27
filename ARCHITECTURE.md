@@ -4,6 +4,8 @@
 > - **Sem login:** no primeiro arranque, a app cria um utilizador anónimo do Supabase (`signInAnonymously`) para o dispositivo. Não há email, código, Apple ou Google. O servidor continua a decidir tudo (RPCs, RLS); o progresso fica ligado ao dispositivo.
 > - **Sem pagamentos:** foram removidos o Plus, o RevenueCat, o paywall, as compras de gemas e as tabelas `entitlements` e `purchases`. Todas as lições são gratuitas. As vidas e as gemas continuam como mecânica de jogo e só se ganham a jogar.
 >
+> - **Demo no browser:** este repositório é publicado como demo web que corre sem servidor (a API de demonstração e o Postgres em WASM correm dentro da página; ver `tools/web-demo`). A app das lojas será um projeto à parte.
+>
 > O que este documento diz sobre monetização, subscrições, Stripe, paywall e login por email ou social (sobretudo no Contexto e nas secções 2, 3, 6, 7, 10 e 12) fica como histórico e já não se aplica.
 
 ## Contexto

@@ -281,7 +281,7 @@ class _Settings extends ConsumerWidget {
           contentPadding: EdgeInsets.zero,
           leading: const Icon(Icons.smartphone),
           title: Text(l.noAccountTitle),
-          subtitle: Text(l.noAccountBody),
+          subtitle: Text(AppConfig.demo ? l.demoNoAccountBody : l.noAccountBody),
         ),
         ListTile(
           contentPadding: EdgeInsets.zero,

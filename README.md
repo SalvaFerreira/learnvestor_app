@@ -1,17 +1,18 @@
 # LearnVestor: app
 
-Monorepo da app LearnVestor (o "Duolingo da literacia financeira"). A app é **pública e gratuita**: não tem login nem pagamentos. A arquitetura e as decisões estão em [ARCHITECTURE.md](ARCHITECTURE.md).
+Monorepo da **demo gratuita do LearnVestor no browser** (o "Duolingo da literacia financeira"): qualquer pessoa a pode experimentar em https://salvaferreira.github.io/LearnVestor_Website/demo/, sem instalar nada, sem login e sem pagamentos. A app para descarregar das lojas será um projeto à parte. A arquitetura e as decisões estão em [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ```
 App/
-├── apps/mobile/            App Flutter (iOS, Android; corre também na web para desenvolvimento)
+├── apps/mobile/            App Flutter (publicada como demo web; também compila para iOS e Android)
 ├── supabase/
 │   ├── migrations/         Schema, RLS, lógica de jogo (RPCs), cron e permissões da API
 │   ├── seeds/              10_content.sql (gerado) + 20_dev_market_data.sql (só local)
 │   └── functions/          Edge Functions: market-data-sync, delete-account
 ├── packages/content/       Currículo, lições, conquistas e instrumentos como código (EN + PT)
-├── tools/db-tests/         Testes da base de dados em PGlite (sem Docker) + API de demonstração
-├── tools/e2e/              Percurso completo no browser (Playwright) contra a API de demonstração
+├── tools/db-tests/         Testes da base de dados em PGlite (sem Docker) + API de demonstração (api.mjs)
+├── tools/web-demo/         Build da demo no browser: app + API de demonstração a correr dentro da página
+├── tools/e2e/              Percurso completo no browser (Playwright) sobre a demo
 └── .github/workflows/      CI (testes em cada push) e deploy manual por ambiente
 ```
 
@@ -37,15 +38,36 @@ npx deno check supabase/functions/*/index.ts && npx deno test supabase/functions
 # App: análise estática, testes unitários, de widgets e de contrato com respostas reais das RPCs
 cd apps/mobile && flutter pub get && flutter analyze && flutter test
 
-# E2E: com a API de demonstração e a build web a correr (ver secção seguinte)
+# E2E: sobre a demo construída e servida (ver secção seguinte)
 cd tools/e2e && npm ci && CHROME_PATH="<caminho do Chrome>" npm test
 ```
 
 Sempre que mudares o JSON devolvido por uma RPC, regenera as fixtures do teste de contrato da app com `cd tools/db-tests && npm run fixtures`.
 
-## Ver a app a funcionar em 2 minutos (sem Docker nem contas)
+## Demo no browser (o que é publicado)
 
-O `tools/db-tests/dev-server.mjs` imita a parte da API do Supabase que a app usa e corre as **migrações e RPCs reais** num Postgres em memória. Os dados perdem-se quando o servidor para.
+A demo não precisa de servidor. O `tools/web-demo` junta a build web da app (com `--dart-define=DEMO=true`) e a API de demonstração (`tools/db-tests/api.mjs`), que corre as **migrações e RPCs reais** num Postgres em WASM (PGlite) dentro do browser. No modo demo, o cliente Supabase da app envia todos os pedidos para essa API, sem rede. Cada visitante tem a sua base de dados, guardada no IndexedDB do browser, por isso o progresso sobrevive a um refresh. Custa 0 € e não tem contas para gerir.
+
+```bash
+cd tools/db-tests && npm ci
+cd ../web-demo && npm ci
+npm run build                     # → tools/web-demo/dist (servir com qualquer servidor estático)
+npx http-server dist -p 51973     # e abrir http://127.0.0.1:51973
+```
+
+**Publicar no website** (GitHub Pages do repositório LearnVestor_Website), depois de mudares a app, as migrações ou o conteúdo:
+
+```bash
+cd tools/web-demo
+npm run build -- --out ../../../LearnVestor_Website/docs/demo --base-href LearnVestor_Website/demo
+# depois: commit e push no repositório LearnVestor_Website
+```
+
+Limitações da demo: os preços das ações são de exemplo (mantêm-se, mas a data é renovada a cada visita) e a classificação semanal mostra o visitante e quatro jogadores fictícios. Quando o esquema muda, a demo cria uma base de dados nova e o progresso antigo de cada visitante é descartado.
+
+## Ver a app a funcionar com hot reload (sem Docker nem contas)
+
+O `tools/db-tests/dev-server.mjs` serve a mesma API de demonstração por HTTP, para desenvolver com `flutter run`. A base de dados fica em memória e perde-se quando o servidor para.
 
 ```bash
 cd tools/db-tests && npm ci && npm run dev      # API em http://127.0.0.1:54321

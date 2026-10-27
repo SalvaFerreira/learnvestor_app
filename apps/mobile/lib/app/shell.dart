@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/config.dart';
+import '../core/theme.dart';
 import '../state/providers.dart';
 import '../ui/common.dart';
 
@@ -79,6 +81,14 @@ class TopBar extends ConsumerWidget implements PreferredSizeWidget {
           Image.asset('assets/logo.png', height: 32),
           const SizedBox(width: 10),
           Text(title ?? context.l10n.appName, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 22)),
+          if (AppConfig.demo) ...[
+            const SizedBox(width: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              decoration: BoxDecoration(gradient: AppColors.brandGradient, borderRadius: BorderRadius.circular(8)),
+              child: Text(context.l10n.demoBadge, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Colors.white)),
+            ),
+          ],
         ],
       ),
       actions: [

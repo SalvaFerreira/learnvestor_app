@@ -370,6 +370,8 @@
   "deleteConfirm": "Delete permanently",
   "noAccountTitle": "No account needed",
   "noAccountBody": "LearnVestor is free. Your progress is saved for this device: uninstalling the app or clearing its data starts over.",
+  "demoBadge": "DEMO",
+  "demoNoAccountBody": "This is the free browser demo. Your progress is saved only in this browser.",
   "legal": "Legal",
   "privacyPolicy": "Privacy Policy",
   "termsOfService": "Terms of Service",
