@@ -1,0 +1,112 @@
+[
+  {
+    "id": "first_lesson",
+    "icon": "school",
+    "title": "Primeiros Passos",
+    "progress": 1,
+    "threshold": 1,
+    "gem_reward": 10,
+    "description": "Completa a tua primeira lição",
+    "unlocked_at": "2026-10-27T16:21:57.342+00:00"
+  },
+  {
+    "id": "lessons_5",
+    "icon": "menu_book",
+    "title": "Rato de Biblioteca",
+    "progress": 1,
+    "threshold": 5,
+    "gem_reward": 20,
+    "description": "Completa 5 lições",
+    "unlocked_at": null
+  },
+  {
+    "id": "lessons_10",
+    "icon": "workspace_premium",
+    "title": "Académico",
+    "progress": 1,
+    "threshold": 10,
+    "gem_reward": 50,
+    "description": "Completa 10 lições",
+    "unlocked_at": null
+  },
+  {
+    "id": "streak_3",
+    "icon": "local_fire_department",
+    "title": "Em Chamas",
+    "progress": 1,
+    "threshold": 3,
+    "gem_reward": 15,
+    "description": "Atinge uma sequência de 3 dias",
+    "unlocked_at": null
+  },
+  {
+    "id": "streak_7",
+    "icon": "whatshot",
+    "title": "Guerreiro da Semana",
+    "progress": 1,
+    "threshold": 7,
+    "gem_reward": 30,
+    "description": "Atinge uma sequência de 7 dias",
+    "unlocked_at": null
+  },
+  {
+    "id": "streak_30",
+    "icon": "military_tech",
+    "title": "Imparável",
+    "progress": 1,
+    "threshold": 30,
+    "gem_reward": 100,
+    "description": "Atinge uma sequência de 30 dias",
+    "unlocked_at": null
+  },
+  {
+    "id": "level_5",
+    "icon": "rocket_launch",
+    "title": "Investidor em Ascensão",
+    "progress": 1,
+    "threshold": 5,
+    "gem_reward": 50,
+    "description": "Chega ao nível 5",
+    "unlocked_at": null
+  },
+  {
+    "id": "xp_1000",
+    "icon": "bolt",
+    "title": "Máquina de XP",
+    "progress": 28,
+    "threshold": 1000,
+    "gem_reward": 50,
+    "description": "Ganha 1000 XP",
+    "unlocked_at": null
+  },
+  {
+    "id": "first_trade",
+    "icon": "show_chart",
+    "title": "Primeira Transação",
+    "progress": 1,
+    "threshold": 1,
+    "gem_reward": 10,
+    "description": "Compra a tua primeira ação (virtual)",
+    "unlocked_at": "2026-10-27T16:21:57.348+00:00"
+  },
+  {
+    "id": "trades_10",
+    "icon": "swap_horiz",
+    "title": "Investidor Ativo",
+    "progress": 2,
+    "threshold": 10,
+    "gem_reward": 30,
+    "description": "Faz 10 transações",
+    "unlocked_at": null
+  },
+  {
+    "id": "diversified",
+    "icon": "pie_chart",
+    "title": "Diversificado",
+    "progress": 2,
+    "threshold": 5,
+    "gem_reward": 50,
+    "description": "Tem 5 investimentos diferentes ao mesmo tempo",
+    "unlocked_at": null
+  }
+]

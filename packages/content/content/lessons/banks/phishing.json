@@ -1,0 +1,164 @@
+{
+  "id": "phishing",
+  "version": 1,
+  "unit": "payments-fraud",
+  "status": "draft",
+  "sources": [
+    "bdp"
+  ],
+  "xp": 30,
+  "coins": 45,
+  "title": {
+    "en": "Phishing and Fake Messages",
+    "pt": "Phishing e Mensagens Falsas"
+  },
+  "description": {
+    "en": "Spot scams before they cost you",
+    "pt": "Identifica burlas antes que te custem caro"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Someone pretending to be your bank",
+        "pt": "Alguém a fingir ser o teu banco"
+      },
+      "body": {
+        "en": "Phishing is a scam where someone pretends to be your bank, a delivery company or the tax office to make you click a link or give away your data. Banks never ask for your authentication codes by SMS, email or phone.",
+        "pt": "Phishing é uma burla em que alguém se faz passar pelo teu banco, pelos CTT ou pelas Finanças para te levar a clicar num link ou a dar os teus dados. Os bancos nunca pedem códigos de autenticação por SMS, email ou telefone."
+      }
+    },
+    {
+      "id": "bank-asks-code",
+      "type": "true_false",
+      "statement": {
+        "en": "Your bank may ask you by SMS for the code you received to confirm an operation.",
+        "pt": "O teu banco pode pedir-te por SMS o código que recebeste para confirmar uma operação."
+      },
+      "answer": false,
+      "explanation": {
+        "en": "Codes are only for you to type yourself in the official app or website. Anyone asking for them is a scammer.",
+        "pt": "Os códigos são só para escreveres tu na app ou no site oficial. Quem os pede é um burlão."
+      }
+    },
+    {
+      "id": "blocked-sms",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "You get an SMS: \"Your account has been blocked, click here\". What should you do?",
+        "pt": "Recebes um SMS: \"A sua conta foi bloqueada, clique aqui\". O que deves fazer?"
+      },
+      "options": {
+        "en": [
+          "Don't click and contact the bank through its official channels",
+          "Click quickly to unblock it",
+          "Reply with your details",
+          "Forward it to friends"
+        ],
+        "pt": [
+          "Não clicar e contactar o banco pelos canais oficiais",
+          "Clicar rapidamente para desbloquear",
+          "Responder com os teus dados",
+          "Reencaminhar para os amigos"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Use the number on your card or the official app, never the link in the message.",
+        "pt": "Usa o número do teu cartão ou a app oficial, nunca o link da mensagem."
+      }
+    },
+    {
+      "id": "types",
+      "type": "match",
+      "prompt": {
+        "en": "Match each term to its meaning",
+        "pt": "Liga cada termo ao seu significado"
+      },
+      "left": {
+        "en": [
+          "Phishing",
+          "Smishing",
+          "Vishing",
+          "Strong authentication"
+        ],
+        "pt": [
+          "Phishing",
+          "Smishing",
+          "Vishing",
+          "Autenticação forte"
+        ]
+      },
+      "right": {
+        "en": [
+          "Scam by fake email or website",
+          "Phishing by SMS",
+          "Scam by phone call",
+          "Confirming with two different factors"
+        ],
+        "pt": [
+          "Burla por email ou site falso",
+          "Phishing por SMS",
+          "Burla por chamada telefónica",
+          "Confirmação com dois fatores diferentes"
+        ]
+      },
+      "explanation": {
+        "en": "The channel changes, the goal is the same: your data and your money.",
+        "pt": "O canal muda, o objetivo é o mesmo: os teus dados e o teu dinheiro."
+      }
+    },
+    {
+      "id": "urgency",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "A message that creates ___ (\"reply within 1 hour!\") is a typical sign of a scam.",
+        "pt": "Uma mensagem que cria ___ (\"responda em 1 hora!\") é um sinal típico de burla."
+      },
+      "options": {
+        "en": [
+          "urgency",
+          "calm",
+          "trust"
+        ],
+        "pt": [
+          "urgência",
+          "calma",
+          "confiança"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Scammers rush you so you do not stop to think.",
+        "pt": "Os burlões apressam-te para não parares para pensar."
+      }
+    },
+    {
+      "id": "if-it-happens",
+      "type": "order",
+      "prompt": {
+        "en": "You gave your details by mistake. Order what to do:",
+        "pt": "Deste os teus dados por engano. Ordena o que fazer:"
+      },
+      "items": {
+        "en": [
+          "Call your bank's official line straight away",
+          "Block cards and change passwords",
+          "Check your account movements",
+          "Report it to the authorities"
+        ],
+        "pt": [
+          "Contactar logo o banco pela linha oficial",
+          "Bloquear cartões e mudar palavras-passe",
+          "Verificar os movimentos da conta",
+          "Apresentar queixa às autoridades"
+        ]
+      },
+      "explanation": {
+        "en": "Speed matters: the sooner the bank knows, the more it can do.",
+        "pt": "A rapidez conta: quanto mais cedo o banco souber, mais pode fazer."
+      }
+    }
+  ]
+}

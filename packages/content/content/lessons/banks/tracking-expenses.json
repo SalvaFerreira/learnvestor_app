@@ -1,0 +1,153 @@
+{
+  "id": "tracking-expenses",
+  "version": 1,
+  "unit": "budgeting",
+  "status": "draft",
+  "sources": [
+    "todoscontam"
+  ],
+  "xp": 25,
+  "coins": 40,
+  "title": {
+    "en": "Tracking Expenses",
+    "pt": "Registar Despesas"
+  },
+  "description": {
+    "en": "Find out where your money really goes",
+    "pt": "Descobre para onde vai realmente o dinheiro"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Fixed, variable, occasional",
+        "pt": "Fixas, variáveis, ocasionais"
+      },
+      "body": {
+        "en": "Fixed expenses repeat with the same amount (rent, gym). Variable expenses change every month (groceries, fuel). Occasional expenses appear a few times a year (car insurance, gifts). Tracking everything for one month shows where your money really goes.",
+        "pt": "As despesas fixas repetem-se com o mesmo valor (renda, ginásio). As variáveis mudam todos os meses (supermercado, combustível). As ocasionais aparecem poucas vezes por ano (seguro do carro, prendas). Registar tudo durante um mês mostra para onde vai realmente o dinheiro."
+      }
+    },
+    {
+      "id": "types",
+      "type": "match",
+      "prompt": {
+        "en": "Match each type of expense to an example",
+        "pt": "Liga cada tipo de despesa a um exemplo"
+      },
+      "left": {
+        "en": [
+          "Fixed",
+          "Variable",
+          "Occasional"
+        ],
+        "pt": [
+          "Fixa",
+          "Variável",
+          "Ocasional"
+        ]
+      },
+      "right": {
+        "en": [
+          "Monthly rent",
+          "Groceries",
+          "Yearly car insurance"
+        ],
+        "pt": [
+          "Renda da casa",
+          "Supermercado",
+          "Seguro anual do carro"
+        ]
+      },
+      "explanation": {
+        "en": "Knowing the type helps you plan: fixed ones are predictable, occasional ones catch people off guard.",
+        "pt": "Saber o tipo ajuda a planear: as fixas são previsíveis, as ocasionais apanham muita gente desprevenida."
+      }
+    },
+    {
+      "id": "insurance",
+      "type": "numeric",
+      "prompt": {
+        "en": "Your car insurance costs €360 a year. How much should you set aside each month (in €)?",
+        "pt": "Pagas um seguro anual de 360 €. Quanto deves pôr de parte por mês para não seres apanhado de surpresa (em €)?"
+      },
+      "answer": 30,
+      "decimals": 0,
+      "unit": {
+        "en": "€",
+        "pt": "€"
+      },
+      "explanation": {
+        "en": "€360 ÷ 12 = €30 a month.",
+        "pt": "360 € ÷ 12 = 30 € por mês."
+      }
+    },
+    {
+      "id": "start",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "What's the best way to start controlling your spending?",
+        "pt": "Qual é a melhor forma de começar a controlar as despesas?"
+      },
+      "options": {
+        "en": [
+          "Record every expense for a month",
+          "Cut all leisure at once",
+          "Only look at the balance at the end of the month",
+          "Get a credit card"
+        ],
+        "pt": [
+          "Registar todos os gastos durante um mês",
+          "Cortar todo o lazer de uma vez",
+          "Olhar só para o saldo no fim do mês",
+          "Pedir um cartão de crédito"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "You cannot improve what you do not measure.",
+        "pt": "Não consegues melhorar o que não medes."
+      }
+    },
+    {
+      "id": "small",
+      "type": "true_false",
+      "statement": {
+        "en": "Small daily expenses, like a €1 coffee, have no impact on a budget.",
+        "pt": "Pequenas despesas diárias, como um café de 1 €, não têm impacto no orçamento."
+      },
+      "answer": false,
+      "explanation": {
+        "en": "€1 a day adds up to about €365 a year.",
+        "pt": "1 € por dia são cerca de 365 € por ano."
+      }
+    },
+    {
+      "id": "steps",
+      "type": "order",
+      "prompt": {
+        "en": "Order the steps to build a budget:",
+        "pt": "Ordena os passos para criar um orçamento:"
+      },
+      "items": {
+        "en": [
+          "Record what you spend for a month",
+          "Group it into categories",
+          "Compare it with your income",
+          "Set limits for next month"
+        ],
+        "pt": [
+          "Registar o que gastas durante um mês",
+          "Separar por categorias",
+          "Comparar com o rendimento",
+          "Definir limites para o mês seguinte"
+        ]
+      },
+      "explanation": {
+        "en": "Measure first, then decide.",
+        "pt": "Primeiro medir, depois decidir."
+      }
+    }
+  ]
+}

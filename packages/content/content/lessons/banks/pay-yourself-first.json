@@ -1,0 +1,142 @@
+{
+  "id": "pay-yourself-first",
+  "version": 1,
+  "unit": "budgeting",
+  "status": "draft",
+  "sources": [
+    "todoscontam"
+  ],
+  "xp": 25,
+  "coins": 40,
+  "title": {
+    "en": "Pay Yourself First",
+    "pt": "Paga-te Primeiro a Ti"
+  },
+  "description": {
+    "en": "Save on payday, not with what is left",
+    "pt": "Poupa no dia do salário, não com o que sobra"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Savings come first",
+        "pt": "A poupança vem primeiro"
+      },
+      "body": {
+        "en": "Paying yourself first means setting your savings aside on the day you get paid, and only then spending the rest. An automatic transfer to another account does it for you, without relying on willpower.",
+        "pt": "Pagar-te primeiro significa pôr de lado a poupança no próprio dia em que recebes, e só depois gastar o resto. Uma transferência automática para outra conta faz isto por ti, sem depender da força de vontade."
+      }
+    },
+    {
+      "id": "meaning",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "What does \"pay yourself first\" mean?",
+        "pt": "O que significa \"pagar-te primeiro\"?"
+      },
+      "options": {
+        "en": [
+          "Save as soon as you get paid, before spending",
+          "Buy what you want first",
+          "Pay other people's debts",
+          "Spend everything and save what is left"
+        ],
+        "pt": [
+          "Poupar assim que recebes, antes de gastar",
+          "Comprar primeiro o que te apetece",
+          "Pagar as dívidas dos outros",
+          "Gastar tudo e poupar o que sobrar"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Savings become a fixed \"expense\" of the month.",
+        "pt": "A poupança passa a ser uma \"despesa\" fixa do mês."
+      }
+    },
+    {
+      "id": "leftovers",
+      "type": "true_false",
+      "statement": {
+        "en": "Saving only what is left at the end of the month usually means saving less.",
+        "pt": "Poupar só o que sobra no fim do mês costuma resultar em poupar menos."
+      },
+      "answer": true,
+      "explanation": {
+        "en": "Spending tends to grow to fill whatever money is available.",
+        "pt": "Os gastos tendem a crescer até ocupar o dinheiro disponível."
+      }
+    },
+    {
+      "id": "left-to-spend",
+      "type": "numeric",
+      "prompt": {
+        "en": "You earn €1,000 and an automatic transfer moves 10% to savings on payday. How much is left to spend (in €)?",
+        "pt": "Recebes 1000 € e uma transferência automática de 10% vai para a poupança no dia do salário. Quanto fica para gastar (em €)?"
+      },
+      "answer": 900,
+      "decimals": 0,
+      "unit": {
+        "en": "€",
+        "pt": "€"
+      },
+      "explanation": {
+        "en": "€1,000 − 10% = €900.",
+        "pt": "1000 € − 10% = 900 €."
+      }
+    },
+    {
+      "id": "payday",
+      "type": "order",
+      "prompt": {
+        "en": "Order what happens on payday:",
+        "pt": "Ordena o que acontece no dia do salário:"
+      },
+      "items": {
+        "en": [
+          "Your salary arrives",
+          "The automatic transfer moves your savings",
+          "Fixed bills are paid",
+          "You use the rest day to day"
+        ],
+        "pt": [
+          "O salário entra na conta",
+          "A transferência automática envia a poupança",
+          "Pagas as contas fixas",
+          "Usas o restante no dia a dia"
+        ]
+      },
+      "explanation": {
+        "en": "Saving before spending is the whole trick.",
+        "pt": "Poupar antes de gastar é todo o segredo."
+      }
+    },
+    {
+      "id": "automatic",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "An ___ transfer to another account turns saving into a habit.",
+        "pt": "Uma transferência ___ para outra conta transforma a poupança num hábito."
+      },
+      "options": {
+        "en": [
+          "automatic",
+          "forgotten",
+          "yearly"
+        ],
+        "pt": [
+          "automática",
+          "esquecida",
+          "anual"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Automation removes the daily decision.",
+        "pt": "Automatizar elimina a decisão de todos os dias."
+      }
+    }
+  ]
+}

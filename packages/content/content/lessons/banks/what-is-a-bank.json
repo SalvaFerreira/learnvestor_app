@@ -1,0 +1,125 @@
+{
+  "id": "what-is-a-bank",
+  "version": 1,
+  "unit": "money-basics",
+  "status": "draft",
+  "sources": [
+    "fgd",
+    "bdp"
+  ],
+  "xp": 20,
+  "coins": 30,
+  "title": {
+    "en": "How Banks Work",
+    "pt": "Como Funcionam os Bancos"
+  },
+  "description": {
+    "en": "Deposits, loans and why your money is safe",
+    "pt": "Depósitos, empréstimos e porque é que o teu dinheiro está seguro"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Banks put money to work",
+        "pt": "Os bancos põem o dinheiro a trabalhar"
+      },
+      "body": {
+        "en": "Banks keep your money safe and make it useful. They take deposits from savers, lend part of that money to people and companies, and earn the difference between the interest they charge on loans and the interest they pay on deposits.",
+        "pt": "Os bancos guardam o teu dinheiro e tornam-no útil. Recebem depósitos de quem poupa, emprestam parte desse dinheiro a pessoas e empresas e ganham a diferença entre os juros que cobram nos empréstimos e os juros que pagam nos depósitos."
+      }
+    },
+    {
+      "id": "how-banks-earn",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "What is the main way a bank makes money?",
+        "pt": "Qual é a principal forma de um banco ganhar dinheiro?"
+      },
+      "options": {
+        "en": [
+          "Charging more interest on loans than it pays on deposits",
+          "Printing new money",
+          "Selling customers' personal data",
+          "Investing only in gold"
+        ],
+        "pt": [
+          "Cobrar mais juros nos empréstimos do que paga nos depósitos",
+          "Imprimir dinheiro novo",
+          "Vender dados pessoais dos clientes",
+          "Investir apenas em ouro"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "This difference is called the interest margin, and it is a bank's core business.",
+        "pt": "Esta diferença chama-se margem financeira e é o negócio principal de um banco."
+      }
+    },
+    {
+      "id": "deposit-guarantee",
+      "type": "true_false",
+      "statement": {
+        "en": "In the EU, deposits up to €100,000 per person per bank are protected if the bank fails.",
+        "pt": "Na UE, os depósitos até 100 000 € por pessoa e por banco estão protegidos se o banco falir."
+      },
+      "answer": true,
+      "explanation": {
+        "en": "Every EU country has a deposit guarantee scheme covering up to €100,000 per depositor per bank.",
+        "pt": "Todos os países da UE têm um fundo de garantia de depósitos que cobre até 100 000 € por depositante e por banco."
+      }
+    },
+    {
+      "id": "current-account",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "A ___ account is for everyday spending, while a savings account is for money you want to set aside.",
+        "pt": "Uma conta ___ serve para o dia a dia, enquanto uma conta poupança serve para guardar dinheiro."
+      },
+      "options": {
+        "en": [
+          "current",
+          "mortgage",
+          "pension"
+        ],
+        "pt": [
+          "à ordem",
+          "crédito habitação",
+          "reforma"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Current accounts give instant access to your money for payments and cards.",
+        "pt": "As contas à ordem dão acesso imediato ao dinheiro para pagamentos e cartões."
+      }
+    },
+    {
+      "id": "liquidity-order",
+      "type": "order",
+      "prompt": {
+        "en": "Order from the easiest to use right away to the hardest (most liquid to least liquid):",
+        "pt": "Ordena do mais fácil de usar de imediato ao mais difícil (mais líquido para menos líquido):"
+      },
+      "items": {
+        "en": [
+          "Cash in your wallet",
+          "Money in a current account",
+          "A 12-month term deposit",
+          "A house"
+        ],
+        "pt": [
+          "Dinheiro na carteira",
+          "Dinheiro na conta à ordem",
+          "Um depósito a prazo de 12 meses",
+          "Uma casa"
+        ]
+      },
+      "explanation": {
+        "en": "Liquidity is how quickly something can be turned into cash without losing value.",
+        "pt": "Liquidez é a rapidez com que algo pode ser convertido em dinheiro sem perder valor."
+      }
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "id": "gross-vs-net",
+  "version": 1,
+  "unit": "payslip",
+  "status": "draft",
+  "sources": [
+    "financas",
+    "segsocial"
+  ],
+  "valid_until": "2026-12-31",
+  "xp": 25,
+  "coins": 40,
+  "title": {
+    "en": "Gross vs Net Salary",
+    "pt": "Salário Bruto vs Líquido"
+  },
+  "description": {
+    "en": "From your contract to your account",
+    "pt": "Do contrato à tua conta"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Two numbers on your payslip",
+        "pt": "Dois números no recibo"
+      },
+      "body": {
+        "en": "Gross salary is the amount in your contract. Net salary is what reaches your account after deductions: the Social Security contribution and the income tax (IRS) withheld at source. Your payslip shows each of these lines.",
+        "pt": "O salário bruto é o valor do contrato. O líquido é o que chega à tua conta depois dos descontos: a contribuição para a Segurança Social e a retenção na fonte de IRS. O recibo de vencimento mostra cada uma destas parcelas."
+      }
+    },
+    {
+      "id": "net",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "What is net salary?",
+        "pt": "O que é o salário líquido?"
+      },
+      "options": {
+        "en": [
+          "What you receive after deductions",
+          "The amount written in the contract",
+          "Your yearly salary",
+          "The amount before taxes"
+        ],
+        "pt": [
+          "O que recebes depois dos descontos",
+          "O valor escrito no contrato",
+          "O salário anual",
+          "O valor antes dos impostos"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Net is what you can actually spend and save.",
+        "pt": "O líquido é o que podes realmente gastar e poupar."
+      }
+    },
+    {
+      "id": "payslip",
+      "type": "match",
+      "prompt": {
+        "en": "Match each payslip line to its meaning",
+        "pt": "Liga cada linha do recibo ao seu significado"
+      },
+      "left": {
+        "en": [
+          "Gross salary",
+          "Net salary",
+          "Social Security",
+          "Withholding tax"
+        ],
+        "pt": [
+          "Salário bruto",
+          "Salário líquido",
+          "Segurança Social",
+          "Retenção na fonte"
+        ]
+      },
+      "right": {
+        "en": [
+          "Amount before deductions",
+          "Amount paid into your account",
+          "Contribution for pensions and social protection",
+          "Monthly advance on income tax"
+        ],
+        "pt": [
+          "Valor antes dos descontos",
+          "Valor que chega à conta",
+          "Contribuição para pensões e proteção social",
+          "Adiantamento mensal do IRS"
+        ]
+      },
+      "explanation": {
+        "en": "Reading your payslip helps you spot mistakes.",
+        "pt": "Ler o recibo ajuda-te a detetar erros."
+      }
+    },
+    {
+      "id": "ss",
+      "type": "numeric",
+      "prompt": {
+        "en": "Your gross salary is €1,200 and you contribute 11% to Social Security. How much is that deduction (in €)?",
+        "pt": "O teu salário bruto é 1200 € e descontas 11% para a Segurança Social. Quanto é esse desconto (em €)?"
+      },
+      "answer": 132,
+      "decimals": 0,
+      "unit": {
+        "en": "€",
+        "pt": "€"
+      },
+      "explanation": {
+        "en": "11% of €1,200 = €132.",
+        "pt": "11% de 1200 € = 132 €."
+      }
+    },
+    {
+      "id": "same-gross",
+      "type": "true_false",
+      "statement": {
+        "en": "Two colleagues with the same gross salary can take home different net amounts.",
+        "pt": "Dois colegas com o mesmo salário bruto podem receber líquidos diferentes."
+      },
+      "answer": true,
+      "explanation": {
+        "en": "IRS withholding depends on your situation, for example dependants or marital status.",
+        "pt": "A retenção de IRS depende da situação de cada um, por exemplo dependentes ou estado civil."
+      }
+    },
+    {
+      "id": "payslip-name",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "The document showing gross pay, deductions and net pay is called a ___.",
+        "pt": "O documento que mostra o bruto, os descontos e o líquido chama-se recibo de ___."
+      },
+      "options": {
+        "en": [
+          "payslip",
+          "receipt",
+          "invoice"
+        ],
+        "pt": [
+          "vencimento",
+          "multibanco",
+          "compra"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Your employer must give you one every month.",
+        "pt": "A entidade empregadora tem de to entregar todos os meses."
+      }
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "id": "budget-50-30-20",
+  "version": 1,
+  "unit": "budgeting",
+  "status": "draft",
+  "sources": [
+    "todoscontam"
+  ],
+  "xp": 25,
+  "coins": 40,
+  "title": {
+    "en": "The 50/30/20 Rule",
+    "pt": "A Regra 50/30/20"
+  },
+  "description": {
+    "en": "A simple starting point for your budget",
+    "pt": "Um ponto de partida simples para o teu orçamento"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Three buckets",
+        "pt": "Três partes"
+      },
+      "body": {
+        "en": "The 50/30/20 rule is a starting point: 50% of your net income for needs (housing, food, transport), 30% for wants (leisure, eating out) and 20% for savings or paying off debt. It is not a law: adapt it to your reality.",
+        "pt": "A regra 50/30/20 é um ponto de partida: 50% do rendimento líquido para necessidades (casa, comida, transportes), 30% para desejos (lazer, jantares fora) e 20% para poupança ou para pagar dívidas. Não é uma lei: adapta-a à tua realidade."
+      }
+    },
+    {
+      "id": "savings",
+      "type": "numeric",
+      "prompt": {
+        "en": "You take home €1,200 a month. Under the 50/30/20 rule, how much goes to savings (in €)?",
+        "pt": "Recebes 1200 € líquidos por mês. Segundo a regra 50/30/20, quanto vai para poupança (em €)?"
+      },
+      "answer": 240,
+      "decimals": 0,
+      "unit": {
+        "en": "€",
+        "pt": "€"
+      },
+      "explanation": {
+        "en": "20% of €1,200 = €240.",
+        "pt": "20% de 1200 € = 240 €."
+      }
+    },
+    {
+      "id": "buckets",
+      "type": "match",
+      "prompt": {
+        "en": "Match each part of the budget to an example",
+        "pt": "Liga cada parte do orçamento a um exemplo"
+      },
+      "left": {
+        "en": [
+          "Needs",
+          "Wants",
+          "Savings"
+        ],
+        "pt": [
+          "Necessidades",
+          "Desejos",
+          "Poupança"
+        ]
+      },
+      "right": {
+        "en": [
+          "Rent, food and transport",
+          "Dinners out and subscriptions",
+          "Emergency fund and investing"
+        ],
+        "pt": [
+          "Renda, comida e transportes",
+          "Jantares fora e subscrições",
+          "Fundo de emergência e investimento"
+        ]
+      },
+      "explanation": {
+        "en": "Each euro gets a job before the month starts.",
+        "pt": "Cada euro tem uma função antes de o mês começar."
+      }
+    },
+    {
+      "id": "needs-cap",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "With €1,500 net, what is the most the rule suggests for needs?",
+        "pt": "Com 1500 € líquidos, qual é o máximo que a regra sugere para necessidades?"
+      },
+      "options": {
+        "en": [
+          "€750",
+          "€450",
+          "€300",
+          "€1,500"
+        ],
+        "pt": [
+          "750 €",
+          "450 €",
+          "300 €",
+          "1500 €"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "50% of €1,500 = €750.",
+        "pt": "50% de 1500 € = 750 €."
+      }
+    },
+    {
+      "id": "gross",
+      "type": "true_false",
+      "statement": {
+        "en": "The 50/30/20 rule is applied to your gross salary.",
+        "pt": "A regra 50/30/20 aplica-se ao salário bruto."
+      },
+      "answer": false,
+      "explanation": {
+        "en": "It applies to net income: what actually reaches your account after taxes and contributions.",
+        "pt": "Aplica-se ao rendimento líquido: o que chega efetivamente à conta depois de impostos e descontos."
+      }
+    },
+    {
+      "id": "adapt",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "If rent takes more than half of your income, you can cut the ___ part to keep saving.",
+        "pt": "Se a renda ocupa mais de metade do rendimento, podes reduzir a parte dos ___ para continuar a poupar."
+      },
+      "options": {
+        "en": [
+          "wants",
+          "taxes",
+          "interest"
+        ],
+        "pt": [
+          "desejos",
+          "impostos",
+          "juros"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Wants are the most flexible part of a budget.",
+        "pt": "Os desejos são a parte mais flexível de um orçamento."
+      }
+    }
+  ]
+}

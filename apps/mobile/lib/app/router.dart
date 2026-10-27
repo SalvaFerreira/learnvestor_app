@@ -1,0 +1,75 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+import '../features/auth/sign_in_screen.dart';
+import '../features/explore/explore_screen.dart';
+import '../features/home/home_screen.dart';
+import '../features/learn/learn_screen.dart';
+import '../features/learn/lesson_screen.dart';
+import '../features/onboarding/onboarding_screen.dart';
+import '../features/paywall/paywall_screen.dart';
+import '../features/portfolio/portfolio_screen.dart';
+import '../features/profile/profile_screen.dart';
+import '../features/tools/tools_screen.dart';
+import '../state/providers.dart';
+import 'shell.dart';
+
+/// Re-runs the router's redirect whenever sign-in or onboarding status changes.
+class _RouterRefresh extends ChangeNotifier {
+  _RouterRefresh(Ref ref) {
+    ref
+      ..listen(userIdProvider, (_, _) => notifyListeners())
+      ..listen(playerStateProvider, (_, _) => notifyListeners());
+  }
+}
+
+final routerProvider = Provider<GoRouter>((ref) {
+  final refresh = _RouterRefresh(ref);
+  ref.onDispose(refresh.dispose);
+
+  return GoRouter(
+    initialLocation: '/home',
+    refreshListenable: refresh,
+    redirect: (context, state) {
+      final location = state.matchedLocation;
+      if (ref.read(userIdProvider) == null) return location == '/sign-in' ? null : '/sign-in';
+
+      final player = ref.read(playerStateProvider);
+      if (player.isLoading && !player.hasValue) return location == '/splash' ? null : '/splash';
+      final profile = player.value?.profile;
+      if (profile == null) return null; // error state: let the screen show retry
+      if (!profile.onboarded) return location == '/onboarding' ? null : '/onboarding';
+      if (const {'/sign-in', '/onboarding', '/splash'}.contains(location)) return '/home';
+      return null;
+    },
+    routes: [
+      GoRoute(path: '/splash', builder: (_, _) => const _Splash()),
+      GoRoute(path: '/sign-in', builder: (_, _) => const SignInScreen()),
+      GoRoute(path: '/onboarding', builder: (_, _) => const OnboardingScreen()),
+      GoRoute(path: '/plus', builder: (_, _) => const PaywallScreen()),
+      GoRoute(path: '/lesson/:id', builder: (_, state) => LessonScreen(lessonId: state.pathParameters['id']!)),
+      GoRoute(path: '/practice', builder: (_, _) => const LessonScreen.practice()),
+      GoRoute(path: '/tools', builder: (_, _) => const ToolsScreen()),
+      StatefulShellRoute.indexedStack(
+        builder: (_, _, shell) => AppShell(shell: shell),
+        branches: [
+          StatefulShellBranch(routes: [GoRoute(path: '/home', builder: (_, _) => const HomeScreen())]),
+          StatefulShellBranch(routes: [GoRoute(path: '/learn', builder: (_, _) => const LearnScreen())]),
+          StatefulShellBranch(routes: [GoRoute(path: '/explore', builder: (_, _) => const ExploreScreen())]),
+          StatefulShellBranch(routes: [GoRoute(path: '/portfolio', builder: (_, _) => const PortfolioScreen())]),
+          StatefulShellBranch(routes: [GoRoute(path: '/profile', builder: (_, _) => const ProfileScreen())]),
+        ],
+      ),
+    ],
+  );
+});
+
+class _Splash extends StatelessWidget {
+  const _Splash();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        body: Center(child: Image.asset('assets/logo.png', width: 96)),
+      );
+}

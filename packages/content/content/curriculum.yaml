@@ -1,0 +1,571 @@
+# LearnVestor curriculum: the single source of truth for tracks, units, lesson order,
+# regions and premium access. Each lesson listed here is "planned" until a file exists in
+# content/lessons/<track>/<lesson-id>.json ("draft"), and only "reviewed" lessons are
+# published to production.
+#
+#   goals        what the learner must be able to do after the lesson (input for drafting)
+#   facts        facts the lesson must teach correctly; time-sensitive ones get valid_until
+#   sources      official references a reviewer checks the facts against
+#   regions      ISO countries where the lesson is shown (omit = everywhere)
+#   valid_until  date after which the lesson must be re-reviewed (tax rules, rates...)
+#
+# Launch market: Portugal (PT-PT first, EN second). Keep the tone educational: explain
+# concepts and trade-offs, never recommend specific products, brokers or securities.
+
+sources:
+  bdp: https://clientebancario.bportugal.pt
+  fgd: https://www.fgd.pt
+  financas: https://info.portaldasfinancas.gov.pt
+  segsocial: https://www.seg-social.pt
+  igcp: https://www.igcp.pt
+  cmvm: https://www.cmvm.pt
+  todoscontam: https://www.todoscontam.pt
+  ecb: https://www.ecb.europa.eu
+  spiva: https://www.spglobal.com/spdji/en/research-insights/spiva/
+
+tracks:
+  - id: banks
+    position: 1
+    icon: account_balance
+    color: "#3B82F6"
+    title: { en: "Everyday Money", pt: "Dinheiro no Dia a Dia" }
+    description:
+      en: Banks, budgets, payments and credit without surprises
+      pt: Bancos, orçamento, pagamentos e crédito sem surpresas
+    units:
+      - id: money-basics
+        title: { en: "Money Basics", pt: "Bases do Dinheiro" }
+        description: { en: "Build a safe foundation before investing", pt: "Constrói uma base segura antes de investir" }
+        lessons:
+          - id: what-is-a-bank
+            title: { en: "How Banks Work", pt: "Como Funcionam os Bancos" }
+            goals: ["Explicar como um banco ganha dinheiro", "Distinguir conta à ordem de conta poupança"]
+            facts: ["Na UE os depósitos estão garantidos até 100 000 € por depositante e por banco"]
+            sources: [fgd, bdp]
+          - id: emergency-fund
+            title: { en: "Your Emergency Fund", pt: "O Teu Fundo de Emergência" }
+            goals: ["Calcular um fundo de emergência de 3 a 6 meses de despesas essenciais", "Saber onde o guardar"]
+            sources: [todoscontam]
+          - id: compound-interest
+            title: { en: "The Magic of Compound Interest", pt: "A Magia dos Juros Compostos" }
+            goals: ["Distinguir juro simples de composto", "Usar a regra dos 72"]
+            sources: [todoscontam]
+          - id: inflation
+            title: { en: "Inflation", pt: "Inflação" }
+            goals: ["Explicar porque é que o dinheiro parado perde poder de compra", "Ler a taxa de inflação"]
+            facts: ["O BCE tem um objetivo de inflação de 2% a médio prazo"]
+            sources: [ecb, bdp]
+          - id: real-interest-rate
+            title: { en: "Real vs Nominal Returns", pt: "Rentabilidade Real vs Nominal" }
+            goals: ["Calcular de forma aproximada a rentabilidade real (nominal menos inflação)"]
+            sources: [todoscontam]
+
+      - id: budgeting
+        title: { en: "Budgeting", pt: "Orçamento" }
+        description: { en: "Know where your money goes", pt: "Sabe para onde vai o teu dinheiro" }
+        lessons:
+          - id: budget-50-30-20
+            title: { en: "The 50/30/20 Rule", pt: "A Regra 50/30/20" }
+            goals: ["Dividir o rendimento líquido em necessidades, desejos e poupança"]
+            sources: [todoscontam]
+          - id: tracking-expenses
+            title: { en: "Tracking Expenses", pt: "Registar Despesas" }
+            goals: ["Distinguir despesas fixas, variáveis e ocasionais", "Criar o hábito de registar"]
+            sources: [todoscontam]
+          - id: needs-vs-wants
+            title: { en: "Needs vs Wants", pt: "Necessidades vs Desejos" }
+            goals: ["Classificar despesas", "Reconhecer compras por impulso"]
+            sources: [todoscontam]
+          - id: saving-goals
+            title: { en: "Saving Goals", pt: "Objetivos de Poupança" }
+            goals: ["Definir objetivos com valor e prazo", "Calcular quanto poupar por mês"]
+            sources: [todoscontam]
+          - id: pay-yourself-first
+            title: { en: "Pay Yourself First", pt: "Paga-te Primeiro a Ti" }
+            goals: ["Automatizar a poupança no dia do salário"]
+            sources: [todoscontam]
+
+      - id: payments-fraud
+        title: { en: "Payments & Fraud", pt: "Pagamentos e Fraudes" }
+        description: { en: "Pay safely and spot scams", pt: "Paga em segurança e identifica burlas" }
+        lessons:
+          - id: debit-vs-credit-cards
+            title: { en: "Debit vs Credit Cards", pt: "Cartão de Débito vs Crédito" }
+            goals: ["Explicar a diferença entre débito e crédito", "Perceber o custo de pagar só o mínimo"]
+            sources: [bdp]
+          - id: instant-payments
+            title: { en: "Instant Payments", pt: "Pagamentos Imediatos" }
+            goals: ["Explicar transferências imediatas e MB WAY", "Saber que uma transferência enviada é difícil de reverter"]
+            regions: [PT]
+            sources: [bdp]
+          - id: phishing
+            title: { en: "Phishing and Fake Messages", pt: "Phishing e Mensagens Falsas" }
+            goals: ["Reconhecer SMS e emails falsos do \"banco\"", "Nunca partilhar códigos de autenticação"]
+            facts: ["Os bancos nunca pedem códigos de autenticação por SMS, email ou telefone"]
+            sources: [bdp]
+          - id: protect-your-accounts
+            title: { en: "Protect Your Accounts", pt: "Protege as Tuas Contas" }
+            goals: ["Usar autenticação forte e palavras-passe únicas", "Saber o que fazer após uma fraude"]
+            sources: [bdp]
+
+      - id: credit
+        title: { en: "Credit", pt: "Crédito" }
+        description: { en: "Borrow only when it makes sense", pt: "Pede emprestado só quando faz sentido" }
+        lessons:
+          - id: tan-vs-taeg
+            title: { en: "Nominal vs Annual Percentage Rate", pt: "TAN vs TAEG" }
+            goals: ["Explicar porque a TAEG inclui custos além dos juros", "Comparar propostas pela TAEG"]
+            sources: [bdp]
+          - id: consumer-credit
+            title: { en: "Consumer Credit", pt: "Crédito ao Consumo" }
+            goals: ["Avaliar o custo total de um crédito pessoal ou automóvel"]
+            sources: [bdp]
+          - id: credit-card-debt
+            title: { en: "Credit Card Debt", pt: "Dívida de Cartão de Crédito" }
+            goals: ["Perceber como os juros de cartão se acumulam", "Priorizar o pagamento de dívidas caras"]
+            sources: [bdp]
+          - id: mortgage-basics
+            title: { en: "Mortgage Basics", pt: "Crédito Habitação: o Básico" }
+            goals: ["Explicar Euribor, spread e taxa fixa vs variável", "Perceber o esforço da prestação"]
+            regions: [PT]
+            sources: [bdp]
+          - id: credit-history
+            title: { en: "Your Credit History", pt: "O Teu Histórico de Crédito" }
+            goals: ["Explicar o que é a Central de Responsabilidades de Crédito e como a consultar"]
+            regions: [PT]
+            sources: [bdp]
+          - id: paying-off-debt
+            title: { en: "Paying Off Debt", pt: "Pagar Dívidas" }
+            goals: ["Comparar os métodos bola de neve e avalanche"]
+            sources: [todoscontam]
+
+      - id: big-decisions
+        title: { en: "Big Decisions", pt: "Grandes Decisões" }
+        description: { en: "Housing, cars and insurance", pt: "Casa, carro e seguros" }
+        lessons:
+          - id: rent-vs-buy
+            title: { en: "Rent or Buy?", pt: "Arrendar ou Comprar?" }
+            goals: ["Listar os custos de comprar casa além da prestação", "Perceber que a decisão depende do horizonte"]
+            regions: [PT]
+            sources: [bdp]
+          - id: car-cash-vs-loan
+            title: { en: "Buying a Car", pt: "Comprar Carro" }
+            goals: ["Comparar pagar a pronto, crédito e leasing pelo custo total"]
+            sources: [bdp]
+          - id: insurance-basics
+            title: { en: "Insurance Basics", pt: "Seguros: o Básico" }
+            goals: ["Explicar prémio, franquia e capital seguro", "Distinguir seguros obrigatórios de opcionais"]
+            sources: [todoscontam]
+
+      - id: income
+        title: { en: "Earning Money", pt: "Ganhar Dinheiro" }
+        description: { en: "First job, freelancing and extra income", pt: "Primeiro emprego, trabalho independente e rendimentos extra" }
+        lessons:
+          - id: first-job
+            title: { en: "Your First Job", pt: "O Teu Primeiro Emprego" }
+            goals: ["Perceber contrato, período experimental e o que verificar no primeiro salário"]
+            regions: [PT]
+            sources: [segsocial]
+          - id: freelancing
+            title: { en: "Working Independently", pt: "Trabalhar a Recibos Verdes" }
+            goals: ["Explicar o regime de trabalhador independente, retenções e contribuições de forma geral"]
+            regions: [PT]
+            valid_until: 2026-12-31
+            sources: [financas, segsocial]
+          - id: lifestyle-inflation
+            title: { en: "Lifestyle Inflation", pt: "Inflação do Estilo de Vida" }
+            goals: ["Reconhecer quando os gastos sobem com o rendimento", "Poupar parte de cada aumento"]
+            sources: [todoscontam]
+
+  - id: taxes
+    position: 2
+    icon: receipt_long
+    color: "#22C55E"
+    regions: [PT]
+    title: { en: "Taxes & the State", pt: "Impostos e Estado" }
+    description:
+      en: Payslips, IRS, state savings and retirement in Portugal
+      pt: Recibo de vencimento, IRS, poupança do Estado e reforma em Portugal
+    units:
+      - id: payslip
+        title: { en: "Your Payslip", pt: "O Recibo de Vencimento" }
+        description: { en: "From gross to net salary", pt: "Do salário bruto ao líquido" }
+        lessons:
+          - id: gross-vs-net
+            title: { en: "Gross vs Net Salary", pt: "Salário Bruto vs Líquido" }
+            goals: ["Ler um recibo de vencimento", "Explicar os descontos principais"]
+            sources: [financas, segsocial]
+          - id: social-security
+            title: { en: "Social Security Contributions", pt: "Descontos para a Segurança Social" }
+            goals: ["Explicar para que servem as contribuições"]
+            facts: ["O trabalhador por conta de outrem desconta em regra 11% e a entidade empregadora 23,75%"]
+            valid_until: 2026-12-31
+            sources: [segsocial]
+          - id: irs-withholding
+            title: { en: "IRS Withholding", pt: "Retenção na Fonte de IRS" }
+            goals: ["Explicar que a retenção é um adiantamento do imposto anual"]
+            valid_until: 2026-12-31
+            sources: [financas]
+          - id: holiday-christmas-pay
+            title: { en: "Holiday and Christmas Pay", pt: "Subsídios de Férias e de Natal" }
+            goals: ["Explicar os 14 meses de salário e o duodécimo"]
+            sources: [segsocial]
+
+      - id: irs
+        title: { en: "Income Tax Without Fear", pt: "IRS sem Medo" }
+        description: { en: "How income tax really works", pt: "Como funciona realmente o IRS" }
+        lessons:
+          - id: irs-brackets
+            title: { en: "Tax Brackets", pt: "Escalões de IRS" }
+            goals: ["Distinguir taxa marginal de taxa efetiva", "Desfazer o mito de que um aumento faz perder dinheiro"]
+            valid_until: 2026-12-31
+            sources: [financas]
+          - id: irs-deductions
+            title: { en: "Deductions and e-Fatura", pt: "Deduções e e-Fatura" }
+            goals: ["Saber que despesas podem ser deduzidas", "Pedir fatura com NIF"]
+            valid_until: 2026-12-31
+            sources: [financas]
+          - id: irs-jovem
+            title: { en: "IRS Jovem", pt: "IRS Jovem" }
+            goals: ["Explicar o objetivo do regime e onde confirmar as regras em vigor"]
+            valid_until: 2026-12-31
+            sources: [financas]
+          - id: irs-filing
+            title: { en: "Filing Your Return", pt: "Entregar a Declaração" }
+            goals: ["Saber o calendário de entrega e o IRS Automático", "Perceber reembolso vs pagamento"]
+            valid_until: 2026-12-31
+            sources: [financas]
+          - id: investment-taxes
+            title: { en: "Taxes on Investments", pt: "Impostos sobre Investimentos" }
+            goals: ["Explicar a taxa liberatória e a opção de englobamento para mais-valias e dividendos"]
+            facts: ["Mais-valias e dividendos são em regra tributados a 28%, com opção de englobamento"]
+            valid_until: 2026-12-31
+            sources: [financas]
+
+      - id: state-savings
+        title: { en: "State Savings", pt: "Poupança do Estado" }
+        description: { en: "Savings and Treasury certificates", pt: "Certificados de Aforro e do Tesouro" }
+        lessons:
+          - id: savings-certificates
+            title: { en: "Savings Certificates", pt: "Certificados de Aforro" }
+            goals: ["Explicar o que são, como se subscrevem e de que depende a taxa"]
+            valid_until: 2026-12-31
+            sources: [igcp]
+          - id: treasury-certificates
+            title: { en: "Treasury Certificates", pt: "Certificados do Tesouro" }
+            goals: ["Comparar com os Certificados de Aforro em prazo e remuneração"]
+            valid_until: 2026-12-31
+            sources: [igcp]
+          - id: deposits-vs-certificates
+            title: { en: "Deposits vs Certificates", pt: "Depósitos vs Certificados" }
+            goals: ["Comparar liquidez, garantia e rentabilidade"]
+            valid_until: 2026-12-31
+            sources: [igcp, fgd]
+
+      - id: retirement
+        title: { en: "Retirement", pt: "Reforma" }
+        description: { en: "Plan the long term", pt: "Planear o longo prazo" }
+        lessons:
+          - id: how-pensions-work
+            title: { en: "How Public Pensions Work", pt: "Como Funcionam as Pensões" }
+            goals: ["Explicar o sistema de repartição e a importância da carreira contributiva"]
+            sources: [segsocial]
+          - id: replacement-rate
+            title: { en: "Replacement Rate", pt: "Taxa de Substituição" }
+            goals: ["Explicar porque a pensão costuma ser inferior ao último salário"]
+            sources: [segsocial]
+          - id: ppr-basics
+            title: { en: "Retirement Savings Plans", pt: "PPR: o Básico" }
+            goals: ["Explicar o que é um PPR, as regras de resgate e o benefício fiscal"]
+            facts: ["A dedução à coleta é de 20% do valor aplicado, com limites que dependem da idade"]
+            valid_until: 2026-12-31
+            sources: [financas, cmvm]
+          - id: start-early
+            title: { en: "Start Early", pt: "Começar Cedo" }
+            goals: ["Mostrar com números o efeito de começar 10 anos mais cedo"]
+            sources: [todoscontam]
+
+      - id: other-taxes
+        title: { en: "Other Taxes", pt: "Outros Impostos" }
+        description: { en: "VAT and property taxes", pt: "IVA e impostos sobre imóveis" }
+        lessons:
+          - id: vat
+            title: { en: "VAT", pt: "IVA" }
+            goals: ["Explicar o IVA e as taxas normal, intermédia e reduzida"]
+            valid_until: 2026-12-31
+            sources: [financas]
+          - id: property-taxes
+            title: { en: "Property Taxes", pt: "IMT, IMI e Imposto do Selo" }
+            goals: ["Saber que impostos se pagam ao comprar e ao ter casa"]
+            valid_until: 2026-12-31
+            sources: [financas]
+
+  - id: investment
+    position: 3
+    icon: trending_up
+    color: "#FACC15"
+    title: { en: "Investment", pt: "Investimento" }
+    description:
+      en: Start your investment journey with solid basics
+      pt: Começa a tua jornada de investimento com bases sólidas
+    units:
+      - id: investment-fundamentals
+        title: { en: "Investment Fundamentals", pt: "Fundamentos de Investimento" }
+        description: { en: "Risk, asset types and how the stock market works", pt: "Risco, tipos de ativos e como funciona a bolsa" }
+        lessons:
+          - id: risk-vs-reward
+            title: { en: "Risk vs. Reward", pt: "Risco vs. Retorno" }
+            goals: ["Relacionar risco e retorno esperado", "Explicar volatilidade"]
+            sources: [cmvm]
+          - id: types-of-investments
+            title: { en: "Types of Investments", pt: "Tipos de Investimentos" }
+            goals: ["Distinguir ações, obrigações, fundos e depósitos"]
+            sources: [cmvm]
+          - id: diversification
+            title: { en: "Diversification", pt: "Diversificação" }
+            goals: ["Explicar risco específico vs risco de mercado"]
+            sources: [cmvm]
+          - id: what-is-a-stock
+            title: { en: "How the Stock Market Works", pt: "Como Funciona a Bolsa" }
+            goals: ["Explicar bolsa, ticker e capitalização bolsista"]
+            sources: [cmvm]
+          - id: time-horizon
+            title: { en: "Time Horizon", pt: "Horizonte Temporal" }
+            goals: ["Associar o horizonte ao tipo de investimento adequado"]
+            sources: [cmvm]
+
+      - id: stocks
+        title: { en: "Stocks", pt: "Ações" }
+        description: { en: "Orders, dividends and indices", pt: "Ordens, dividendos e índices" }
+        lessons:
+          - id: order-types
+            title: { en: "Market and Limit Orders", pt: "Ordens de Mercado e Limitadas" }
+            goals: ["Distinguir ordem a mercado de ordem limitada"]
+            sources: [cmvm]
+          - id: bid-ask-spread
+            title: { en: "Bid, Ask and Spread", pt: "Compra, Venda e Spread" }
+            goals: ["Explicar o spread como custo implícito"]
+            sources: [cmvm]
+          - id: dividends
+            title: { en: "Dividends", pt: "Dividendos" }
+            goals: ["Explicar dividendos, data ex-dividendo e dividend yield de forma simples"]
+            sources: [cmvm]
+          - id: stock-indices
+            title: { en: "Stock Indices", pt: "Índices Bolsistas" }
+            goals: ["Explicar o que é um índice e dar exemplos (PSI, S&P 500, MSCI World)"]
+            sources: [cmvm]
+          - id: euronext-lisbon
+            title: { en: "The Lisbon Stock Exchange", pt: "A Bolsa de Lisboa" }
+            goals: ["Explicar o que é a Euronext Lisbon e o PSI"]
+            regions: [PT]
+            sources: [cmvm]
+
+      - id: bonds
+        title: { en: "Bonds", pt: "Obrigações" }
+        description: { en: "Lending to governments and companies", pt: "Emprestar a Estados e empresas" }
+        lessons:
+          - id: what-is-a-bond
+            title: { en: "What Is a Bond", pt: "O Que É uma Obrigação" }
+            goals: ["Explicar cupão, maturidade e valor nominal"]
+            sources: [cmvm]
+          - id: bond-prices-rates
+            title: { en: "Bond Prices and Interest Rates", pt: "Preço das Obrigações e Juros" }
+            goals: ["Explicar porque o preço cai quando as taxas sobem"]
+            sources: [cmvm]
+          - id: credit-risk
+            title: { en: "Credit Risk and Ratings", pt: "Risco de Crédito e Ratings" }
+            goals: ["Relacionar rating, risco de incumprimento e juro exigido"]
+            sources: [cmvm]
+
+      - id: funds-etfs
+        title: { en: "Funds & ETFs", pt: "Fundos e ETFs" }
+        description: { en: "Investing in baskets", pt: "Investir em cabazes" }
+        lessons:
+          - id: funds-vs-etfs
+            title: { en: "Funds vs ETFs", pt: "Fundos vs ETFs" }
+            goals: ["Comparar fundos de investimento e ETFs em negociação e custos"]
+            sources: [cmvm]
+          - id: accumulating-vs-distributing
+            title: { en: "Accumulating vs Distributing", pt: "Acumulação vs Distribuição" }
+            goals: ["Explicar as duas políticas de rendimentos e o efeito fiscal geral"]
+            sources: [cmvm]
+          - id: investment-costs
+            title: { en: "Investment Costs", pt: "Custos de Investir" }
+            goals: ["Listar comissões de corretagem, custódia", "TER e câmbio"]
+            sources: [cmvm]
+          - id: kid-document
+            title: { en: "Reading the KID", pt: "Ler o Documento de Informação Fundamental" }
+            goals: ["Encontrar risco, custos e cenários no documento obrigatório"]
+            sources: [cmvm]
+
+      - id: other-assets
+        title: { en: "Other Assets", pt: "Outros Ativos" }
+        description: { en: "Property, gold and more", pt: "Imobiliário, ouro e outros" }
+        lessons:
+          - id: real-estate-investing
+            title: { en: "Real Estate Investing", pt: "Investir em Imobiliário" }
+            goals: ["Comparar comprar para arrendar com fundos imobiliários"]
+            sources: [cmvm]
+          - id: gold-commodities
+            title: { en: "Gold and Commodities", pt: "Ouro e Matérias-Primas" }
+            goals: ["Explicar o papel e os riscos das matérias-primas"]
+            sources: [cmvm]
+
+  - id: mindset
+    position: 4
+    icon: psychology
+    color: "#F97316"
+    title: { en: "Investor Mindset", pt: "Mente do Investidor" }
+    description:
+      en: Biases, scams and crypto risks
+      pt: Enviesamentos, burlas e riscos das cripto
+    units:
+      - id: biases
+        title: { en: "Biases", pt: "Enviesamentos" }
+        description: { en: "Your brain is your biggest risk", pt: "O teu cérebro é o teu maior risco" }
+        lessons:
+          - id: loss-aversion
+            title: { en: "Loss Aversion", pt: "Aversão à Perda" }
+            goals: ["Explicar porque as perdas doem mais do que os ganhos alegram"]
+            sources: [cmvm]
+          - id: fomo
+            title: { en: "FOMO", pt: "Medo de Ficar de Fora (FOMO)" }
+            goals: ["Reconhecer decisões tomadas por euforia"]
+            sources: [cmvm]
+          - id: confirmation-bias
+            title: { en: "Confirmation Bias", pt: "Viés de Confirmação" }
+            goals: ["Procurar ativamente argumentos contrários"]
+            sources: [cmvm]
+          - id: overconfidence
+            title: { en: "Overconfidence", pt: "Excesso de Confiança" }
+            goals: ["Explicar porque negociar muito costuma reduzir resultados"]
+            sources: [spiva]
+          - id: herd-behavior
+            title: { en: "Following the Herd", pt: "Efeito Manada" }
+            goals: ["Reconhecer bolhas e modas"]
+            sources: [cmvm]
+
+      - id: scams
+        title: { en: "Scams", pt: "Burlas" }
+        description: { en: "If it sounds too good to be true...", pt: "Se parece bom demais para ser verdade..." }
+        lessons:
+          - id: ponzi-schemes
+            title: { en: "Ponzi Schemes", pt: "Esquemas Ponzi" }
+            goals: ["Explicar como funcionam e os sinais de alerta"]
+            sources: [cmvm]
+          - id: guaranteed-returns
+            title: { en: "Guaranteed Returns", pt: "Rentabilidades Garantidas" }
+            goals: ["Desconfiar de retornos altos sem risco"]
+            sources: [cmvm]
+          - id: check-authorized-entities
+            title: { en: "Check Who You Deal With", pt: "Confirma com Quem Falas" }
+            goals: ["Verificar se uma entidade está autorizada no site da CMVM e do Banco de Portugal"]
+            regions: [PT]
+            sources: [cmvm, bdp]
+          - id: finfluencers
+            title: { en: "Finfluencers", pt: "Influencers Financeiros" }
+            goals: ["Avaliar conselhos nas redes sociais com espírito crítico"]
+            sources: [cmvm]
+
+      - id: crypto-risks
+        title: { en: "Crypto Risks", pt: "Cripto: Riscos" }
+        description: { en: "Understand before you touch", pt: "Perceber antes de tocar" }
+        lessons:
+          - id: what-is-crypto
+            title: { en: "What Is Crypto", pt: "O Que São Criptoativos" }
+            goals: ["Explicar blockchain e criptoativos de forma simples"]
+            sources: [cmvm, bdp]
+          - id: crypto-volatility
+            title: { en: "Crypto Volatility", pt: "Volatilidade das Cripto" }
+            goals: ["Comparar a volatilidade com outros ativos"]
+            sources: [cmvm]
+          - id: crypto-scams
+            title: { en: "Crypto Scams", pt: "Burlas com Cripto" }
+            goals: ["Reconhecer esquemas comuns (falsas plataformas, recuperação de fundos)"]
+            sources: [cmvm, bdp]
+
+  - id: advanced
+    position: 5
+    icon: insights
+    color: "#A855F7"
+    premium: true
+    title: { en: "Advanced", pt: "Avançado" }
+    description:
+      en: Long-term strategies used by smart investors
+      pt: Estratégias de longo prazo usadas por investidores informados
+    units:
+      - id: smarter-investing
+        title: { en: "Smarter Investing", pt: "Investir Melhor" }
+        description: { en: "Index funds, costs and investing regularly", pt: "Fundos de índice, custos e investir com regularidade" }
+        lessons:
+          - id: etfs-and-index-funds
+            title: { en: "ETFs and Index Funds", pt: "ETFs e Fundos de Índice" }
+            goals: ["Explicar gestão passiva vs ativa"]
+            sources: [spiva, cmvm]
+          - id: fees-matter
+            title: { en: "Why Fees Matter", pt: "Porque é que os Custos Importam" }
+            goals: ["Quantificar o impacto de custos ao longo de décadas"]
+            sources: [cmvm]
+          - id: dollar-cost-averaging
+            title: { en: "Investing Regularly (DCA)", pt: "Investir com Regularidade (DCA)" }
+            goals: ["Explicar o investimento periódico e o custo médio"]
+            sources: [cmvm]
+
+      - id: company-analysis
+        title: { en: "Analysing Companies", pt: "Analisar Empresas" }
+        description: { en: "Read the numbers behind a share", pt: "Lê os números por trás de uma ação" }
+        lessons:
+          - id: income-statement
+            title: { en: "The Income Statement", pt: "A Demonstração de Resultados" }
+            goals: ["Distinguir receitas, lucro operacional e lucro líquido"]
+            sources: [cmvm]
+          - id: balance-sheet
+            title: { en: "The Balance Sheet", pt: "O Balanço" }
+            goals: ["Explicar ativo, passivo e capital próprio"]
+            sources: [cmvm]
+          - id: pe-ratio
+            title: { en: "The P/E Ratio", pt: "O Rácio P/E" }
+            goals: ["Calcular e interpretar o P/E com cautela"]
+            sources: [cmvm]
+          - id: competitive-advantage
+            title: { en: "Competitive Advantage", pt: "Vantagem Competitiva" }
+            goals: ["Identificar marcas, custos de mudança e efeitos de rede"]
+            sources: [cmvm]
+
+      - id: portfolio-building
+        title: { en: "Building a Portfolio", pt: "Construir uma Carteira" }
+        description: { en: "Allocation, rebalancing and currency", pt: "Alocação, rebalanceamento e câmbio" }
+        lessons:
+          - id: asset-allocation
+            title: { en: "Asset Allocation", pt: "Alocação de Ativos" }
+            goals: ["Explicar a divisão entre ações, obrigações e liquidez"]
+            sources: [cmvm]
+          - id: risk-profile
+            title: { en: "Your Risk Profile", pt: "O Teu Perfil de Risco" }
+            goals: ["Relacionar objetivos, horizonte e tolerância ao risco"]
+            sources: [cmvm]
+          - id: rebalancing
+            title: { en: "Rebalancing", pt: "Rebalancear" }
+            goals: ["Explicar quando e porquê rebalancear"]
+            sources: [cmvm]
+          - id: currency-risk
+            title: { en: "Currency Risk", pt: "Risco Cambial" }
+            goals: ["Explicar o efeito do câmbio EUR/USD numa ação americana"]
+            sources: [cmvm]
+
+      - id: long-term
+        title: { en: "The Long Game", pt: "O Jogo Longo" }
+        description: { en: "Financial independence and market crashes", pt: "Independência financeira e quedas de mercado" }
+        lessons:
+          - id: financial-independence
+            title: { en: "Financial Independence", pt: "Independência Financeira" }
+            goals: ["Explicar o conceito FIRE e a regra dos 4% com as suas limitações"]
+            sources: [todoscontam]
+          - id: market-crashes
+            title: { en: "Surviving Market Crashes", pt: "Sobreviver a Quedas de Mercado" }
+            goals: ["Mostrar historicamente recuperações e o custo de vender em pânico"]
+            sources: [cmvm]
+          - id: leverage-risk
+            title: { en: "Leverage and Derivatives", pt: "Alavancagem e Derivados" }
+            goals: ["Explicar como a alavancagem amplifica perdas", "CFDs e opções em termos gerais"]
+            sources: [cmvm]

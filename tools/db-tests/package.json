@@ -1,0 +1,14 @@
+{
+  "name": "@learnvestor/db-tests",
+  "private": true,
+  "type": "module",
+  "description": "PGlite (Postgres in WASM) tools: database tests, RPC fixtures for the app and a local demo API (npm run dev).",
+  "scripts": {
+    "test": "node --test --test-concurrency=1 \"tests/*.test.mjs\"",
+    "fixtures": "node fixtures.mjs",
+    "dev": "node dev-server.mjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.3.0"
+  }
+}

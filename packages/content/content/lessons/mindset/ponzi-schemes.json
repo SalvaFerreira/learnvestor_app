@@ -1,0 +1,143 @@
+{
+  "id": "ponzi-schemes",
+  "version": 1,
+  "unit": "scams",
+  "status": "draft",
+  "sources": [
+    "cmvm"
+  ],
+  "xp": 30,
+  "coins": 45,
+  "title": {
+    "en": "Ponzi Schemes",
+    "pt": "Esquemas Ponzi"
+  },
+  "description": {
+    "en": "When \"profits\" are other people's money",
+    "pt": "Quando os \"lucros\" são o dinheiro dos outros"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Paying old investors with new money",
+        "pt": "Pagar antigos com dinheiro de novos"
+      },
+      "body": {
+        "en": "In a Ponzi scheme, the \"profits\" paid to early investors come from the money of new investors, not from a real business. It works while new money keeps coming in; when it stops, it collapses and most people lose everything.",
+        "pt": "Num esquema Ponzi, os \"lucros\" pagos aos primeiros investidores vêm do dinheiro dos novos, não de um negócio real. Funciona enquanto entra dinheiro novo; quando deixa de entrar, colapsa e a maioria perde tudo."
+      }
+    },
+    {
+      "id": "source",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "Where do the payments in a Ponzi scheme come from?",
+        "pt": "De onde vêm os pagamentos num esquema Ponzi?"
+      },
+      "options": {
+        "en": [
+          "From new investors' money",
+          "From a company's profits",
+          "From central bank interest",
+          "From taxes"
+        ],
+        "pt": [
+          "Do dinheiro de novos investidores",
+          "Dos lucros de uma empresa",
+          "Dos juros do banco central",
+          "Dos impostos"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "There is no real activity generating returns.",
+        "pt": "Não há nenhuma atividade real a gerar rendimento."
+      }
+    },
+    {
+      "id": "lasts",
+      "type": "true_false",
+      "statement": {
+        "en": "A Ponzi scheme can pay returns for months or years before collapsing.",
+        "pt": "Um esquema Ponzi pode pagar rendimentos durante meses ou anos antes de colapsar."
+      },
+      "answer": true,
+      "explanation": {
+        "en": "Early payments build trust, which is exactly how it attracts more victims.",
+        "pt": "Os primeiros pagamentos criam confiança, e é assim que atrai mais vítimas."
+      }
+    },
+    {
+      "id": "red-flag",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "Which of these is a red flag?",
+        "pt": "Qual destes é um sinal de alerta?"
+      },
+      "options": {
+        "en": [
+          "A promise of 5% a month with no risk",
+          "A document listing costs and risks",
+          "An entity registered with the regulator",
+          "A clear explanation of where returns come from"
+        ],
+        "pt": [
+          "Promessa de 5% por mês sem risco",
+          "Um documento com custos e riscos",
+          "Uma entidade registada no regulador",
+          "Uma explicação clara de onde vem o retorno"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "High, steady, risk-free returns do not exist in legitimate investing.",
+        "pt": "Retornos altos, constantes e sem risco não existem em investimentos legítimos."
+      }
+    },
+    {
+      "id": "recruit",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "If you are asked to ___ new people to earn more, be suspicious: it may be a pyramid scheme.",
+        "pt": "Se te pedem para ___ novas pessoas para ganhares mais, desconfia: pode ser um esquema em pirâmide."
+      },
+      "options": {
+        "en": [
+          "recruit",
+          "ignore",
+          "inform"
+        ],
+        "pt": [
+          "recrutar",
+          "ignorar",
+          "informar"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "When income depends on recruiting, the scheme needs endless new members.",
+        "pt": "Quando o ganho depende de recrutar, o esquema precisa de novos membros sem fim."
+      }
+    },
+    {
+      "id": "promise",
+      "type": "numeric",
+      "prompt": {
+        "en": "An offer promises 10% a month. How much would €1,000 \"earn\" in one month according to the promise (in €)?",
+        "pt": "Uma oferta promete 10% por mês. Quanto \"renderiam\" 1000 € num mês segundo a promessa (em €)?"
+      },
+      "answer": 100,
+      "decimals": 0,
+      "unit": {
+        "en": "€",
+        "pt": "€"
+      },
+      "explanation": {
+        "en": "€100 a month would be over 200% a year: a classic sign of a scam.",
+        "pt": "100 € por mês seria mais de 200% ao ano: um sinal clássico de burla."
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "title": "Como Funcionam os Bancos",
+  "hearts": {
+    "gems": 0,
+    "hearts": 6,
+    "unlimited": false,
+    "max_hearts": 6,
+    "next_heart_at": null
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "body": "Os bancos guardam o teu dinheiro e tornam-no útil. Recebem depósitos de quem poupa, emprestam parte desse dinheiro a pessoas e empresas e ganham a diferença entre os juros que cobram nos empréstimos e os juros que pagam nos depósitos.",
+      "type": "info",
+      "title": "Os bancos põem o dinheiro a trabalhar"
+    },
+    {
+      "id": "how-banks-earn",
+      "type": "multiple_choice",
+      "answer": 0,
+      "prompt": "Qual é a principal forma de um banco ganhar dinheiro?",
+      "options": [
+        "Cobrar mais juros nos empréstimos do que paga nos depósitos",
+        "Imprimir dinheiro novo",
+        "Vender dados pessoais dos clientes",
+        "Investir apenas em ouro"
+      ],
+      "explanation": "Esta diferença chama-se margem financeira e é o negócio principal de um banco."
+    },
+    {
+      "id": "deposit-guarantee",
+      "type": "true_false",
+      "answer": true,
+      "statement": "Na UE, os depósitos até 100 000 € por pessoa e por banco estão protegidos se o banco falir.",
+      "explanation": "Todos os países da UE têm um fundo de garantia de depósitos que cobre até 100 000 € por depositante e por banco."
+    },
+    {
+      "id": "current-account",
+      "type": "fill_blank",
+      "answer": 0,
+      "options": [
+        "à ordem",
+        "crédito habitação",
+        "reforma"
+      ],
+      "sentence": "Uma conta ___ serve para o dia a dia, enquanto uma conta poupança serve para guardar dinheiro.",
+      "explanation": "As contas à ordem dão acesso imediato ao dinheiro para pagamentos e cartões."
+    },
+    {
+      "id": "liquidity-order",
+      "type": "order",
+      "items": [
+        "Dinheiro na carteira",
+        "Dinheiro na conta à ordem",
+        "Um depósito a prazo de 12 meses",
+        "Uma casa"
+      ],
+      "answer": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "prompt": "Ordena do mais fácil de usar de imediato ao mais difícil (mais líquido para menos líquido):",
+      "explanation": "Liquidez é a rapidez com que algo pode ser convertido em dinheiro sem perder valor."
+    }
+  ],
+  "lesson_id": "what-is-a-bank",
+  "xp_reward": 20,
+  "attempt_id": "33a2ef3f-bf1c-44a8-8e28-3133141c0f99",
+  "coin_reward": 30,
+  "description": "Depósitos, empréstimos e porque é que o teu dinheiro está seguro"
+}

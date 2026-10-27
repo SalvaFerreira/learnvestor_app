@@ -1,0 +1,125 @@
+{
+  "id": "fees-matter",
+  "version": 1,
+  "unit": "smarter-investing",
+  "status": "draft",
+  "sources": [
+    "cmvm"
+  ],
+  "xp": 40,
+  "coins": 60,
+  "title": {
+    "en": "Why Fees Matter",
+    "pt": "Porque é que os Custos Importam"
+  },
+  "description": {
+    "en": "Small percentages, big differences",
+    "pt": "Percentagens pequenas, diferenças grandes"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Fees compound too",
+        "pt": "Os custos também se acumulam"
+      },
+      "body": {
+        "en": "Fees look tiny, but they are charged every year on your whole balance, so they compound against you. Paying 2% a year instead of 0.2% can eat a large share of your returns over decades.",
+        "pt": "Os custos parecem pequenos, mas são cobrados todos os anos sobre o valor total, por isso acumulam-se contra ti. Pagar 2% ao ano em vez de 0,2% pode comer uma grande parte dos teus ganhos ao longo de décadas."
+      }
+    },
+    {
+      "id": "ter",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "What is a fund's TER (Total Expense Ratio)?",
+        "pt": "O que é a TER (Total Expense Ratio) de um fundo?"
+      },
+      "options": {
+        "en": [
+          "Its yearly cost as a % of your investment",
+          "The tax on your gains",
+          "The price of one share",
+          "The minimum investment"
+        ],
+        "pt": [
+          "O custo anual em % do teu investimento",
+          "O imposto sobre as mais-valias",
+          "O preço de uma unidade",
+          "O investimento mínimo"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "A TER of 0.2% costs €2 per year for every €1,000 invested.",
+        "pt": "Uma TER de 0,2% custa 2 € por ano por cada 1000 € investidos."
+      }
+    },
+    {
+      "id": "fee-gap",
+      "type": "true_false",
+      "statement": {
+        "en": "A fund charging 2% a year must beat a fund charging 0.2% by 1.8 percentage points every year just to match it.",
+        "pt": "Um fundo que cobra 2% ao ano tem de render mais 1,8 pontos percentuais por ano do que um que cobra 0,2% só para o igualar."
+      },
+      "answer": true,
+      "explanation": {
+        "en": "Fees are subtracted from returns, so higher fees set a higher bar every single year.",
+        "pt": "Os custos são subtraídos aos retornos, por isso custos mais altos exigem mais todos os anos."
+      }
+    },
+    {
+      "id": "fee-impact",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "Over 30 years, a 2% yearly fee instead of 0.2% can reduce your final amount by ___.",
+        "pt": "Em 30 anos, um custo de 2% ao ano em vez de 0,2% pode reduzir o valor final em ___."
+      },
+      "options": {
+        "en": [
+          "more than a third",
+          "exactly zero",
+          "less than 1%"
+        ],
+        "pt": [
+          "mais de um terço",
+          "exatamente zero",
+          "menos de 1%"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Example: 7% vs 5.2% net per year over 30 years ends about 40% lower.",
+        "pt": "Exemplo: 7% vs 5,2% líquidos por ano durante 30 anos termina cerca de 40% abaixo."
+      }
+    },
+    {
+      "id": "costs-to-check",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "Which costs should you check before investing?",
+        "pt": "Que custos deves verificar antes de investir?"
+      },
+      "options": {
+        "en": [
+          "Fund fees, trading commissions and taxes",
+          "Only the fund's logo",
+          "Only last year's return",
+          "None, costs don't matter"
+        ],
+        "pt": [
+          "Custos do fundo, comissões de negociação e impostos",
+          "Apenas o logótipo do fundo",
+          "Apenas o retorno do ano passado",
+          "Nenhum, os custos não importam"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Costs are one of the few things investors can actually control.",
+        "pt": "Os custos são uma das poucas coisas que um investidor consegue realmente controlar."
+      }
+    }
+  ]
+}

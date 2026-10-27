@@ -1,0 +1,15 @@
+{
+  "me": {
+    "xp": 28,
+    "rank": 1
+  },
+  "entries": [
+    {
+      "xp": 28,
+      "rank": 1,
+      "is_me": true,
+      "username": "fixture_user"
+    }
+  ],
+  "week_start": "2026-10-26T00:00:00+00:00"
+}

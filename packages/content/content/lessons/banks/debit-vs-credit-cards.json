@@ -1,0 +1,156 @@
+{
+  "id": "debit-vs-credit-cards",
+  "version": 1,
+  "unit": "payments-fraud",
+  "status": "draft",
+  "sources": [
+    "bdp"
+  ],
+  "xp": 30,
+  "coins": 45,
+  "title": {
+    "en": "Debit vs Credit Cards",
+    "pt": "Cartão de Débito vs Crédito"
+  },
+  "description": {
+    "en": "Your money or borrowed money?",
+    "pt": "O teu dinheiro ou dinheiro emprestado?"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Two very different cards",
+        "pt": "Dois cartões muito diferentes"
+      },
+      "body": {
+        "en": "With a debit card you pay with money you already have in your account. With a credit card you use money lent by the bank, which you must pay back; if you don't pay the full amount by the due date, you pay interest, usually high.",
+        "pt": "Com o cartão de débito pagas com dinheiro que já tens na conta. Com o cartão de crédito usas dinheiro emprestado pelo banco, que tens de devolver; se não pagares o total até à data-limite, pagas juros, normalmente altos."
+      }
+    },
+    {
+      "id": "debit",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "With a debit card, the money comes…",
+        "pt": "Com um cartão de débito, o dinheiro sai…"
+      },
+      "options": {
+        "en": [
+          "from your account, at the time of purchase",
+          "from a bank loan",
+          "from next month's salary",
+          "from a friend's card"
+        ],
+        "pt": [
+          "da tua conta, no momento da compra",
+          "de um empréstimo do banco",
+          "do salário do próximo mês",
+          "do cartão de um amigo"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Debit spends what you have; it cannot create debt by itself.",
+        "pt": "O débito gasta o que tens; por si só não cria dívida."
+      }
+    },
+    {
+      "id": "minimum",
+      "type": "true_false",
+      "statement": {
+        "en": "Paying only the minimum on a credit card avoids interest.",
+        "pt": "Pagar só o valor mínimo do cartão de crédito evita pagar juros."
+      },
+      "answer": false,
+      "explanation": {
+        "en": "Interest is charged on the part you do not pay, so the debt keeps growing.",
+        "pt": "Os juros são cobrados sobre a parte que não pagas, por isso a dívida continua a crescer."
+      }
+    },
+    {
+      "id": "terms",
+      "type": "match",
+      "prompt": {
+        "en": "Match each term to its meaning",
+        "pt": "Liga cada termo ao seu significado"
+      },
+      "left": {
+        "en": [
+          "Debit",
+          "Credit",
+          "Minimum payment",
+          "APR (TAEG)"
+        ],
+        "pt": [
+          "Débito",
+          "Crédito",
+          "Pagamento mínimo",
+          "TAEG"
+        ]
+      },
+      "right": {
+        "en": [
+          "Uses your own money",
+          "Uses borrowed money",
+          "Smallest amount you can pay each month",
+          "Total yearly cost of the credit"
+        ],
+        "pt": [
+          "Usa o teu próprio dinheiro",
+          "Usa dinheiro emprestado",
+          "O valor mais pequeno que podes pagar por mês",
+          "Custo total anual do crédito"
+        ]
+      },
+      "explanation": {
+        "en": "Read the APR (TAEG in Portugal) before using credit: it includes interest and fees.",
+        "pt": "Lê a TAEG antes de usar crédito: inclui juros e encargos."
+      }
+    },
+    {
+      "id": "full-payment",
+      "type": "numeric",
+      "prompt": {
+        "en": "You spend €300 on a credit card and pay the full amount by the due date. How much interest do you usually pay on those purchases (in €)?",
+        "pt": "Gastas 300 € no cartão de crédito e pagas o valor total até à data-limite. Quanto pagas normalmente de juros por essas compras (em €)?"
+      },
+      "answer": 0,
+      "decimals": 0,
+      "unit": {
+        "en": "€",
+        "pt": "€"
+      },
+      "explanation": {
+        "en": "Paying the full balance on time normally avoids interest on purchases. Check your card terms.",
+        "pt": "Pagar o total a tempo normalmente evita juros sobre as compras. Confirma as condições do teu cartão."
+      }
+    },
+    {
+      "id": "safest",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "If you use a credit card, the safest habit is to pay ___ every month.",
+        "pt": "Se usares cartão de crédito, o hábito mais seguro é pagar ___ todos os meses."
+      },
+      "options": {
+        "en": [
+          "the full balance",
+          "only the minimum",
+          "nothing"
+        ],
+        "pt": [
+          "o valor total",
+          "só o mínimo",
+          "nada"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "That way the card is a payment tool, not a loan.",
+        "pt": "Assim o cartão é um meio de pagamento, não um empréstimo."
+      }
+    }
+  ]
+}

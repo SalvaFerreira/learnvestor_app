@@ -1,0 +1,12 @@
+{
+  "name": "@learnvestor/e2e",
+  "private": true,
+  "type": "module",
+  "description": "Browser walkthrough of the Flutter web build against the local demo API (tools/db-tests/dev-server.mjs).",
+  "scripts": {
+    "test": "node walkthrough.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.0"
+  }
+}

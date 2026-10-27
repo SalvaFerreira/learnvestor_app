@@ -1,0 +1,152 @@
+{
+  "id": "guaranteed-returns",
+  "version": 1,
+  "unit": "scams",
+  "status": "draft",
+  "sources": [
+    "cmvm"
+  ],
+  "xp": 30,
+  "coins": 45,
+  "title": {
+    "en": "Guaranteed Returns",
+    "pt": "Rentabilidades Garantidas"
+  },
+  "description": {
+    "en": "High returns without risk do not exist",
+    "pt": "Retorno alto sem risco não existe"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Return comes with risk",
+        "pt": "Retorno vem com risco"
+      },
+      "body": {
+        "en": "In investing, higher expected returns come with more risk. If someone promises high, guaranteed gains with no risk, it is probably a scam. Even serious products always show their risks and warn that past returns do not guarantee future ones.",
+        "pt": "Em investimento, um retorno esperado mais alto vem com mais risco. Se alguém promete ganhos altos e garantidos, sem risco, provavelmente é burla. Mesmo os produtos sérios mostram sempre os riscos e avisam que rentabilidades passadas não garantem rentabilidades futuras."
+      }
+    },
+    {
+      "id": "twenty",
+      "type": "true_false",
+      "statement": {
+        "en": "A legitimate investment can guarantee 20% a year with no risk at all.",
+        "pt": "Um investimento legítimo pode garantir 20% ao ano sem qualquer risco."
+      },
+      "answer": false,
+      "explanation": {
+        "en": "Guaranteed products pay much less; high returns always carry risk.",
+        "pt": "Os produtos garantidos rendem muito menos; retornos altos têm sempre risco."
+      }
+    },
+    {
+      "id": "friend",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "A friend says it is \"impossible to lose\" with a new investment. What do you do?",
+        "pt": "Um amigo diz que é \"impossível perder\" com um investimento novo. O que fazes?"
+      },
+      "options": {
+        "en": [
+          "Ask for written information and check the entity",
+          "Invest now so you don't miss out",
+          "Take a loan to invest more",
+          "Share it with the whole family"
+        ],
+        "pt": [
+          "Pedir informação escrita e verificar a entidade",
+          "Investir já para não perder a oportunidade",
+          "Pedir um empréstimo para investir mais",
+          "Partilhar com toda a família"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Checking takes minutes; losing savings can take years to recover.",
+        "pt": "Verificar demora minutos; recuperar poupanças perdidas pode demorar anos."
+      }
+    },
+    {
+      "id": "past",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "___ returns do not guarantee future returns.",
+        "pt": "Rentabilidades ___ não garantem rentabilidades futuras."
+      },
+      "options": {
+        "en": [
+          "Past",
+          "Written",
+          "Promised"
+        ],
+        "pt": [
+          "passadas",
+          "escritas",
+          "prometidas"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "This warning appears on every legitimate investment document.",
+        "pt": "Este aviso aparece em todos os documentos de investimento legítimos."
+      }
+    },
+    {
+      "id": "concepts",
+      "type": "match",
+      "prompt": {
+        "en": "Match each term to its meaning",
+        "pt": "Liga cada termo ao seu significado"
+      },
+      "left": {
+        "en": [
+          "Return",
+          "Risk",
+          "Liquidity"
+        ],
+        "pt": [
+          "Retorno",
+          "Risco",
+          "Liquidez"
+        ]
+      },
+      "right": {
+        "en": [
+          "What you may gain",
+          "The possibility of losing",
+          "How easily you get your money back"
+        ],
+        "pt": [
+          "O que podes ganhar",
+          "A possibilidade de perder",
+          "A facilidade de recuperar o dinheiro"
+        ]
+      },
+      "explanation": {
+        "en": "A good offer explains all three, not just the return.",
+        "pt": "Uma boa oferta explica os três, não só o retorno."
+      }
+    },
+    {
+      "id": "loss",
+      "type": "numeric",
+      "prompt": {
+        "en": "You invest €2,000 and lose 25%. How much do you have left (in €)?",
+        "pt": "Investes 2000 € e perdes 25%. Com quanto ficas (em €)?"
+      },
+      "answer": 1500,
+      "decimals": 0,
+      "unit": {
+        "en": "€",
+        "pt": "€"
+      },
+      "explanation": {
+        "en": "€2,000 − 25% = €1,500. Only invest money you can afford to see fall.",
+        "pt": "2000 € − 25% = 1500 €. Investe só dinheiro que aguentas ver descer."
+      }
+    }
+  ]
+}

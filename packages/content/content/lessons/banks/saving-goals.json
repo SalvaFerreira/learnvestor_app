@@ -1,0 +1,142 @@
+{
+  "id": "saving-goals",
+  "version": 1,
+  "unit": "budgeting",
+  "status": "draft",
+  "sources": [
+    "todoscontam"
+  ],
+  "xp": 25,
+  "coins": 40,
+  "title": {
+    "en": "Saving Goals",
+    "pt": "Objetivos de Poupança"
+  },
+  "description": {
+    "en": "Turn wishes into monthly amounts",
+    "pt": "Transforma desejos em valores mensais"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Amount + date",
+        "pt": "Valor + data"
+      },
+      "body": {
+        "en": "A good saving goal has an amount and a date: \"save €1,200 for a trip in 12 months\". Divide the amount by the number of months and you know how much to save each month.",
+        "pt": "Um bom objetivo de poupança tem um valor e uma data: \"juntar 1200 € para uma viagem daqui a 12 meses\". Dividindo o valor pelo número de meses ficas a saber quanto poupar por mês."
+      }
+    },
+    {
+      "id": "monthly",
+      "type": "numeric",
+      "prompt": {
+        "en": "You want to save €900 in 6 months. How much do you need to save per month (in €)?",
+        "pt": "Queres juntar 900 € em 6 meses. Quanto tens de poupar por mês (em €)?"
+      },
+      "answer": 150,
+      "decimals": 0,
+      "unit": {
+        "en": "€",
+        "pt": "€"
+      },
+      "explanation": {
+        "en": "€900 ÷ 6 = €150.",
+        "pt": "900 € ÷ 6 = 150 €."
+      }
+    },
+    {
+      "id": "well-defined",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "Which goal is best defined?",
+        "pt": "Qual destes objetivos está melhor definido?"
+      },
+      "options": {
+        "en": [
+          "Save €600 for a laptop by June",
+          "Save more",
+          "Be rich one day",
+          "Spend less sometimes"
+        ],
+        "pt": [
+          "Juntar 600 € para um portátil até junho",
+          "Poupar mais",
+          "Ser rico um dia",
+          "Gastar menos às vezes"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "It has an amount, a purpose and a deadline.",
+        "pt": "Tem um valor, um propósito e um prazo."
+      }
+    },
+    {
+      "id": "short-term",
+      "type": "true_false",
+      "statement": {
+        "en": "Short-term goals (under a year) should be kept somewhere safe and easy to access.",
+        "pt": "Os objetivos de curto prazo (menos de 1 ano) devem estar num sítio seguro e de acesso fácil."
+      },
+      "answer": true,
+      "explanation": {
+        "en": "If you need the money soon, you cannot risk it being worth less at that moment.",
+        "pt": "Se precisas do dinheiro em breve, não podes arriscar que valha menos nessa altura."
+      }
+    },
+    {
+      "id": "horizon",
+      "type": "order",
+      "prompt": {
+        "en": "Order these goals from shortest to longest term:",
+        "pt": "Ordena estes objetivos do prazo mais curto para o mais longo:"
+      },
+      "items": {
+        "en": [
+          "A birthday present in 2 months",
+          "A trip next summer",
+          "A deposit for a house",
+          "Retirement"
+        ],
+        "pt": [
+          "Prenda de anos daqui a 2 meses",
+          "Viagem no próximo verão",
+          "Entrada para uma casa",
+          "Reforma"
+        ]
+      },
+      "explanation": {
+        "en": "The time horizon changes where the money should be kept.",
+        "pt": "O horizonte temporal muda o sítio onde o dinheiro deve estar."
+      }
+    },
+    {
+      "id": "milestones",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "Breaking a big goal into ___ milestones helps you stay motivated.",
+        "pt": "Dividir um objetivo grande em metas ___ ajuda a manter a motivação."
+      },
+      "options": {
+        "en": [
+          "monthly",
+          "secret",
+          "impossible"
+        ],
+        "pt": [
+          "mensais",
+          "secretas",
+          "impossíveis"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Small wins along the way keep you going.",
+        "pt": "Pequenas vitórias pelo caminho ajudam a continuar."
+      }
+    }
+  ]
+}

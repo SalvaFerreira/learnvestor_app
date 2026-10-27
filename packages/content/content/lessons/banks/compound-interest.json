@@ -1,0 +1,151 @@
+{
+  "id": "compound-interest",
+  "version": 1,
+  "unit": "money-basics",
+  "status": "draft",
+  "sources": [
+    "todoscontam"
+  ],
+  "xp": 25,
+  "coins": 35,
+  "title": {
+    "en": "The Magic of Compound Interest",
+    "pt": "A Magia dos Juros Compostos"
+  },
+  "description": {
+    "en": "Why your interest can earn interest",
+    "pt": "Porque é que os teus juros podem render juros"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Simple vs. compound",
+        "pt": "Simples vs. compostos"
+      },
+      "body": {
+        "en": "Simple interest is calculated only on the amount you started with. Compound interest is calculated on that amount plus the interest already earned, so your interest starts earning interest too. Over many years, this snowball effect becomes huge.",
+        "pt": "Os juros simples são calculados apenas sobre o valor inicial. Os juros compostos são calculados sobre esse valor mais os juros já ganhos, por isso os teus juros também começam a render. Ao longo de muitos anos, este efeito bola de neve torna-se enorme."
+      }
+    },
+    {
+      "id": "simple-calc",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "You deposit €100 at 10% simple interest per year. How much interest do you earn in 2 years?",
+        "pt": "Depositas 100 € a 10% de juro simples por ano. Quanto ganhas de juros em 2 anos?"
+      },
+      "options": {
+        "en": [
+          "€20",
+          "€21",
+          "€10",
+          "€200"
+        ],
+        "pt": [
+          "20 €",
+          "21 €",
+          "10 €",
+          "200 €"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "€10 each year, always calculated on the original €100.",
+        "pt": "10 € por ano, sempre calculados sobre os 100 € iniciais."
+      }
+    },
+    {
+      "id": "compound-calc",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "You invest €100 at 10% compound interest per year. How much do you have after 2 years?",
+        "pt": "Investes 100 € a 10% de juro composto por ano. Quanto tens ao fim de 2 anos?"
+      },
+      "options": {
+        "en": [
+          "€121",
+          "€120",
+          "€110",
+          "€200"
+        ],
+        "pt": [
+          "121 €",
+          "120 €",
+          "110 €",
+          "200 €"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Year 1: €100 → €110. Year 2: €110 × 1.10 = €121. The extra €1 is interest on interest.",
+        "pt": "Ano 1: 100 € → 110 €. Ano 2: 110 € × 1,10 = 121 €. O euro extra são juros sobre juros."
+      }
+    },
+    {
+      "id": "time-matters",
+      "type": "true_false",
+      "statement": {
+        "en": "With compound interest, time is one of the biggest factors in how much your money grows.",
+        "pt": "Com juros compostos, o tempo é um dos fatores que mais influencia o crescimento do teu dinheiro."
+      },
+      "answer": true,
+      "explanation": {
+        "en": "The longer the snowball rolls, the bigger it gets. Starting early is a superpower.",
+        "pt": "Quanto mais tempo a bola de neve rola, maior fica. Começar cedo é um superpoder."
+      }
+    },
+    {
+      "id": "rule-of-72",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "The Rule of 72 says that at an 8% yearly return, money roughly doubles in about ___ years.",
+        "pt": "A Regra dos 72 diz que, com uma rentabilidade de 8% ao ano, o dinheiro duplica em cerca de ___ anos."
+      },
+      "options": {
+        "en": [
+          "9",
+          "72",
+          "4"
+        ],
+        "pt": [
+          "9",
+          "72",
+          "4"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "72 ÷ 8 = 9 years.",
+        "pt": "72 ÷ 8 = 9 anos."
+      }
+    },
+    {
+      "id": "growth-order",
+      "type": "order",
+      "prompt": {
+        "en": "Starting with €1,000, order from the least to the most money after 20 years:",
+        "pt": "Começando com 1000 €, ordena do menor para o maior valor ao fim de 20 anos:"
+      },
+      "items": {
+        "en": [
+          "Kept in a drawer",
+          "2% simple interest",
+          "2% compound interest",
+          "6% compound interest"
+        ],
+        "pt": [
+          "Guardado numa gaveta",
+          "2% de juro simples",
+          "2% de juro composto",
+          "6% de juro composto"
+        ]
+      },
+      "explanation": {
+        "en": "€1,000 → €1,400 → about €1,486 → about €3,207.",
+        "pt": "1000 € → 1400 € → cerca de 1486 € → cerca de 3207 €."
+      }
+    }
+  ]
+}

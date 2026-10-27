@@ -1,0 +1,168 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://learnvestor.app/schemas/lesson.json",
+  "title": "LearnVestor lesson",
+  "description": "One lesson, all locales. Order, regions and premium access come from content/curriculum.yaml. Option, item and match order is shuffled by the app, so authors list the correct option first and items/pairs in the correct order.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "version", "unit", "status", "xp", "coins", "title", "description", "exercises"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "version": { "type": "integer", "minimum": 1, "description": "Bump whenever anything in this file changes after it was published." },
+    "unit": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "status": {
+      "enum": ["draft", "reviewed"],
+      "description": "Only reviewed lessons are published to production. Drafts appear in local/dev seeds."
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["by", "date"],
+      "properties": {
+        "by": { "type": "string", "minLength": 2 },
+        "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "notes": { "type": "string" }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 3 },
+      "description": "Official references the reviewer checked (keys from curriculum.yaml sources or URLs)."
+    },
+    "valid_until": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "After this date the build fails until the lesson is re-reviewed (tax rules, rates...)."
+    },
+    "xp": { "type": "integer", "minimum": 1, "maximum": 200 },
+    "coins": { "type": "number", "minimum": 0 },
+    "title": { "$ref": "#/definitions/text" },
+    "description": { "$ref": "#/definitions/text" },
+    "exercises": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 15,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/definitions/info" },
+          { "$ref": "#/definitions/multipleChoice" },
+          { "$ref": "#/definitions/trueFalse" },
+          { "$ref": "#/definitions/fillBlank" },
+          { "$ref": "#/definitions/order" },
+          { "$ref": "#/definitions/match" },
+          { "$ref": "#/definitions/numeric" }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "text": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["en", "pt"],
+      "properties": {
+        "en": { "type": "string", "minLength": 1, "maxLength": 600 },
+        "pt": { "type": "string", "minLength": 1, "maxLength": 600 }
+      }
+    },
+    "textList": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["en", "pt"],
+      "properties": {
+        "en": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 160 } },
+        "pt": { "type": "array", "items": { "type": "string", "minLength": 1, "maxLength": 160 } }
+      }
+    },
+    "exerciseId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "info": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "title", "body"],
+      "properties": {
+        "id": { "$ref": "#/definitions/exerciseId" },
+        "type": { "const": "info" },
+        "title": { "$ref": "#/definitions/text" },
+        "body": { "$ref": "#/definitions/text" }
+      }
+    },
+    "multipleChoice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "prompt", "options", "answer", "explanation"],
+      "properties": {
+        "id": { "$ref": "#/definitions/exerciseId" },
+        "type": { "const": "multiple_choice" },
+        "prompt": { "$ref": "#/definitions/text" },
+        "options": { "$ref": "#/definitions/textList" },
+        "answer": { "type": "integer", "minimum": 0 },
+        "explanation": { "$ref": "#/definitions/text" }
+      }
+    },
+    "trueFalse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "statement", "answer", "explanation"],
+      "properties": {
+        "id": { "$ref": "#/definitions/exerciseId" },
+        "type": { "const": "true_false" },
+        "statement": { "$ref": "#/definitions/text" },
+        "answer": { "type": "boolean" },
+        "explanation": { "$ref": "#/definitions/text" }
+      }
+    },
+    "fillBlank": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "sentence", "options", "answer", "explanation"],
+      "properties": {
+        "id": { "$ref": "#/definitions/exerciseId" },
+        "type": { "const": "fill_blank" },
+        "sentence": { "$ref": "#/definitions/text" },
+        "options": { "$ref": "#/definitions/textList" },
+        "answer": { "type": "integer", "minimum": 0 },
+        "explanation": { "$ref": "#/definitions/text" }
+      }
+    },
+    "order": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "prompt", "items", "explanation"],
+      "properties": {
+        "id": { "$ref": "#/definitions/exerciseId" },
+        "type": { "const": "order" },
+        "prompt": { "$ref": "#/definitions/text" },
+        "items": { "$ref": "#/definitions/textList", "description": "In the CORRECT order." },
+        "explanation": { "$ref": "#/definitions/text" }
+      }
+    },
+    "match": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "prompt", "left", "right", "explanation"],
+      "properties": {
+        "id": { "$ref": "#/definitions/exerciseId" },
+        "type": { "const": "match" },
+        "prompt": { "$ref": "#/definitions/text" },
+        "left": { "$ref": "#/definitions/textList", "description": "Terms. left[i] matches right[i]." },
+        "right": { "$ref": "#/definitions/textList", "description": "Definitions, in the same order as left." },
+        "explanation": { "$ref": "#/definitions/text" }
+      }
+    },
+    "numeric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "prompt", "answer", "decimals", "explanation"],
+      "properties": {
+        "id": { "$ref": "#/definitions/exerciseId" },
+        "type": { "const": "numeric" },
+        "prompt": { "$ref": "#/definitions/text" },
+        "answer": { "type": "number", "description": "Exact answer, already rounded to `decimals`." },
+        "decimals": { "type": "integer", "minimum": 0, "maximum": 2 },
+        "unit": { "$ref": "#/definitions/text", "description": "Shown after the input, e.g. € or anos/years." },
+        "explanation": { "$ref": "#/definitions/text" }
+      }
+    }
+  }
+}

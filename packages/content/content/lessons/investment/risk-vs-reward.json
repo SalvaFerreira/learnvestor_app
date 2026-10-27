@@ -1,0 +1,151 @@
+{
+  "id": "risk-vs-reward",
+  "version": 1,
+  "unit": "investment-fundamentals",
+  "status": "draft",
+  "sources": [
+    "cmvm"
+  ],
+  "xp": 30,
+  "coins": 45,
+  "title": {
+    "en": "Risk vs. Reward",
+    "pt": "Risco vs. Retorno"
+  },
+  "description": {
+    "en": "Understanding investment trade-offs",
+    "pt": "Perceber os compromissos de cada investimento"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "There is no free lunch",
+        "pt": "Não há almoços grátis"
+      },
+      "body": {
+        "en": "Every investment has a trade-off. The chance of higher returns usually comes with higher risk: the possibility that its value falls, sometimes a lot, especially in the short term.",
+        "pt": "Todos os investimentos implicam um compromisso. A possibilidade de retornos mais altos vem normalmente com mais risco: a hipótese de o valor cair, por vezes muito, sobretudo no curto prazo."
+      }
+    },
+    {
+      "id": "lowest-risk",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "Which of these is usually the lowest-risk option?",
+        "pt": "Qual destas é normalmente a opção de menor risco?"
+      },
+      "options": {
+        "en": [
+          "A guaranteed savings deposit",
+          "Shares of a single new startup",
+          "Cryptocurrency",
+          "Options trading"
+        ],
+        "pt": [
+          "Um depósito de poupança garantido",
+          "Ações de uma única startup",
+          "Criptomoedas",
+          "Negociação de opções"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Guaranteed deposits have low risk, but also low returns.",
+        "pt": "Os depósitos garantidos têm baixo risco, mas também baixo retorno."
+      }
+    },
+    {
+      "id": "no-guarantee",
+      "type": "true_false",
+      "statement": {
+        "en": "A higher potential return means a guaranteed higher return.",
+        "pt": "Um retorno potencial mais alto significa um retorno garantido mais alto."
+      },
+      "answer": false,
+      "explanation": {
+        "en": "Potential is not a promise. Riskier investments can also lose money.",
+        "pt": "Potencial não é uma promessa. Os investimentos mais arriscados também podem perder dinheiro."
+      }
+    },
+    {
+      "id": "volatility",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "Volatility measures how much an investment's price ___ over time.",
+        "pt": "A volatilidade mede o quanto o preço de um investimento ___ ao longo do tempo."
+      },
+      "options": {
+        "en": [
+          "moves up and down",
+          "is guaranteed",
+          "is taxed"
+        ],
+        "pt": [
+          "sobe e desce",
+          "está garantido",
+          "é tributado"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "High volatility means bigger and more frequent price swings.",
+        "pt": "Volatilidade alta significa oscilações de preço maiores e mais frequentes."
+      }
+    },
+    {
+      "id": "time-horizon",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "Why can a young investor often take more risk than someone about to retire?",
+        "pt": "Porque é que um investidor jovem pode muitas vezes correr mais risco do que alguém prestes a reformar-se?"
+      },
+      "options": {
+        "en": [
+          "They have more time to recover from market drops",
+          "They pay no taxes",
+          "Stocks are cheaper for young people",
+          "Risk does not exist for young people"
+        ],
+        "pt": [
+          "Tem mais tempo para recuperar de quedas do mercado",
+          "Não paga impostos",
+          "As ações são mais baratas para jovens",
+          "O risco não existe para os jovens"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Your time horizon, how long until you need the money, shapes how much risk you can take.",
+        "pt": "O teu horizonte temporal, ou seja, quanto tempo falta até precisares do dinheiro, define quanto risco podes correr."
+      }
+    },
+    {
+      "id": "risk-ladder",
+      "type": "order",
+      "prompt": {
+        "en": "Order from typically lowest to highest risk:",
+        "pt": "Ordena do risco normalmente mais baixo para o mais alto:"
+      },
+      "items": {
+        "en": [
+          "Savings deposit",
+          "Government bonds",
+          "Diversified stock index fund",
+          "Shares of a single small company"
+        ],
+        "pt": [
+          "Depósito de poupança",
+          "Obrigações do Estado",
+          "Fundo de índice de ações diversificado",
+          "Ações de uma única pequena empresa"
+        ]
+      },
+      "explanation": {
+        "en": "The less diversified and the more dependent on one outcome, the higher the risk.",
+        "pt": "Quanto menos diversificado e mais dependente de um único resultado, maior o risco."
+      }
+    }
+  ]
+}

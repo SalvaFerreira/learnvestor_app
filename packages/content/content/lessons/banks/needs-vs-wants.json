@@ -1,0 +1,143 @@
+{
+  "id": "needs-vs-wants",
+  "version": 1,
+  "unit": "budgeting",
+  "status": "draft",
+  "sources": [
+    "todoscontam"
+  ],
+  "xp": 25,
+  "coins": 40,
+  "title": {
+    "en": "Needs vs Wants",
+    "pt": "Necessidades vs Desejos"
+  },
+  "description": {
+    "en": "Spend on purpose, not on impulse",
+    "pt": "Gasta com intenção, não por impulso"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Essential or nice to have?",
+        "pt": "Essencial ou dispensável?"
+      },
+      "body": {
+        "en": "A need is essential to live and work (housing, basic food, transport). A want makes life better but you could do without it (a new phone, streaming). Many expenses mix both: you need to eat, but eating out is a want.",
+        "pt": "Uma necessidade é essencial para viver e trabalhar (casa, comida básica, transporte). Um desejo melhora a vida, mas podes passar sem ele (telemóvel novo, streaming). Muitas despesas misturam as duas coisas: precisas de comer, mas jantar fora é um desejo."
+      }
+    },
+    {
+      "id": "which-need",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "Which of these is a need?",
+        "pt": "Qual destas é uma necessidade?"
+      },
+      "options": {
+        "en": [
+          "A monthly transport pass to get to work",
+          "A third streaming subscription",
+          "A top-of-the-range new phone",
+          "Dinner out at the weekend"
+        ],
+        "pt": [
+          "Passe mensal de transportes para ir trabalhar",
+          "Uma terceira subscrição de streaming",
+          "Um telemóvel novo topo de gama",
+          "Jantar fora ao fim de semana"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Getting to work is essential; the others are choices.",
+        "pt": "Ir trabalhar é essencial; as outras são escolhas."
+      }
+    },
+    {
+      "id": "clothes",
+      "type": "true_false",
+      "statement": {
+        "en": "Buying clothes can be a need or a want, depending on what you buy.",
+        "pt": "Comprar roupa pode ser uma necessidade ou um desejo, dependendo do que compras."
+      },
+      "answer": true,
+      "explanation": {
+        "en": "A winter coat when you have none is a need; the fifth pair of trainers is a want.",
+        "pt": "Um casaco de inverno quando não tens nenhum é uma necessidade; o quinto par de sapatilhas é um desejo."
+      }
+    },
+    {
+      "id": "impulse",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "Impulse purchases happen most when you…",
+        "pt": "As compras por impulso acontecem sobretudo quando…"
+      },
+      "options": {
+        "en": [
+          "shop in a hurry or emotional",
+          "make a list before going out",
+          "compare prices",
+          "set a budget"
+        ],
+        "pt": [
+          "compras com pressa ou emocionado",
+          "fazes uma lista antes de sair",
+          "comparas preços",
+          "defines um orçamento"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Plans and lists protect you from impulses.",
+        "pt": "Planos e listas protegem-te dos impulsos."
+      }
+    },
+    {
+      "id": "wait",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "Before an impulse buy, a useful rule is to wait ___ before deciding.",
+        "pt": "Antes de uma compra por impulso, uma regra útil é esperar ___ antes de decidir."
+      },
+      "options": {
+        "en": [
+          "24 hours",
+          "one year",
+          "zero seconds"
+        ],
+        "pt": [
+          "24 horas",
+          "um ano",
+          "zero segundos"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "If you still want it a day later, it is probably a considered choice.",
+        "pt": "Se ainda quiseres no dia seguinte, provavelmente é uma escolha pensada."
+      }
+    },
+    {
+      "id": "subscription",
+      "type": "numeric",
+      "prompt": {
+        "en": "You cancel a €12-a-month subscription. How much do you save in a year (in €)?",
+        "pt": "Cancelas uma subscrição de 12 € por mês. Quanto poupas num ano (em €)?"
+      },
+      "answer": 144,
+      "decimals": 0,
+      "unit": {
+        "en": "€",
+        "pt": "€"
+      },
+      "explanation": {
+        "en": "€12 × 12 = €144.",
+        "pt": "12 € × 12 = 144 €."
+      }
+    }
+  ]
+}

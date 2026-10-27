@@ -1,0 +1,64 @@
+{
+  "title": null,
+  "hearts": {
+    "gems": 20,
+    "hearts": 5,
+    "unlimited": false,
+    "max_hearts": 6,
+    "next_heart_at": "2026-10-27T17:21:57.338+00:00"
+  },
+  "exercises": [
+    {
+      "id": "what-is-a-bank/deposit-guarantee",
+      "type": "true_false",
+      "answer": true,
+      "statement": "Na UE, os depósitos até 100 000 € por pessoa e por banco estão protegidos se o banco falir.",
+      "explanation": "Todos os países da UE têm um fundo de garantia de depósitos que cobre até 100 000 € por depositante e por banco."
+    },
+    {
+      "id": "what-is-a-bank/how-banks-earn",
+      "type": "multiple_choice",
+      "answer": 0,
+      "prompt": "Qual é a principal forma de um banco ganhar dinheiro?",
+      "options": [
+        "Cobrar mais juros nos empréstimos do que paga nos depósitos",
+        "Imprimir dinheiro novo",
+        "Vender dados pessoais dos clientes",
+        "Investir apenas em ouro"
+      ],
+      "explanation": "Esta diferença chama-se margem financeira e é o negócio principal de um banco."
+    },
+    {
+      "id": "what-is-a-bank/current-account",
+      "type": "fill_blank",
+      "answer": 0,
+      "options": [
+        "à ordem",
+        "crédito habitação",
+        "reforma"
+      ],
+      "sentence": "Uma conta ___ serve para o dia a dia, enquanto uma conta poupança serve para guardar dinheiro.",
+      "explanation": "As contas à ordem dão acesso imediato ao dinheiro para pagamentos e cartões."
+    },
+    {
+      "id": "what-is-a-bank/liquidity-order",
+      "type": "order",
+      "items": [
+        "Dinheiro na carteira",
+        "Dinheiro na conta à ordem",
+        "Um depósito a prazo de 12 meses",
+        "Uma casa"
+      ],
+      "answer": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "prompt": "Ordena do mais fácil de usar de imediato ao mais difícil (mais líquido para menos líquido):",
+      "explanation": "Liquidez é a rapidez com que algo pode ser convertido em dinheiro sem perder valor."
+    }
+  ],
+  "lesson_id": null,
+  "attempt_id": "81db6228-8033-4b11-a606-50f3de2ff7ae"
+}

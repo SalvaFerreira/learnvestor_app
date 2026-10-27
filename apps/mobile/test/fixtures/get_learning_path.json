@@ -1,0 +1,341 @@
+[
+  {
+    "id": "banks",
+    "icon": "account_balance",
+    "color": "#3B82F6",
+    "title": "Dinheiro no Dia a Dia",
+    "units": [
+      {
+        "id": "money-basics",
+        "title": "Bases do Dinheiro",
+        "lessons": [
+          {
+            "id": "what-is-a-bank",
+            "stars": 2,
+            "title": "Como Funcionam os Bancos",
+            "status": "completed",
+            "xp_reward": 20,
+            "is_premium": false,
+            "coin_reward": 30,
+            "description": "Depósitos, empréstimos e porque é que o teu dinheiro está seguro"
+          },
+          {
+            "id": "emergency-fund",
+            "stars": null,
+            "title": "O Teu Fundo de Emergência",
+            "status": "unlocked",
+            "xp_reward": 20,
+            "is_premium": false,
+            "coin_reward": 30,
+            "description": "A rede de segurança que todo o investidor precisa primeiro"
+          },
+          {
+            "id": "compound-interest",
+            "stars": null,
+            "title": "A Magia dos Juros Compostos",
+            "status": "locked",
+            "xp_reward": 25,
+            "is_premium": false,
+            "coin_reward": 35,
+            "description": "Porque é que os teus juros podem render juros"
+          },
+          {
+            "id": "inflation",
+            "stars": null,
+            "title": "Inflação",
+            "status": "locked",
+            "xp_reward": 20,
+            "is_premium": false,
+            "coin_reward": 30,
+            "description": "Porque é que o dinheiro parado perde valor"
+          },
+          {
+            "id": "real-interest-rate",
+            "stars": null,
+            "title": "Rentabilidade Real vs Nominal",
+            "status": "locked",
+            "xp_reward": 20,
+            "is_premium": false,
+            "coin_reward": 30,
+            "description": "O que ganhas realmente depois da inflação"
+          }
+        ],
+        "description": "Constrói uma base segura antes de investir"
+      },
+      {
+        "id": "budgeting",
+        "title": "Orçamento",
+        "lessons": [
+          {
+            "id": "budget-50-30-20",
+            "stars": null,
+            "title": "A Regra 50/30/20",
+            "status": "locked",
+            "xp_reward": 25,
+            "is_premium": false,
+            "coin_reward": 40,
+            "description": "Um ponto de partida simples para o teu orçamento"
+          },
+          {
+            "id": "tracking-expenses",
+            "stars": null,
+            "title": "Registar Despesas",
+            "status": "locked",
+            "xp_reward": 25,
+            "is_premium": false,
+            "coin_reward": 40,
+            "description": "Descobre para onde vai realmente o dinheiro"
+          },
+          {
+            "id": "needs-vs-wants",
+            "stars": null,
+            "title": "Necessidades vs Desejos",
+            "status": "locked",
+            "xp_reward": 25,
+            "is_premium": false,
+            "coin_reward": 40,
+            "description": "Gasta com intenção, não por impulso"
+          },
+          {
+            "id": "saving-goals",
+            "stars": null,
+            "title": "Objetivos de Poupança",
+            "status": "locked",
+            "xp_reward": 25,
+            "is_premium": false,
+            "coin_reward": 40,
+            "description": "Transforma desejos em valores mensais"
+          },
+          {
+            "id": "pay-yourself-first",
+            "stars": null,
+            "title": "Paga-te Primeiro a Ti",
+            "status": "locked",
+            "xp_reward": 25,
+            "is_premium": false,
+            "coin_reward": 40,
+            "description": "Poupa no dia do salário, não com o que sobra"
+          }
+        ],
+        "description": "Sabe para onde vai o teu dinheiro"
+      },
+      {
+        "id": "payments-fraud",
+        "title": "Pagamentos e Fraudes",
+        "lessons": [
+          {
+            "id": "debit-vs-credit-cards",
+            "stars": null,
+            "title": "Cartão de Débito vs Crédito",
+            "status": "locked",
+            "xp_reward": 30,
+            "is_premium": false,
+            "coin_reward": 45,
+            "description": "O teu dinheiro ou dinheiro emprestado?"
+          },
+          {
+            "id": "phishing",
+            "stars": null,
+            "title": "Phishing e Mensagens Falsas",
+            "status": "locked",
+            "xp_reward": 30,
+            "is_premium": false,
+            "coin_reward": 45,
+            "description": "Identifica burlas antes que te custem caro"
+          }
+        ],
+        "description": "Paga em segurança e identifica burlas"
+      }
+    ],
+    "is_premium": false,
+    "description": "Bancos, orçamento, pagamentos e crédito sem surpresas",
+    "stars_total": 36,
+    "stars_earned": 2
+  },
+  {
+    "id": "taxes",
+    "icon": "receipt_long",
+    "color": "#22C55E",
+    "title": "Impostos e Estado",
+    "units": [
+      {
+        "id": "payslip",
+        "title": "O Recibo de Vencimento",
+        "lessons": [
+          {
+            "id": "gross-vs-net",
+            "stars": null,
+            "title": "Salário Bruto vs Líquido",
+            "status": "unlocked",
+            "xp_reward": 25,
+            "is_premium": false,
+            "coin_reward": 40,
+            "description": "Do contrato à tua conta"
+          },
+          {
+            "id": "social-security",
+            "stars": null,
+            "title": "Descontos para a Segurança Social",
+            "status": "locked",
+            "xp_reward": 25,
+            "is_premium": false,
+            "coin_reward": 40,
+            "description": "O que pagas e o que te protege"
+          }
+        ],
+        "description": "Do salário bruto ao líquido"
+      }
+    ],
+    "is_premium": false,
+    "description": "Recibo de vencimento, IRS, poupança do Estado e reforma em Portugal",
+    "stars_total": 6,
+    "stars_earned": 0
+  },
+  {
+    "id": "investment",
+    "icon": "trending_up",
+    "color": "#FACC15",
+    "title": "Investimento",
+    "units": [
+      {
+        "id": "investment-fundamentals",
+        "title": "Fundamentos de Investimento",
+        "lessons": [
+          {
+            "id": "risk-vs-reward",
+            "stars": null,
+            "title": "Risco vs. Retorno",
+            "status": "unlocked",
+            "xp_reward": 30,
+            "is_premium": false,
+            "coin_reward": 45,
+            "description": "Perceber os compromissos de cada investimento"
+          },
+          {
+            "id": "types-of-investments",
+            "stars": null,
+            "title": "Tipos de Investimentos",
+            "status": "locked",
+            "xp_reward": 35,
+            "is_premium": false,
+            "coin_reward": 50,
+            "description": "Ações, obrigações, ETFs e mais"
+          },
+          {
+            "id": "diversification",
+            "stars": null,
+            "title": "Diversificação",
+            "status": "locked",
+            "xp_reward": 35,
+            "is_premium": false,
+            "coin_reward": 50,
+            "description": "Não ponhas os ovos todos no mesmo cesto"
+          },
+          {
+            "id": "what-is-a-stock",
+            "stars": null,
+            "title": "Como Funciona a Bolsa",
+            "status": "locked",
+            "xp_reward": 40,
+            "is_premium": false,
+            "coin_reward": 55,
+            "description": "Preços, tickers e bolsas de valores"
+          }
+        ],
+        "description": "Risco, tipos de ativos e como funciona a bolsa"
+      }
+    ],
+    "is_premium": false,
+    "description": "Começa a tua jornada de investimento com bases sólidas",
+    "stars_total": 12,
+    "stars_earned": 0
+  },
+  {
+    "id": "mindset",
+    "icon": "psychology",
+    "color": "#F97316",
+    "title": "Mente do Investidor",
+    "units": [
+      {
+        "id": "scams",
+        "title": "Burlas",
+        "lessons": [
+          {
+            "id": "ponzi-schemes",
+            "stars": null,
+            "title": "Esquemas Ponzi",
+            "status": "unlocked",
+            "xp_reward": 30,
+            "is_premium": false,
+            "coin_reward": 45,
+            "description": "Quando os \"lucros\" são o dinheiro dos outros"
+          },
+          {
+            "id": "guaranteed-returns",
+            "stars": null,
+            "title": "Rentabilidades Garantidas",
+            "status": "locked",
+            "xp_reward": 30,
+            "is_premium": false,
+            "coin_reward": 45,
+            "description": "Retorno alto sem risco não existe"
+          }
+        ],
+        "description": "Se parece bom demais para ser verdade..."
+      }
+    ],
+    "is_premium": false,
+    "description": "Enviesamentos, burlas e riscos das cripto",
+    "stars_total": 6,
+    "stars_earned": 0
+  },
+  {
+    "id": "advanced",
+    "icon": "insights",
+    "color": "#A855F7",
+    "title": "Avançado",
+    "units": [
+      {
+        "id": "smarter-investing",
+        "title": "Investir Melhor",
+        "lessons": [
+          {
+            "id": "etfs-and-index-funds",
+            "stars": null,
+            "title": "ETFs e Fundos de Índice",
+            "status": "premium",
+            "xp_reward": 40,
+            "is_premium": true,
+            "coin_reward": 60,
+            "description": "Investe no mercado inteiro com um clique"
+          },
+          {
+            "id": "fees-matter",
+            "stars": null,
+            "title": "Porque é que os Custos Importam",
+            "status": "premium",
+            "xp_reward": 40,
+            "is_premium": true,
+            "coin_reward": 60,
+            "description": "Percentagens pequenas, diferenças grandes"
+          },
+          {
+            "id": "dollar-cost-averaging",
+            "stars": null,
+            "title": "Investir com Regularidade (DCA)",
+            "status": "premium",
+            "xp_reward": 45,
+            "is_premium": true,
+            "coin_reward": 65,
+            "description": "Deixa de tentar adivinhar o mercado"
+          }
+        ],
+        "description": "Fundos de índice, custos e investir com regularidade"
+      }
+    ],
+    "is_premium": true,
+    "description": "Estratégias de longo prazo usadas por investidores informados",
+    "stars_total": 9,
+    "stars_earned": 0
+  }
+]

@@ -1,0 +1,5 @@
+# Generated SQL is compared byte-for-byte in CI (content:check), keep LF everywhere.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary

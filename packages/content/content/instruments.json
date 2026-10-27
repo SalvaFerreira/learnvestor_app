@@ -1,0 +1,44 @@
+[
+  { "symbol": "AAPL", "name": "Apple Inc.", "exchange": "NASDAQ", "currency": "USD", "sector": "technology", "popularity": 100 },
+  { "symbol": "MSFT", "name": "Microsoft Corp.", "exchange": "NASDAQ", "currency": "USD", "sector": "technology", "popularity": 98 },
+  { "symbol": "GOOGL", "name": "Alphabet Inc.", "exchange": "NASDAQ", "currency": "USD", "sector": "technology", "popularity": 96 },
+  { "symbol": "AMZN", "name": "Amazon.com Inc.", "exchange": "NASDAQ", "currency": "USD", "sector": "technology", "popularity": 95 },
+  { "symbol": "NVDA", "name": "NVIDIA Corp.", "exchange": "NASDAQ", "currency": "USD", "sector": "technology", "popularity": 97 },
+  { "symbol": "META", "name": "Meta Platforms Inc.", "exchange": "NASDAQ", "currency": "USD", "sector": "technology", "popularity": 90 },
+  { "symbol": "ASML.AS", "name": "ASML Holding", "exchange": "Euronext Amsterdam", "currency": "EUR", "sector": "technology", "popularity": 80 },
+  { "symbol": "SAP.DE", "name": "SAP SE", "exchange": "XETRA", "currency": "EUR", "sector": "technology", "popularity": 75 },
+
+  { "symbol": "JPM", "name": "JPMorgan Chase & Co.", "exchange": "NYSE", "currency": "USD", "sector": "finance", "popularity": 85 },
+  { "symbol": "V", "name": "Visa Inc.", "exchange": "NYSE", "currency": "USD", "sector": "finance", "popularity": 84 },
+  { "symbol": "MA", "name": "Mastercard Inc.", "exchange": "NYSE", "currency": "USD", "sector": "finance", "popularity": 80 },
+  { "symbol": "BAC", "name": "Bank of America Corp.", "exchange": "NYSE", "currency": "USD", "sector": "finance", "popularity": 72 },
+  { "symbol": "GS", "name": "Goldman Sachs Group", "exchange": "NYSE", "currency": "USD", "sector": "finance", "popularity": 70 },
+  { "symbol": "BCP.LS", "name": "Banco Comercial Português", "exchange": "Euronext Lisbon", "currency": "EUR", "sector": "finance", "popularity": 60 },
+
+  { "symbol": "JNJ", "name": "Johnson & Johnson", "exchange": "NYSE", "currency": "USD", "sector": "healthcare", "popularity": 78 },
+  { "symbol": "LLY", "name": "Eli Lilly and Co.", "exchange": "NYSE", "currency": "USD", "sector": "healthcare", "popularity": 82 },
+  { "symbol": "UNH", "name": "UnitedHealth Group", "exchange": "NYSE", "currency": "USD", "sector": "healthcare", "popularity": 74 },
+  { "symbol": "PFE", "name": "Pfizer Inc.", "exchange": "NYSE", "currency": "USD", "sector": "healthcare", "popularity": 70 },
+  { "symbol": "NVO", "name": "Novo Nordisk (ADR)", "exchange": "NYSE", "currency": "USD", "sector": "healthcare", "popularity": 76 },
+
+  { "symbol": "KO", "name": "The Coca-Cola Co.", "exchange": "NYSE", "currency": "USD", "sector": "consumer", "popularity": 83 },
+  { "symbol": "MCD", "name": "McDonald's Corp.", "exchange": "NYSE", "currency": "USD", "sector": "consumer", "popularity": 80 },
+  { "symbol": "NKE", "name": "Nike Inc.", "exchange": "NYSE", "currency": "USD", "sector": "consumer", "popularity": 79 },
+  { "symbol": "TSLA", "name": "Tesla Inc.", "exchange": "NASDAQ", "currency": "USD", "sector": "consumer", "popularity": 94 },
+  { "symbol": "SBUX", "name": "Starbucks Corp.", "exchange": "NASDAQ", "currency": "USD", "sector": "consumer", "popularity": 68 },
+  { "symbol": "JMT.LS", "name": "Jerónimo Martins", "exchange": "Euronext Lisbon", "currency": "EUR", "sector": "consumer", "popularity": 58 },
+
+  { "symbol": "XOM", "name": "Exxon Mobil Corp.", "exchange": "NYSE", "currency": "USD", "sector": "energy", "popularity": 72 },
+  { "symbol": "CVX", "name": "Chevron Corp.", "exchange": "NYSE", "currency": "USD", "sector": "energy", "popularity": 68 },
+  { "symbol": "GALP.LS", "name": "Galp Energia", "exchange": "Euronext Lisbon", "currency": "EUR", "sector": "energy", "popularity": 60 },
+  { "symbol": "EDP.LS", "name": "EDP - Energias de Portugal", "exchange": "Euronext Lisbon", "currency": "EUR", "sector": "energy", "popularity": 62 },
+
+  { "symbol": "CAT", "name": "Caterpillar Inc.", "exchange": "NYSE", "currency": "USD", "sector": "industrials", "popularity": 66 },
+  { "symbol": "GE", "name": "GE Aerospace", "exchange": "NYSE", "currency": "USD", "sector": "industrials", "popularity": 65 },
+  { "symbol": "AIR.PA", "name": "Airbus SE", "exchange": "Euronext Paris", "currency": "EUR", "sector": "industrials", "popularity": 70 },
+
+  { "symbol": "SPY", "name": "SPDR S&P 500 ETF", "exchange": "NYSE Arca", "currency": "USD", "sector": "etf", "popularity": 92 },
+  { "symbol": "QQQ", "name": "Invesco QQQ (Nasdaq-100)", "exchange": "NASDAQ", "currency": "USD", "sector": "etf", "popularity": 88 },
+  { "symbol": "VT", "name": "Vanguard Total World Stock ETF", "exchange": "NYSE Arca", "currency": "USD", "sector": "etf", "popularity": 86 },
+  { "symbol": "VTI", "name": "Vanguard Total Stock Market ETF", "exchange": "NYSE Arca", "currency": "USD", "sector": "etf", "popularity": 84 }
+]

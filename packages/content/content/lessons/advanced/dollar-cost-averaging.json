@@ -1,0 +1,151 @@
+{
+  "id": "dollar-cost-averaging",
+  "version": 1,
+  "unit": "smarter-investing",
+  "status": "draft",
+  "sources": [
+    "cmvm"
+  ],
+  "xp": 45,
+  "coins": 65,
+  "title": {
+    "en": "Investing Regularly (DCA)",
+    "pt": "Investir com Regularidade (DCA)"
+  },
+  "description": {
+    "en": "Stop trying to time the market",
+    "pt": "Deixa de tentar adivinhar o mercado"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Same amount, every month",
+        "pt": "O mesmo valor, todos os meses"
+      },
+      "body": {
+        "en": "Dollar-cost averaging (DCA) means investing a fixed amount at regular intervals, for example €100 every month, whatever the price. You automatically buy more shares when prices are low and fewer when they are high.",
+        "pt": "O investimento periódico (DCA, dollar-cost averaging) consiste em investir um valor fixo em intervalos regulares, por exemplo 100 € por mês, seja qual for o preço. Compras automaticamente mais unidades quando os preços estão baixos e menos quando estão altos."
+      }
+    },
+    {
+      "id": "prices-fall",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "With DCA, when prices fall, your fixed monthly amount buys…",
+        "pt": "Com DCA, quando os preços descem, o teu valor mensal fixo compra…"
+      },
+      "options": {
+        "en": [
+          "More shares",
+          "Fewer shares",
+          "The same number of shares",
+          "No shares"
+        ],
+        "pt": [
+          "Mais unidades",
+          "Menos unidades",
+          "O mesmo número de unidades",
+          "Nenhuma unidade"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "€100 ÷ a lower price = more shares.",
+        "pt": "100 € ÷ um preço mais baixo = mais unidades."
+      }
+    },
+    {
+      "id": "no-guessing",
+      "type": "true_false",
+      "statement": {
+        "en": "DCA removes the need to guess the best moment to invest.",
+        "pt": "O DCA elimina a necessidade de adivinhar o melhor momento para investir."
+      },
+      "answer": true,
+      "explanation": {
+        "en": "It turns investing into a habit instead of a prediction.",
+        "pt": "Transforma o investimento num hábito em vez de uma previsão."
+      }
+    },
+    {
+      "id": "timing",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "Trying to buy at the lowest point and sell at the highest is called ___ the market.",
+        "pt": "Tentar comprar no ponto mais baixo e vender no mais alto chama-se fazer ___ de mercado."
+      },
+      "options": {
+        "en": [
+          "timing",
+          "diversifying",
+          "indexing"
+        ],
+        "pt": [
+          "timing",
+          "diversificação",
+          "indexação"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Even professionals rarely get market timing right consistently.",
+        "pt": "Mesmo os profissionais raramente acertam no timing de mercado de forma consistente."
+      }
+    },
+    {
+      "id": "dca-math",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "You invest €100 when a share costs €10, and €100 when it costs €5. How many shares do you own?",
+        "pt": "Investes 100 € quando uma ação custa 10 € e 100 € quando custa 5 €. Quantas ações tens?"
+      },
+      "options": {
+        "en": [
+          "30",
+          "20",
+          "15",
+          "25"
+        ],
+        "pt": [
+          "30",
+          "20",
+          "15",
+          "25"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "10 shares + 20 shares = 30, at an average cost of about €6.67 per share.",
+        "pt": "10 ações + 20 ações = 30, a um custo médio de cerca de 6,67 € por ação."
+      }
+    },
+    {
+      "id": "routine",
+      "type": "order",
+      "prompt": {
+        "en": "Order a simple long-term investing routine:",
+        "pt": "Ordena uma rotina simples de investimento a longo prazo:"
+      },
+      "items": {
+        "en": [
+          "Set a monthly amount you can afford",
+          "Invest it automatically on a fixed date",
+          "Keep investing in good and bad months",
+          "Review your plan once or twice a year"
+        ],
+        "pt": [
+          "Definir um valor mensal que consegues pagar",
+          "Investi-lo automaticamente numa data fixa",
+          "Continuar a investir nos meses bons e maus",
+          "Rever o plano uma ou duas vezes por ano"
+        ]
+      },
+      "explanation": {
+        "en": "Consistency beats intensity in long-term investing.",
+        "pt": "No longo prazo, a consistência vale mais do que a intensidade."
+      }
+    }
+  ]
+}

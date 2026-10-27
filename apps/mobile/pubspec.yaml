@@ -1,0 +1,63 @@
+name: learnvestor
+description: "LearnVestor: learn investing through gamification."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.10.1
+
+dependencies:
+  cupertino_icons: ^1.0.9
+  fl_chart: ^1.3.0
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_riverpod: ^3.3.2
+  flutter_timezone: ^5.1.1
+  go_router: ^17.5.0
+  intl: ^0.20.2
+  purchases_flutter: ^10.18.1
+  sentry_flutter: ^9.30.1
+  shared_preferences: ^2.5.5
+  supabase_flutter: ^2.18.3
+  url_launcher: ^6.3.2
+  uuid: ^4.6.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.7
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/
+
+# App icons: `dart run flutter_launcher_icons` (logo on the app's dark background).
+flutter_launcher_icons:
+  image_path: assets/logo.png
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  background_color_ios: "#12141C"
+  adaptive_icon_background: "#12141C"
+  adaptive_icon_foreground: assets/logo.png
+  adaptive_icon_foreground_inset: 22
+  web:
+    generate: true
+    image_path: assets/logo.png
+    background_color: "#12141C"
+    theme_color: "#EC4899"
+
+# Splash screen: `dart run flutter_native_splash:create`.
+flutter_native_splash:
+  color: "#12141C"
+  image: assets/logo.png
+  android_12:
+    color: "#12141C"
+    image: assets/logo.png
+  web: true

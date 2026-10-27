@@ -1,0 +1,43 @@
+{
+  "stats": {
+    "xp": 28,
+    "gems": 20,
+    "level": 1,
+    "hearts": 6,
+    "streak": 1,
+    "xp_today": 28,
+    "max_hearts": 6,
+    "coins_earned": 30,
+    "level_xp_next": 100,
+    "next_heart_at": null,
+    "level_xp_start": 0,
+    "streak_freezes": 0,
+    "streak_longest": 1,
+    "lessons_completed": 1,
+    "streak_extended_today": true
+  },
+  "economy": {
+    "min_trade_eur": 1,
+    "max_streak_freezes": 2,
+    "refill_hearts_gem_cost": 50,
+    "streak_freeze_gem_cost": 100
+  },
+  "is_plus": false,
+  "profile": {
+    "id": "ee52b7ff-c444-4af9-b6b3-66c3c6299bd9",
+    "locale": "pt",
+    "timezone": "Europe/Lisbon",
+    "username": "fixture_user",
+    "onboarded": true,
+    "age_bracket": "18-24",
+    "country_code": "PT",
+    "display_name": null,
+    "daily_goal_xp": 30,
+    "display_currency": "EUR"
+  },
+  "portfolio": {
+    "cash": 54.35,
+    "total_value": 130,
+    "holdings_value": 75.65
+  }
+}

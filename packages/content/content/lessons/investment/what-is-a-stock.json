@@ -1,0 +1,151 @@
+{
+  "id": "what-is-a-stock",
+  "version": 1,
+  "unit": "investment-fundamentals",
+  "status": "draft",
+  "sources": [
+    "cmvm"
+  ],
+  "xp": 40,
+  "coins": 55,
+  "title": {
+    "en": "How the Stock Market Works",
+    "pt": "Como Funciona a Bolsa"
+  },
+  "description": {
+    "en": "Prices, tickers and exchanges",
+    "pt": "Preços, tickers e bolsas de valores"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "A marketplace for companies",
+        "pt": "Um mercado de empresas"
+      },
+      "body": {
+        "en": "A stock exchange, like Nasdaq, NYSE or Euronext, is where shares are bought and sold. A share's price is what buyers and sellers agree it is worth right now, and it moves with company results, news, interest rates and expectations.",
+        "pt": "Uma bolsa de valores, como a Nasdaq, a NYSE ou a Euronext, é onde se compram e vendem ações. O preço de uma ação é o que compradores e vendedores acordam que vale neste momento, e muda com os resultados da empresa, notícias, taxas de juro e expectativas."
+      }
+    },
+    {
+      "id": "ticker",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "What is \"AAPL\"?",
+        "pt": "O que é \"AAPL\"?"
+      },
+      "options": {
+        "en": [
+          "Apple's ticker symbol on the stock exchange",
+          "Apple's bank account number",
+          "A type of bond",
+          "A stock exchange"
+        ],
+        "pt": [
+          "O símbolo (ticker) da Apple na bolsa",
+          "O número da conta bancária da Apple",
+          "Um tipo de obrigação",
+          "Uma bolsa de valores"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Tickers are short codes that identify each listed company.",
+        "pt": "Os tickers são códigos curtos que identificam cada empresa cotada."
+      }
+    },
+    {
+      "id": "prices-move",
+      "type": "true_false",
+      "statement": {
+        "en": "Stock prices only change once a year, when companies publish results.",
+        "pt": "Os preços das ações só mudam uma vez por ano, quando as empresas publicam resultados."
+      },
+      "answer": false,
+      "explanation": {
+        "en": "Prices change every second while the market is open.",
+        "pt": "Os preços mudam a cada segundo enquanto o mercado está aberto."
+      }
+    },
+    {
+      "id": "market-cap",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "Market capitalisation = share price × number of ___.",
+        "pt": "Capitalização bolsista = preço da ação × número de ___."
+      },
+      "options": {
+        "en": [
+          "shares outstanding",
+          "employees",
+          "stores"
+        ],
+        "pt": [
+          "ações emitidas",
+          "funcionários",
+          "lojas"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Market cap is what the market says the whole company is worth.",
+        "pt": "A capitalização bolsista é quanto o mercado diz que a empresa inteira vale."
+      }
+    },
+    {
+      "id": "exchange",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "Which of these is a stock exchange?",
+        "pt": "Qual destas é uma bolsa de valores?"
+      },
+      "options": {
+        "en": [
+          "Euronext",
+          "Visa",
+          "Spotify",
+          "Eurostat"
+        ],
+        "pt": [
+          "Euronext",
+          "Visa",
+          "Spotify",
+          "Eurostat"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Euronext runs exchanges in Lisbon, Paris, Amsterdam, Milan and other cities.",
+        "pt": "A Euronext gere as bolsas de Lisboa, Paris, Amesterdão, Milão e outras cidades."
+      }
+    },
+    {
+      "id": "buying-steps",
+      "type": "order",
+      "prompt": {
+        "en": "Order the steps of buying a share:",
+        "pt": "Ordena os passos para comprar uma ação:"
+      },
+      "items": {
+        "en": [
+          "Research the company",
+          "Decide how much to invest",
+          "Place a buy order",
+          "Follow the investment over time"
+        ],
+        "pt": [
+          "Pesquisar a empresa",
+          "Decidir quanto investir",
+          "Colocar uma ordem de compra",
+          "Acompanhar o investimento ao longo do tempo"
+        ]
+      },
+      "explanation": {
+        "en": "Try it now in the Explore tab with your virtual money!",
+        "pt": "Experimenta agora no separador Explorar com o teu dinheiro virtual!"
+      }
+    }
+  ]
+}

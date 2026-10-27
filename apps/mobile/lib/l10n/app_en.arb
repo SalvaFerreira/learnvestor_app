@@ -1,0 +1,477 @@
+{
+  "@@locale": "en",
+  "appName": "LearnVestor",
+  "retry": "Try again",
+  "cancel": "Cancel",
+  "continueLabel": "Continue",
+  "close": "Close",
+  "done": "Done",
+  "errorGeneric": "Something went wrong. Please try again.",
+  "errorNetwork": "No connection. Check your internet and try again.",
+  "errorLessonLocked": "Complete the previous lesson first.",
+  "errorLessonNotFound": "This lesson is not available.",
+  "errorPremiumRequired": "This lesson is part of LearnVestor Plus.",
+  "errorOutOfHearts": "You're out of hearts.",
+  "errorTooFast": "That was too fast! Take your time to read each question.",
+  "errorRateLimited": "Too many attempts. Take a short break and try again.",
+  "errorAttemptClosed": "This lesson session has ended. Please start it again.",
+  "errorInsufficientGems": "Not enough gems.",
+  "errorHeartsFull": "Your hearts are already full.",
+  "errorMaxStreakFreezes": "You already have the maximum number of streak freezes.",
+  "errorInsufficientCash": "Not enough virtual cash.",
+  "errorInsufficientShares": "You don't own that many shares.",
+  "errorAmountTooSmall": "The order amount is too small.",
+  "errorQuoteUnavailable": "The price is unavailable right now. Try again later.",
+  "errorUsernameTaken": "That username is already taken.",
+  "errorInvalidProfile": "Please check your details.",
+  "errorTimezone": "You can only change your time zone once a day.",
+  "signInTitle": "Learn to invest, one lesson at a time",
+  "signInSubtitle": "Enter your email and we'll send you a 6-digit code.",
+  "emailLabel": "Email",
+  "sendCode": "Send code",
+  "codeSentTo": "We sent a code to {email}",
+  "@codeSentTo": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "codeLabel": "6-digit code",
+  "verify": "Verify",
+  "changeEmail": "Use a different email",
+  "invalidEmail": "Enter a valid email address.",
+  "invalidCode": "Invalid or expired code.",
+  "authNotConfigured": "This build has no backend configured. Run it with --dart-define=SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY (see apps/mobile/README.md).",
+  "onboardingTitle": "Let's set up your profile",
+  "usernameLabel": "Username",
+  "usernameHint": "3–20 letters, numbers or _",
+  "ageLabel": "Age",
+  "ageUnder16": "Under 16",
+  "ageBlocked": "LearnVestor is for people aged 16 and over.",
+  "dailyGoalLabel": "Daily goal",
+  "goalOption": "{xp} XP per day",
+  "@goalOption": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "goalCasual": "Casual",
+  "goalRegular": "Regular",
+  "goalSerious": "Serious",
+  "goalIntense": "Intense",
+  "acceptTerms": "I accept the Terms of Service and the Privacy Policy",
+  "marketingOptIn": "Send me tips and product news by email",
+  "analyticsOptIn": "Help improve LearnVestor with anonymous usage analytics",
+  "startLearning": "Start learning",
+  "educationalNotice": "LearnVestor is educational only. All investing in the app uses virtual money and nothing here is financial advice.",
+  "navHome": "Home",
+  "navLearn": "Learn",
+  "navExplore": "Explore",
+  "navPortfolio": "Portfolio",
+  "navProfile": "Profile",
+  "levelLabel": "Level {level}",
+  "@levelLabel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "rankBeginner": "Beginner Investor",
+  "rankApprentice": "Apprentice Investor",
+  "rankSkilled": "Skilled Investor",
+  "rankExpert": "Expert Investor",
+  "homeTagline": "Building wealth, one lesson at a time!",
+  "experienceProgress": "Experience Progress",
+  "xpCount": "{xp} XP",
+  "@xpCount": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "xpToLevel": "{xp} XP to Level {level}",
+  "@xpToLevel": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      },
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "streakDays": "{count, plural, =1{1 Day Streak} other{{count} Day Streak}}",
+  "@streakDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "longestStreak": "Longest: {days, plural, =1{1 day} other{{days} days}}",
+  "@longestStreak": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "streakDoneToday": "Great job! Come back tomorrow to build your streak.",
+  "streakPending": "Complete a lesson today to keep your streak!",
+  "streakStart": "Complete a lesson to start your streak!",
+  "portfolioValue": "Portfolio Value",
+  "lessonsDone": "Lessons Done",
+  "totalEarned": "Total Earned",
+  "dailyGoalProgress": "{xp} / {goal} XP today",
+  "@dailyGoalProgress": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
+  "continueLearning": "Continue learning",
+  "yourAchievements": "Your Achievements",
+  "seeAll": "See all",
+  "learnTitle": "Learn",
+  "percentComplete": "{percent}% Complete",
+  "@percentComplete": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "starsProgress": "{earned}/{total} Stars",
+  "@starsProgress": {
+    "placeholders": {
+      "earned": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "plusBadge": "PLUS",
+  "xpReward": "+{xp} XP",
+  "@xpReward": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "check": "Check",
+  "correct": "Correct!",
+  "incorrect": "Not quite",
+  "correctAnswerWas": "Correct answer: {answer}",
+  "@correctAnswerWas": {
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
+  "trueLabel": "True",
+  "falseLabel": "False",
+  "trueOrFalse": "True or false?",
+  "orderHint": "Tap the items in the right order",
+  "fillBlankHint": "Choose the missing words",
+  "chooseAnswer": "Choose the right answer",
+  "quitLessonTitle": "Quit lesson?",
+  "quitLessonBody": "You'll lose your progress in this lesson.",
+  "quit": "Quit",
+  "keepLearning": "Keep learning",
+  "outOfHeartsTitle": "Out of hearts",
+  "outOfHeartsBody": "Wait for your hearts to refill, use gems, or get unlimited hearts with Plus.",
+  "refillWithGems": "Refill for {gems} gems",
+  "@refillWithGems": {
+    "placeholders": {
+      "gems": {
+        "type": "int"
+      }
+    }
+  },
+  "getPlus": "Get LearnVestor Plus",
+  "nextHeartIn": "Next heart in {minutes} min",
+  "@nextHeartIn": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "saving": "Saving your progress…",
+  "lessonComplete": "Lesson complete!",
+  "lessonFailed": "Out of hearts",
+  "lessonFailedBody": "Practice makes perfect. Try again when your hearts refill.",
+  "lessonExpired": "This lesson took too long. Start it again to earn rewards.",
+  "xpEarned": "XP earned",
+  "cashEarned": "Virtual cash",
+  "accuracy": "Accuracy",
+  "levelUp": "Level up! You reached level {level}",
+  "@levelUp": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "streakExtended": "{count, plural, =1{1 day streak!} other{{count} day streak!}}",
+  "@streakExtended": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "newAchievement": "New achievement unlocked!",
+  "replayNote": "Practising again gives XP but no extra virtual cash.",
+  "exploreTitle": "Explore Stocks",
+  "exploreSubtitle": "Discover and invest in companies you believe in",
+  "searchHint": "Search companies (e.g., Apple, Microsoft)",
+  "allSectors": "All",
+  "sectorTechnology": "Technology",
+  "sectorFinance": "Finance",
+  "sectorHealthcare": "Healthcare",
+  "sectorConsumer": "Consumer",
+  "sectorEnergy": "Energy",
+  "sectorIndustrials": "Industrials",
+  "sectorEtf": "ETFs",
+  "currentPrice": "Current Price",
+  "noResults": "No companies found",
+  "pricesNotice": "Prices may be delayed. Virtual money only.",
+  "buy": "Buy",
+  "sell": "Sell",
+  "amountLabel": "Amount (€)",
+  "available": "Available: {amount}",
+  "@available": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "youOwn": "You own {quantity} shares ({value})",
+  "@youOwn": {
+    "placeholders": {
+      "quantity": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "estimatedShares": "≈ {quantity} shares",
+  "@estimatedShares": {
+    "placeholders": {
+      "quantity": {
+        "type": "String"
+      }
+    }
+  },
+  "pricePerShareEur": "≈ {price} per share",
+  "@pricePerShareEur": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "sellAll": "Sell all",
+  "max": "Max",
+  "confirmBuy": "Buy {symbol}",
+  "@confirmBuy": {
+    "placeholders": {
+      "symbol": {
+        "type": "String"
+      }
+    }
+  },
+  "confirmSell": "Sell {symbol}",
+  "@confirmSell": {
+    "placeholders": {
+      "symbol": {
+        "type": "String"
+      }
+    }
+  },
+  "tradeBought": "You bought {symbol}!",
+  "@tradeBought": {
+    "placeholders": {
+      "symbol": {
+        "type": "String"
+      }
+    }
+  },
+  "tradeSold": "You sold {symbol}!",
+  "@tradeSold": {
+    "placeholders": {
+      "symbol": {
+        "type": "String"
+      }
+    }
+  },
+  "virtualMoneyNotice": "Virtual money only. No real trades are made.",
+  "portfolioTitle": "Portfolio",
+  "totalValue": "Total Value",
+  "cash": "Cash",
+  "stocks": "Stocks",
+  "myStocks": "My Stocks",
+  "holdings": "{count, plural, =1{1 holding} other{{count} holdings}}",
+  "@holdings": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noHoldings": "You don't own any stocks yet. Explore companies and make your first virtual investment!",
+  "exploreStocks": "Explore stocks",
+  "recentActivity": "Recent activity",
+  "bought": "Bought",
+  "sold": "Sold",
+  "sharesCount": "{quantity} shares",
+  "@sharesCount": {
+    "placeholders": {
+      "quantity": {
+        "type": "String"
+      }
+    }
+  },
+  "profileTitle": "Profile",
+  "plusMember": "Plus member",
+  "statsXp": "Total XP",
+  "statsStreak": "Best streak",
+  "statsLessons": "Lessons",
+  "statsGems": "Gems",
+  "achievementsTitle": "Achievements",
+  "leaderboardTitle": "This week's leaderboard",
+  "leaderboardEmpty": "No one has earned XP this week yet. Be the first!",
+  "yourRank": "You are #{rank} this week",
+  "@yourRank": {
+    "placeholders": {
+      "rank": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "Settings",
+  "language": "Language",
+  "streakFreeze": "Streak freeze",
+  "streakFreezeBody": "Protects your streak if you miss a day. You have {count}.",
+  "@streakFreezeBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "buyForGems": "Buy for {gems} gems",
+  "@buyForGems": {
+    "placeholders": {
+      "gems": {
+        "type": "int"
+      }
+    }
+  },
+  "restorePurchases": "Restore purchases",
+  "exportData": "Export my data",
+  "exportDone": "Your data was copied to the clipboard as JSON.",
+  "deleteAccount": "Delete account",
+  "deleteAccountBody": "This permanently deletes your account, progress and portfolio. If you have a subscription, cancel it in your App Store or Google Play settings.",
+  "deleteConfirm": "Delete permanently",
+  "signOut": "Sign out",
+  "legal": "Legal",
+  "privacyPolicy": "Privacy Policy",
+  "termsOfService": "Terms of Service",
+  "investmentDisclaimer": "Investment Disclaimer",
+  "plusTitle": "LearnVestor Plus",
+  "plusHeadline": "Learn faster with Plus",
+  "plusBenefitHearts": "Unlimited hearts: learn without waiting",
+  "plusBenefitAdvanced": "The Advanced track and every new premium lesson",
+  "plusBenefitSupport": "Support an independent financial education app",
+  "plusActive": "You're a Plus member. Thank you!",
+  "purchasesUnavailable": "Purchases are available in the iOS and Android apps.",
+  "purchasesNotConfigured": "Purchases are not configured in this build.",
+  "activatingPlus": "Activating your subscription…",
+  "purchaseFailed": "The purchase did not complete. You have not been charged.",
+  "gemPacks": "Gem packs",
+  "restoreDone": "Purchases restored.",
+  "noOffers": "No offers are available right now.",
+  "subscriptionTerms": "Subscriptions renew automatically until cancelled in your App Store or Google Play settings.",
+  "matchHint": "Match each term to its meaning",
+  "numericHint": "Calculate and type the answer",
+  "answerLabel": "Answer",
+  "practice": "Practice",
+  "practiceComplete": "Practice complete!",
+  "heartRecovered": "+1 heart recovered!",
+  "practiceToEarnHeart": "Practice to earn a heart",
+  "practiceHint": "Review your mistakes and earn hearts back",
+  "errorUsernameNotAllowed": "That username is not allowed. Please choose another one.",
+  "errorNothingToPractice": "Complete a lesson before practising.",
+  "reportProblem": "Report a problem",
+  "reportReasonWrongAnswer": "The correct answer is wrong",
+  "reportReasonTypo": "Typo or translation error",
+  "reportReasonUnclear": "The question is unclear",
+  "reportReasonOther": "Something else",
+  "reportMessageHint": "Details (optional)",
+  "reportSend": "Send",
+  "reportThanks": "Thank you! The team will review it.",
+  "reportUsername": "Report name",
+  "toolsTitle": "Tools",
+  "toolsSubtitle": "Calculators for real-life money decisions",
+  "toolCompound": "Compound interest",
+  "toolCompoundDesc": "See how your savings grow over time",
+  "toolEmergency": "Emergency fund",
+  "toolEmergencyDesc": "How much to set aside and how long it takes",
+  "toolFees": "Fund fees",
+  "toolFeesDesc": "What yearly fees cost you over time",
+  "fieldInitial": "Initial amount (€)",
+  "fieldMonthly": "Monthly contribution (€)",
+  "fieldRate": "Annual return (%)",
+  "fieldYears": "Years",
+  "resultFinal": "Final value",
+  "resultContributed": "You put in",
+  "resultInterest": "Growth from returns",
+  "fieldMonthlyExpenses": "Essential monthly expenses (€)",
+  "fieldMonths": "Months of cover",
+  "fieldSaved": "Already saved (€)",
+  "fieldMonthlySaving": "You can save per month (€)",
+  "resultTarget": "Target",
+  "resultMissing": "Still missing",
+  "resultNeverReached": "Add a monthly saving to reach the goal",
+  "fieldAmount": "Amount invested (€)",
+  "fieldFeeA": "Fee A (% per year)",
+  "fieldFeeB": "Fee B (% per year)",
+  "resultWithFeeA": "With fee A",
+  "resultWithFeeB": "With fee B",
+  "resultFeeDifference": "Cost of the higher fee",
+  "toolsDisclaimer": "Simulations for learning only. Real returns vary and are not guaranteed.",
+  "resultMonthsToGoal": "{months, plural, =0{Goal reached!} =1{1 month to go} other{{months} months to go}}",
+  "reportUsernameConfirm": "Report @{username} as an inappropriate name?",
+  "@resultMonthsToGoal": {
+    "placeholders": {
+      "months": {
+        "type": "int"
+      }
+    }
+  },
+  "@reportUsernameConfirm": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  }
+}

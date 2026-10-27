@@ -1,0 +1,153 @@
+{
+  "id": "social-security",
+  "version": 1,
+  "unit": "payslip",
+  "status": "draft",
+  "sources": [
+    "segsocial"
+  ],
+  "valid_until": "2026-12-31",
+  "xp": 25,
+  "coins": 40,
+  "title": {
+    "en": "Social Security Contributions",
+    "pt": "Descontos para a Segurança Social"
+  },
+  "description": {
+    "en": "What you pay and what it protects",
+    "pt": "O que pagas e o que te protege"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "11% + 23.75%",
+        "pt": "11% + 23,75%"
+      },
+      "body": {
+        "en": "Employees in Portugal generally contribute 11% of their gross salary to Social Security, and the employer pays a further 23.75%. These contributions fund pensions and benefits such as sickness, parental leave and unemployment.",
+        "pt": "Quem trabalha por conta de outrem em Portugal desconta, em regra, 11% do salário bruto para a Segurança Social, e a entidade empregadora paga mais 23,75%. Estas contribuições financiam pensões e prestações como doença, parentalidade e desemprego."
+      }
+    },
+    {
+      "id": "rate",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "Employees generally contribute ___ of their gross salary to Social Security.",
+        "pt": "Em regra, o trabalhador por conta de outrem desconta ___ do salário bruto para a Segurança Social."
+      },
+      "options": {
+        "en": [
+          "11%",
+          "23.75%",
+          "50%"
+        ],
+        "pt": [
+          "11%",
+          "23,75%",
+          "50%"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "23.75% is the general rate paid by the employer, on top of your salary.",
+        "pt": "23,75% é a taxa geral paga pela entidade empregadora, além do teu salário."
+      }
+    },
+    {
+      "id": "employer",
+      "type": "numeric",
+      "prompt": {
+        "en": "With a gross salary of €1,000, how much does the employer generally pay to Social Security (in €)?",
+        "pt": "Com um salário bruto de 1000 €, quanto paga em regra a entidade empregadora à Segurança Social (em €)?"
+      },
+      "answer": 237.5,
+      "decimals": 2,
+      "unit": {
+        "en": "€",
+        "pt": "€"
+      },
+      "explanation": {
+        "en": "23.75% of €1,000 = €237.50.",
+        "pt": "23,75% de 1000 € = 237,50 €."
+      }
+    },
+    {
+      "id": "benefit",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "Which of these is funded by Social Security?",
+        "pt": "Qual destas prestações é financiada pela Segurança Social?"
+      },
+      "options": {
+        "en": [
+          "Unemployment benefit",
+          "Income tax refund",
+          "Interest on deposits",
+          "Dividends"
+        ],
+        "pt": [
+          "Subsídio de desemprego",
+          "Reembolso de IRS",
+          "Juros de depósitos",
+          "Dividendos"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Tax refunds come from the tax authority, not from Social Security.",
+        "pt": "Os reembolsos de IRS vêm das Finanças, não da Segurança Social."
+      }
+    },
+    {
+      "id": "career",
+      "type": "true_false",
+      "statement": {
+        "en": "Your contributions build your contribution record and affect your future pension.",
+        "pt": "As contribuições contam para a carreira contributiva e influenciam a futura pensão."
+      },
+      "answer": true,
+      "explanation": {
+        "en": "Years and amounts contributed are used to calculate the pension.",
+        "pt": "Os anos e os valores descontados entram no cálculo da pensão."
+      }
+    },
+    {
+      "id": "who-pays",
+      "type": "match",
+      "prompt": {
+        "en": "Match each term to its meaning",
+        "pt": "Liga cada termo ao seu significado"
+      },
+      "left": {
+        "en": [
+          "Employee",
+          "Employer",
+          "Contribution record"
+        ],
+        "pt": [
+          "Trabalhador",
+          "Entidade empregadora",
+          "Carreira contributiva"
+        ]
+      },
+      "right": {
+        "en": [
+          "11% of gross salary (general rate)",
+          "23.75% of gross salary (general rate)",
+          "Your history of contributions over the years"
+        ],
+        "pt": [
+          "11% do salário bruto (regra geral)",
+          "23,75% do salário bruto (regra geral)",
+          "O historial de descontos ao longo dos anos"
+        ]
+      },
+      "explanation": {
+        "en": "Rates can differ in special cases; check the official Social Security website.",
+        "pt": "As taxas podem ser diferentes em casos especiais; confirma no site oficial da Segurança Social."
+      }
+    }
+  ]
+}

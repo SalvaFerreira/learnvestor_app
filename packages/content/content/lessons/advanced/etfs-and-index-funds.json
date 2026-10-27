@@ -1,0 +1,126 @@
+{
+  "id": "etfs-and-index-funds",
+  "version": 1,
+  "unit": "smarter-investing",
+  "status": "draft",
+  "sources": [
+    "spiva",
+    "cmvm"
+  ],
+  "xp": 40,
+  "coins": 60,
+  "title": {
+    "en": "ETFs and Index Funds",
+    "pt": "ETFs e Fundos de Índice"
+  },
+  "description": {
+    "en": "Own the whole market in one click",
+    "pt": "Investe no mercado inteiro com um clique"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Buy the haystack",
+        "pt": "Compra o palheiro inteiro"
+      },
+      "body": {
+        "en": "An index, like the S&P 500 or the MSCI World, follows a group of companies. An index fund or ETF copies that index, giving you instant diversification, usually at a very low cost.",
+        "pt": "Um índice, como o S&P 500 ou o MSCI World, acompanha um grupo de empresas. Um fundo de índice ou ETF replica esse índice, dando-te diversificação imediata, normalmente com um custo muito baixo."
+      }
+    },
+    {
+      "id": "sp500",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "What does an S&P 500 index fund try to do?",
+        "pt": "O que tenta fazer um fundo de índice do S&P 500?"
+      },
+      "options": {
+        "en": [
+          "Match the performance of about 500 large US companies",
+          "Pick the 5 best stocks of the year",
+          "Guarantee a 5% return",
+          "Invest only in bonds"
+        ],
+        "pt": [
+          "Acompanhar o desempenho de cerca de 500 grandes empresas dos EUA",
+          "Escolher as 5 melhores ações do ano",
+          "Garantir um retorno de 5%",
+          "Investir apenas em obrigações"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Index funds don't try to beat the market; they aim to be the market.",
+        "pt": "Os fundos de índice não tentam bater o mercado; tentam ser o mercado."
+      }
+    },
+    {
+      "id": "active-vs-passive",
+      "type": "true_false",
+      "statement": {
+        "en": "Over long periods, most actively managed funds fail to beat their benchmark index after fees.",
+        "pt": "Em períodos longos, a maioria dos fundos de gestão ativa não consegue bater o seu índice de referência depois de custos."
+      },
+      "answer": true,
+      "explanation": {
+        "en": "Studies such as S&P's SPIVA reports consistently show this over 10+ year periods.",
+        "pt": "Estudos como os relatórios SPIVA da S&P mostram isto de forma consistente em períodos de mais de 10 anos."
+      }
+    },
+    {
+      "id": "etf-name",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "ETF stands for Exchange-Traded ___.",
+        "pt": "ETF significa Exchange-Traded ___ (fundo negociado em bolsa)."
+      },
+      "options": {
+        "en": [
+          "Fund",
+          "Fee",
+          "Future"
+        ],
+        "pt": [
+          "Fund",
+          "Fee",
+          "Future"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "ETFs are funds that trade on an exchange just like a share.",
+        "pt": "Os ETFs são fundos negociados em bolsa tal como uma ação."
+      }
+    },
+    {
+      "id": "advantage",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "A main advantage of index ETFs is…",
+        "pt": "Uma das principais vantagens dos ETFs de índice é…"
+      },
+      "options": {
+        "en": [
+          "Low costs and broad diversification",
+          "Guaranteed profits",
+          "No risk at all",
+          "Their prices only go up"
+        ],
+        "pt": [
+          "Custos baixos e diversificação ampla",
+          "Lucros garantidos",
+          "Nenhum risco",
+          "Os preços só sobem"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "They still carry market risk: when the market falls, the ETF falls too.",
+        "pt": "Continuam a ter risco de mercado: quando o mercado cai, o ETF também cai."
+      }
+    }
+  ]
+}

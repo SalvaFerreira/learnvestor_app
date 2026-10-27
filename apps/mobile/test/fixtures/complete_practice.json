@@ -1,0 +1,25 @@
+{
+  "level": 1,
+  "stars": 3,
+  "total": 4,
+  "hearts": {
+    "gems": 20,
+    "hearts": 6,
+    "unlimited": false,
+    "max_hearts": 6,
+    "next_heart_at": null
+  },
+  "status": "completed",
+  "streak": {
+    "current": 1,
+    "freezes_used": 0,
+    "extended_today": false
+  },
+  "correct": 4,
+  "leveled_up": false,
+  "xp_awarded": 8,
+  "coins_awarded": 0,
+  "heart_awarded": true,
+  "first_completion": false,
+  "new_achievements": []
+}

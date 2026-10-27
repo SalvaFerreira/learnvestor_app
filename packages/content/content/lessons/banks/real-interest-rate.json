@@ -1,0 +1,152 @@
+{
+  "id": "real-interest-rate",
+  "version": 1,
+  "unit": "money-basics",
+  "status": "draft",
+  "sources": [
+    "todoscontam"
+  ],
+  "xp": 20,
+  "coins": 30,
+  "title": {
+    "en": "Real vs Nominal Returns",
+    "pt": "Rentabilidade Real vs Nominal"
+  },
+  "description": {
+    "en": "What you really earn after inflation",
+    "pt": "O que ganhas realmente depois da inflação"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Subtract inflation",
+        "pt": "Desconta a inflação"
+      },
+      "body": {
+        "en": "The nominal return is the one you see advertised, for example 3% a year. The real return takes inflation into account: roughly, real ≈ nominal − inflation. If a deposit pays 2% and inflation is 3%, you lose about 1% of purchasing power.",
+        "pt": "A rentabilidade nominal é a que vês anunciada, por exemplo 3% ao ano. A rentabilidade real tem em conta a inflação: de forma aproximada, real ≈ nominal − inflação. Se um depósito rende 2% e a inflação é 3%, perdes cerca de 1% de poder de compra."
+      }
+    },
+    {
+      "id": "calc-real",
+      "type": "numeric",
+      "prompt": {
+        "en": "A deposit pays 4% and inflation is 2.5%. What is the approximate real return (in %)?",
+        "pt": "Um depósito rende 4% e a inflação é 2,5%. Qual é, aproximadamente, a rentabilidade real (em %)?"
+      },
+      "answer": 1.5,
+      "decimals": 1,
+      "unit": {
+        "en": "%",
+        "pt": "%"
+      },
+      "explanation": {
+        "en": "4% − 2.5% ≈ 1.5%.",
+        "pt": "4% − 2,5% ≈ 1,5%."
+      }
+    },
+    {
+      "id": "positive",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "Which situation has a positive real return?",
+        "pt": "Qual destas situações tem rentabilidade real positiva?"
+      },
+      "options": {
+        "en": [
+          "5% interest with 2% inflation",
+          "1% interest with 3% inflation",
+          "2% interest with 2% inflation",
+          "0% interest with 1% inflation"
+        ],
+        "pt": [
+          "Juro de 5% com inflação de 2%",
+          "Juro de 1% com inflação de 3%",
+          "Juro de 2% com inflação de 2%",
+          "Juro de 0% com inflação de 1%"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Only when the return beats inflation does your purchasing power grow.",
+        "pt": "Só quando a rentabilidade supera a inflação é que o teu poder de compra cresce."
+      }
+    },
+    {
+      "id": "balance-falls",
+      "type": "true_false",
+      "statement": {
+        "en": "If your account pays 1% and inflation is 4%, your balance goes down in euros.",
+        "pt": "Se a conta rende 1% e a inflação é 4%, o saldo diminui em euros."
+      },
+      "answer": false,
+      "explanation": {
+        "en": "The balance in euros goes up by 1%; what falls (about 3%) is what it can buy.",
+        "pt": "O saldo em euros sobe 1%; o que cai (cerca de 3%) é o que consegue comprar."
+      }
+    },
+    {
+      "id": "terms",
+      "type": "match",
+      "prompt": {
+        "en": "Match each term to its meaning",
+        "pt": "Liga cada termo ao seu significado"
+      },
+      "left": {
+        "en": [
+          "Nominal return",
+          "Real return",
+          "Inflation"
+        ],
+        "pt": [
+          "Rentabilidade nominal",
+          "Rentabilidade real",
+          "Inflação"
+        ]
+      },
+      "right": {
+        "en": [
+          "Advertised rate, before inflation",
+          "Rate after subtracting inflation",
+          "General rise in prices"
+        ],
+        "pt": [
+          "Taxa anunciada, antes da inflação",
+          "Taxa depois de descontar a inflação",
+          "Subida geral dos preços"
+        ]
+      },
+      "explanation": {
+        "en": "Always compare what you earn with how fast prices are rising.",
+        "pt": "Compara sempre o que ganhas com a velocidade a que os preços sobem."
+      }
+    },
+    {
+      "id": "grow",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "For your purchasing power to grow, an investment has to earn ___ than inflation.",
+        "pt": "Para o teu poder de compra crescer, o investimento precisa de render ___ do que a inflação."
+      },
+      "options": {
+        "en": [
+          "more",
+          "less",
+          "the same"
+        ],
+        "pt": [
+          "mais",
+          "menos",
+          "o mesmo"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Earning the same as inflation only keeps you where you are.",
+        "pt": "Render o mesmo que a inflação só te mantém onde estás."
+      }
+    }
+  ]
+}

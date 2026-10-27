@@ -1,0 +1,125 @@
+{
+  "id": "types-of-investments",
+  "version": 1,
+  "unit": "investment-fundamentals",
+  "status": "draft",
+  "sources": [
+    "cmvm"
+  ],
+  "xp": 35,
+  "coins": 50,
+  "title": {
+    "en": "Types of Investments",
+    "pt": "Tipos de Investimentos"
+  },
+  "description": {
+    "en": "Stocks, bonds, ETFs and more",
+    "pt": "Ações, obrigações, ETFs e mais"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "The main asset types",
+        "pt": "Os principais tipos de ativos"
+      },
+      "body": {
+        "en": "Stocks are a share of ownership in a company. Bonds are loans to a government or company that pay you interest. Funds and ETFs are baskets holding many investments at once. Cash and deposits are the safest, but grow the least.",
+        "pt": "As ações são uma parte da propriedade de uma empresa. As obrigações são empréstimos a um Estado ou empresa que te pagam juros. Os fundos e ETFs são cabazes com muitos investimentos de uma vez. O dinheiro e os depósitos são os mais seguros, mas os que menos crescem."
+      }
+    },
+    {
+      "id": "share-owner",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "When you buy a share of a company, you become…",
+        "pt": "Quando compras uma ação de uma empresa, tornas-te…"
+      },
+      "options": {
+        "en": [
+          "A part-owner of the company",
+          "A lender to the company",
+          "An employee",
+          "The company's bank"
+        ],
+        "pt": [
+          "Coproprietário da empresa",
+          "Credor da empresa",
+          "Funcionário",
+          "O banco da empresa"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Shareholders own a small piece of the company and share in its success or failure.",
+        "pt": "Os acionistas são donos de uma pequena parte da empresa e participam no seu sucesso ou fracasso."
+      }
+    },
+    {
+      "id": "bond",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "What is a bond?",
+        "pt": "O que é uma obrigação?"
+      },
+      "options": {
+        "en": [
+          "A loan you make to a government or company in exchange for interest",
+          "A share of ownership in a company",
+          "A type of current account",
+          "A cryptocurrency"
+        ],
+        "pt": [
+          "Um empréstimo que fazes a um Estado ou empresa em troca de juros",
+          "Uma parte da propriedade de uma empresa",
+          "Um tipo de conta à ordem",
+          "Uma criptomoeda"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Bondholders are lenders: they receive interest (the coupon) and get their money back at maturity.",
+        "pt": "Os obrigacionistas são credores: recebem juros (o cupão) e o dinheiro de volta na maturidade."
+      }
+    },
+    {
+      "id": "etf-basket",
+      "type": "true_false",
+      "statement": {
+        "en": "An ETF lets you buy many different investments in a single purchase.",
+        "pt": "Um ETF permite-te comprar muitos investimentos diferentes numa só compra."
+      },
+      "answer": true,
+      "explanation": {
+        "en": "One ETF can hold hundreds or thousands of companies.",
+        "pt": "Um só ETF pode conter centenas ou milhares de empresas."
+      }
+    },
+    {
+      "id": "dividends",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "Companies may share part of their profits with shareholders through ___.",
+        "pt": "As empresas podem partilhar parte dos lucros com os acionistas através de ___."
+      },
+      "options": {
+        "en": [
+          "dividends",
+          "mortgages",
+          "deposits"
+        ],
+        "pt": [
+          "dividendos",
+          "hipotecas",
+          "depósitos"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Dividends are cash payments to shareholders. Not every company pays them.",
+        "pt": "Os dividendos são pagamentos em dinheiro aos acionistas. Nem todas as empresas os pagam."
+      }
+    }
+  ]
+}

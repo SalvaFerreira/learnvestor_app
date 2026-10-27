@@ -1,0 +1,26 @@
+{
+  "level": 1,
+  "stars": 2,
+  "total": 4,
+  "hearts": {
+    "gems": 10,
+    "hearts": 5,
+    "unlimited": false,
+    "max_hearts": 6,
+    "next_heart_at": "2026-10-27T17:21:57.338+00:00"
+  },
+  "status": "completed",
+  "streak": {
+    "current": 1,
+    "freezes_used": 0,
+    "extended_today": true
+  },
+  "correct": 3,
+  "leveled_up": false,
+  "xp_awarded": 20,
+  "coins_awarded": 30,
+  "first_completion": true,
+  "new_achievements": [
+    "first_lesson"
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "id": "inflation",
+  "version": 1,
+  "unit": "money-basics",
+  "status": "draft",
+  "sources": [
+    "ecb",
+    "bdp"
+  ],
+  "xp": 20,
+  "coins": 30,
+  "title": {
+    "en": "Inflation",
+    "pt": "Inflação"
+  },
+  "description": {
+    "en": "Why money left idle loses value",
+    "pt": "Porque é que o dinheiro parado perde valor"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Prices go up",
+        "pt": "Os preços sobem"
+      },
+      "body": {
+        "en": "Inflation is the general rise in prices. If prices go up 3% in a year, €100 buys less than before: idle money loses purchasing power. The European Central Bank (ECB) aims to keep euro area inflation at 2% over the medium term.",
+        "pt": "A inflação é a subida generalizada dos preços. Se os preços sobem 3% num ano, 100 € compram menos do que antes: o dinheiro parado perde poder de compra. O Banco Central Europeu (BCE) procura manter a inflação da zona euro nos 2% a médio prazo."
+      }
+    },
+    {
+      "id": "drawer",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "With 3% yearly inflation, what happens to €100 kept in a drawer?",
+        "pt": "Com uma inflação de 3% ao ano, o que acontece a 100 € guardados numa gaveta?"
+      },
+      "options": {
+        "en": [
+          "It buys fewer things a year later",
+          "It becomes €103",
+          "It keeps exactly the same purchasing power",
+          "It disappears"
+        ],
+        "pt": [
+          "Compram menos coisas daqui a um ano",
+          "Passam a valer 103 €",
+          "Mantêm exatamente o mesmo poder de compra",
+          "Desaparecem"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "The note still says €100, but prices are higher, so it buys less.",
+        "pt": "A nota continua a dizer 100 €, mas os preços estão mais altos, por isso compra menos."
+      }
+    },
+    {
+      "id": "basket",
+      "type": "numeric",
+      "prompt": {
+        "en": "A basket of groceries costs €50 and prices rise 4% in a year. How much does it cost next year (in €)?",
+        "pt": "Um cabaz de compras custa 50 € e os preços sobem 4% num ano. Quanto custa o cabaz no ano seguinte (em €)?"
+      },
+      "answer": 52,
+      "decimals": 0,
+      "unit": {
+        "en": "€",
+        "pt": "€"
+      },
+      "explanation": {
+        "en": "€50 × 1.04 = €52.",
+        "pt": "50 € × 1,04 = 52 €."
+      }
+    },
+    {
+      "id": "ecb-target",
+      "type": "true_false",
+      "statement": {
+        "en": "The ECB aims for 0% inflation.",
+        "pt": "O objetivo do BCE é ter uma inflação de 0%."
+      },
+      "answer": false,
+      "explanation": {
+        "en": "The target is 2% over the medium term: low and stable inflation, not zero.",
+        "pt": "O objetivo é 2% a médio prazo: inflação baixa e estável, não zero."
+      }
+    },
+    {
+      "id": "terms",
+      "type": "match",
+      "prompt": {
+        "en": "Match each term to its meaning",
+        "pt": "Liga cada termo ao seu significado"
+      },
+      "left": {
+        "en": [
+          "Inflation",
+          "Deflation",
+          "Purchasing power",
+          "ECB"
+        ],
+        "pt": [
+          "Inflação",
+          "Deflação",
+          "Poder de compra",
+          "BCE"
+        ]
+      },
+      "right": {
+        "en": [
+          "General rise in prices",
+          "General fall in prices",
+          "What your money can buy",
+          "Central bank of the euro area"
+        ],
+        "pt": [
+          "Subida geral dos preços",
+          "Descida geral dos preços",
+          "O que consegues comprar com o teu dinheiro",
+          "Banco central da zona euro"
+        ]
+      },
+      "explanation": {
+        "en": "These four words appear in almost every news story about prices.",
+        "pt": "Estas quatro palavras aparecem em quase todas as notícias sobre preços."
+      }
+    },
+    {
+      "id": "beats-deposit",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "When inflation is higher than the interest on your deposit, your money loses ___.",
+        "pt": "Quando a inflação é mais alta do que o juro do teu depósito, o teu dinheiro perde ___."
+      },
+      "options": {
+        "en": [
+          "purchasing power",
+          "its guarantee",
+          "its account number"
+        ],
+        "pt": [
+          "poder de compra",
+          "a garantia",
+          "o número de conta"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "The balance may even grow in euros, but it buys less.",
+        "pt": "O saldo pode até subir em euros, mas compra menos."
+      }
+    }
+  ]
+}

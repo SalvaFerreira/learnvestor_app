@@ -1,0 +1,151 @@
+{
+  "id": "emergency-fund",
+  "version": 1,
+  "unit": "money-basics",
+  "status": "draft",
+  "sources": [
+    "todoscontam"
+  ],
+  "xp": 20,
+  "coins": 30,
+  "title": {
+    "en": "Your Emergency Fund",
+    "pt": "O Teu Fundo de Emergência"
+  },
+  "description": {
+    "en": "The safety net every investor needs first",
+    "pt": "A rede de segurança que todo o investidor precisa primeiro"
+  },
+  "exercises": [
+    {
+      "id": "intro",
+      "type": "info",
+      "title": {
+        "en": "Expect the unexpected",
+        "pt": "Conta com o inesperado"
+      },
+      "body": {
+        "en": "An emergency fund is money set aside for surprises: a broken car, a medical bill or losing your job. A common guideline is to keep 3 to 6 months of essential expenses somewhere safe and easy to access.",
+        "pt": "Um fundo de emergência é dinheiro reservado para imprevistos: um carro avariado, uma despesa médica ou perder o emprego. Uma regra comum é guardar 3 a 6 meses de despesas essenciais num sítio seguro e de fácil acesso."
+      }
+    },
+    {
+      "id": "where-to-keep",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "Where is the best place to keep an emergency fund?",
+        "pt": "Qual é o melhor sítio para guardar um fundo de emergência?"
+      },
+      "options": {
+        "en": [
+          "A savings account you can access quickly",
+          "Shares of a single company",
+          "A 10-year term deposit",
+          "Lent to a friend"
+        ],
+        "pt": [
+          "Uma conta poupança com acesso rápido",
+          "Ações de uma única empresa",
+          "Um depósito a prazo de 10 anos",
+          "Emprestado a um amigo"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Emergency money must be safe and available the day you need it.",
+        "pt": "O dinheiro de emergência tem de estar seguro e disponível no dia em que precisares dele."
+      }
+    },
+    {
+      "id": "not-in-stocks",
+      "type": "true_false",
+      "statement": {
+        "en": "Your emergency fund should be invested in the stock market so it grows faster.",
+        "pt": "O teu fundo de emergência deve ser investido em bolsa para crescer mais depressa."
+      },
+      "answer": false,
+      "explanation": {
+        "en": "Stock prices can fall exactly when you need the money, for example during a recession when jobs are also at risk.",
+        "pt": "As ações podem cair precisamente quando precisas do dinheiro, por exemplo numa recessão, quando os empregos também estão em risco."
+      }
+    },
+    {
+      "id": "months-rule",
+      "type": "fill_blank",
+      "sentence": {
+        "en": "A common guideline is to keep ___ months of essential expenses in an emergency fund.",
+        "pt": "Uma regra comum é guardar ___ meses de despesas essenciais num fundo de emergência."
+      },
+      "options": {
+        "en": [
+          "3 to 6",
+          "0",
+          "24 to 36"
+        ],
+        "pt": [
+          "3 a 6",
+          "0",
+          "24 a 36"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "Enough to cover a few months without income, without leaving too much money idle.",
+        "pt": "O suficiente para cobrir alguns meses sem rendimento, sem deixar demasiado dinheiro parado."
+      }
+    },
+    {
+      "id": "target",
+      "type": "multiple_choice",
+      "prompt": {
+        "en": "Your essential expenses are €1,000 per month. What is a reasonable emergency fund target?",
+        "pt": "As tuas despesas essenciais são 1000 € por mês. Qual é um objetivo razoável para o fundo de emergência?"
+      },
+      "options": {
+        "en": [
+          "€3,000 to €6,000",
+          "€100",
+          "€50,000",
+          "€0, a credit card is enough"
+        ],
+        "pt": [
+          "3000 € a 6000 €",
+          "100 €",
+          "50 000 €",
+          "0 €, um cartão de crédito chega"
+        ]
+      },
+      "answer": 0,
+      "explanation": {
+        "en": "3 to 6 months × €1,000. Credit cards charge high interest and are not a safety net.",
+        "pt": "3 a 6 meses × 1000 €. Os cartões de crédito cobram juros altos e não são uma rede de segurança."
+      }
+    },
+    {
+      "id": "priorities",
+      "type": "order",
+      "prompt": {
+        "en": "Order a common sequence of money priorities for beginners:",
+        "pt": "Ordena uma sequência comum de prioridades financeiras para quem está a começar:"
+      },
+      "items": {
+        "en": [
+          "Pay for essentials (rent, food, bills)",
+          "Build a small emergency fund",
+          "Pay off high-interest debt",
+          "Start investing for the long term"
+        ],
+        "pt": [
+          "Pagar o essencial (renda, comida, contas)",
+          "Criar um pequeno fundo de emergência",
+          "Pagar dívidas com juros altos",
+          "Começar a investir a longo prazo"
+        ]
+      },
+      "explanation": {
+        "en": "High-interest debt often costs more than investments earn, so it usually comes before investing.",
+        "pt": "As dívidas com juros altos custam muitas vezes mais do que os investimentos rendem, por isso normalmente vêm antes de investir."
+      }
+    }
+  ]
+}
