@@ -5,15 +5,14 @@ import { randomUUID } from 'node:crypto';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { backdateAttempt, correctAnswers, createDb, createUser, onboard, rpc } from './harness.mjs';
+import { backdateAttempt, correctAnswers, createDb, createUser, rpc } from './harness.mjs';
 
 const OUT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'apps', 'mobile', 'test', 'fixtures');
 mkdirSync(OUT, { recursive: true });
 const save = (name, data) => writeFileSync(join(OUT, `${name}.json`), `${JSON.stringify(data, null, 2)}\n`);
 
 const db = await createDb();
-const uid = await createUser(db, { locale: 'pt', timezone: 'Europe/Lisbon' });
-await onboard(db, uid, 'fixture_user');
+const uid = await createUser(db, { locale: 'pt', timezone: 'Europe/Lisbon', country: 'PT' });
 
 const lesson = await rpc(db, uid, 'start_lesson', { p_lesson_id: 'what-is-a-bank', p_locale: 'pt' });
 save('start_lesson', lesson);
@@ -35,6 +34,5 @@ save('get_my_state', await rpc(db, uid, 'get_my_state'));
 save('get_learning_path', await rpc(db, uid, 'get_learning_path', { p_locale: 'pt' }));
 save('get_portfolio', await rpc(db, uid, 'get_portfolio'));
 save('get_my_achievements', await rpc(db, uid, 'get_my_achievements', { p_locale: 'pt' }));
-save('get_weekly_leaderboard', await rpc(db, uid, 'get_weekly_leaderboard'));
 
 console.log(`Fixtures written to ${OUT}`);

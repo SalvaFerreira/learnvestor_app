@@ -5,13 +5,12 @@
 //   npm run dev   →   http://127.0.0.1:54321
 
 import { createServer } from 'node:http';
-import { createApi, seedDemoLearners } from './api.mjs';
+import { createApi } from './api.mjs';
 import { createDb } from './harness.mjs';
 
 const PORT = Number(process.env.PORT ?? 54321);
 
 const db = await createDb();
-await seedDemoLearners(db);
 const api = createApi(db);
 
 const CORS = {

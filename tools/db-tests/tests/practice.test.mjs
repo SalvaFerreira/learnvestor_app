@@ -1,16 +1,11 @@
 // Practice mode: built from mistakes, never costs hearts, a good session returns one.
 import assert from 'node:assert/strict';
 import { before, describe, test } from 'node:test';
-import { backdateAttempt, correctAnswers, createDb, createUser, onboard, passLesson, rpc, sql } from '../harness.mjs';
+import { backdateAttempt, correctAnswers, createDb, createUser, passLesson, rpc, sql } from '../harness.mjs';
 
 let db;
-let n = 0;
 
-async function learner() {
-  const uid = await createUser(db);
-  await onboard(db, uid, `practice${++n}`);
-  return uid;
-}
+const learner = () => createUser(db, { country: 'PT' });
 
 const backdateSession = (id) =>
   sql(db, `update public.practice_sessions set started_at = now() - interval '5 minutes' where id = $1`, [id]);

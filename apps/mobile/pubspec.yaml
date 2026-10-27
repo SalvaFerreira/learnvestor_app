@@ -18,8 +18,6 @@ dependencies:
   go_router: ^17.5.0
   http: ^1.6.0
   intl: ^0.20.2
-  sentry_flutter: ^9.30.1
-  shared_preferences: ^2.5.5
   supabase_flutter: ^2.18.3
   url_launcher: ^6.3.2
   uuid: ^4.6.0
@@ -40,13 +38,8 @@ flutter:
 # App icons: `dart run flutter_launcher_icons` (logo on the app's dark background).
 flutter_launcher_icons:
   image_path: assets/logo.png
-  android: true
-  ios: true
-  remove_alpha_ios: true
-  background_color_ios: "#12141C"
-  adaptive_icon_background: "#12141C"
-  adaptive_icon_foreground: assets/logo.png
-  adaptive_icon_foreground_inset: 22
+  android: false
+  ios: false
   web:
     generate: true
     image_path: assets/logo.png
@@ -57,7 +50,6 @@ flutter_launcher_icons:
 flutter_native_splash:
   color: "#12141C"
   image: assets/logo.png
-  android_12:
-    color: "#12141C"
-    image: assets/logo.png
+  android: false
+  ios: false
   web: true

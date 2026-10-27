@@ -279,7 +279,6 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
                   correct: _lastCorrect!,
                   exercise: exercise,
                   onContinue: _continue,
-                  onReport: () => _report(exercise),
                 ),
             ],
           ),
@@ -288,109 +287,16 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
     );
   }
 
-  /// "Report a problem" for the exercise just answered (feeds content_reports).
-  Future<void> _report(Exercise exercise) async {
-    // Practice exercise ids are "<lesson id>/<exercise id>".
-    final parts = exercise.id.split('/');
-    final lessonId = widget.isPractice ? parts.first : widget.lessonId!;
-    final exerciseId = parts.last;
-    final sent = await showModalBottomSheet<bool>(
-      context: context,
-      isScrollControlled: true,
-      showDragHandle: true,
-      builder: (_) => _ReportSheet(lessonId: lessonId, exerciseId: exerciseId),
-    );
-    if (sent == true && mounted) showMessage(context, context.l10n.reportThanks);
-  }
 }
 
 enum _OutOfHeartsChoice { resume, practice }
 
-class _ReportSheet extends ConsumerStatefulWidget {
-  const _ReportSheet({required this.lessonId, required this.exerciseId});
-
-  final String lessonId;
-  final String exerciseId;
-
-  @override
-  ConsumerState<_ReportSheet> createState() => _ReportSheetState();
-}
-
-class _ReportSheetState extends ConsumerState<_ReportSheet> {
-  final _message = TextEditingController();
-  String _reason = 'wrong_answer';
-  bool _busy = false;
-
-  @override
-  void dispose() {
-    _message.dispose();
-    super.dispose();
-  }
-
-  Future<void> _send() async {
-    setState(() => _busy = true);
-    try {
-      await ref.read(repositoryProvider).reportContent(
-            lessonId: widget.lessonId,
-            exerciseId: widget.exerciseId,
-            reason: _reason,
-            message: _message.text,
-          );
-      if (mounted) Navigator.pop(context, true);
-    } catch (e) {
-      if (mounted) showError(context, e);
-    } finally {
-      if (mounted) setState(() => _busy = false);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l = context.l10n;
-    return Padding(
-      padding: EdgeInsets.fromLTRB(20, 0, 20, 20 + MediaQuery.viewInsetsOf(context).bottom),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(l.reportProblem, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
-          const SizedBox(height: 8),
-          RadioGroup<String>(
-            groupValue: _reason,
-            onChanged: (v) => setState(() => _reason = v!),
-            child: Column(
-              children: [
-                for (final (value, label) in [
-                  ('wrong_answer', l.reportReasonWrongAnswer),
-                  ('typo', l.reportReasonTypo),
-                  ('unclear', l.reportReasonUnclear),
-                  ('other', l.reportReasonOther),
-                ])
-                  RadioListTile<String>(value: value, title: Text(label), contentPadding: EdgeInsets.zero),
-              ],
-            ),
-          ),
-          TextField(
-            controller: _message,
-            maxLength: 500,
-            maxLines: 3,
-            decoration: InputDecoration(hintText: l.reportMessageHint),
-          ),
-          const SizedBox(height: 8),
-          FilledButton(onPressed: _busy ? null : _send, child: Text(l.reportSend)),
-        ],
-      ),
-    );
-  }
-}
-
 class _FeedbackPanel extends StatelessWidget {
-  const _FeedbackPanel({required this.correct, required this.exercise, required this.onContinue, required this.onReport});
+  const _FeedbackPanel({required this.correct, required this.exercise, required this.onContinue});
 
   final bool correct;
   final Exercise exercise;
   final VoidCallback onContinue;
-  final VoidCallback onReport;
 
   @override
   Widget build(BuildContext context) {
@@ -415,11 +321,6 @@ class _FeedbackPanel extends StatelessWidget {
               Expanded(
                 child: Text(correct ? l.correct : l.incorrect,
                     style: TextStyle(color: color, fontSize: 22, fontWeight: FontWeight.w800)),
-              ),
-              IconButton(
-                tooltip: l.reportProblem,
-                onPressed: onReport,
-                icon: const Icon(Icons.flag_outlined, color: AppColors.textSecondary),
               ),
             ],
           ),

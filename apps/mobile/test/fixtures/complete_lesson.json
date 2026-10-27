@@ -6,12 +6,11 @@
     "gems": 10,
     "hearts": 5,
     "max_hearts": 6,
-    "next_heart_at": "2026-10-27T18:27:48.229+00:00"
+    "next_heart_at": "2026-10-27T22:25:38.832+00:00"
   },
   "status": "completed",
   "streak": {
     "current": 1,
-    "freezes_used": 0,
     "extended_today": true
   },
   "correct": 3,

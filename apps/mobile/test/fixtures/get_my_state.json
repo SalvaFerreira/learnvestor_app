@@ -11,24 +11,18 @@
     "level_xp_next": 100,
     "next_heart_at": null,
     "level_xp_start": 0,
-    "streak_freezes": 0,
     "streak_longest": 1,
     "lessons_completed": 1,
     "streak_extended_today": true
   },
   "economy": {
     "min_trade_eur": 1,
-    "max_streak_freezes": 2,
-    "refill_hearts_gem_cost": 50,
-    "streak_freeze_gem_cost": 100
+    "refill_hearts_gem_cost": 50
   },
   "profile": {
-    "id": "6ec2d5ef-9ef0-4a06-a678-14043b2995e5",
+    "id": "f361ad9a-1c56-4f38-8bba-eda926ac1cff",
     "locale": "pt",
     "timezone": "Europe/Lisbon",
-    "username": "fixture_user",
-    "onboarded": true,
-    "age_bracket": "18-24",
     "country_code": "PT",
     "display_name": null,
     "daily_goal_xp": 30,

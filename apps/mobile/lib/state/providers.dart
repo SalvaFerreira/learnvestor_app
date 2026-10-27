@@ -2,13 +2,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../core/config.dart';
 import '../data/models.dart';
 import '../data/repository.dart';
 
 final supabaseProvider = Provider<SupabaseClient>((ref) => Supabase.instance.client);
 
-final repositoryProvider = Provider<Repository>((ref) => Repository(ref.watch(supabaseProvider), realtime: !AppConfig.demo));
+final repositoryProvider = Provider<Repository>((ref) => Repository(ref.watch(supabaseProvider)));
 
 final _authEventsProvider = StreamProvider<AuthState>((ref) => ref.watch(supabaseProvider).auth.onAuthStateChange);
 
@@ -46,7 +45,7 @@ final portfolioProvider = FutureProvider<Portfolio>((ref) {
 
 final instrumentsProvider = FutureProvider<List<Instrument>>((ref) => ref.watch(repositoryProvider).getInstruments());
 
-final quotesProvider = StreamProvider<Map<String, Quote>>((ref) => ref.watch(repositoryProvider).watchQuotes());
+final quotesProvider = FutureProvider<Map<String, Quote>>((ref) => ref.watch(repositoryProvider).getQuotes());
 
 final fxRatesProvider = FutureProvider<Map<String, double>>((ref) => ref.watch(repositoryProvider).getFxRates());
 

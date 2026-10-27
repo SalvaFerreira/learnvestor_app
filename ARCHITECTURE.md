@@ -76,7 +76,7 @@ Postgres organizado como num projeto Supabase: o esquema `public` é a superfíc
 
 - **Lições:** `start_lesson` verifica a ordem de desbloqueio e a região, e devolve os exercícios na língua pedida. `complete_lesson` corrige com as respostas certas guardadas no servidor (só conta a primeira tentativa), desconta as vidas em falta e atribui estrelas, XP (com limite diário e menos XP em repetições), euros, streak e conquistas. Rejeita tentativas demasiado rápidas.
 - **Vidas:** não há tarefas periódicas. O valor é calculado quando é pedido, a partir de `hearts`, `hearts_updated_at` e da taxa de regeneração. Recuperam-se com o tempo, com gemas ou com uma boa sessão de prática.
-- **Streak:** conta dias no fuso horário do visitante. As mudanças de fuso estão limitadas a uma por dia.
+- **Streak:** conta dias seguidos com uma lição, no fuso horário do visitante. Um dia falhado recomeça a contagem. As mudanças de fuso estão limitadas a uma por dia.
 - **Trades:** `place_trade` usa o preço guardado no servidor, nunca o do cliente. Converte a moeda com a taxa do dia, valida o saldo ou a posição e é idempotente (pedidos repetidos não duplicam a compra).
 
 ## 5. Conteúdo
@@ -97,11 +97,11 @@ Não há Realtime: a app lê as cotações uma vez por REST.
 
 ## 7. Persistência no browser
 
-- Na primeira visita, `demo_api.js` descarrega o PGlite (cerca de 14 MB), aplica as migrações e os seeds e cria quatro jogadores fictícios.
+- Na primeira visita, `demo_api.js` descarrega o PGlite (cerca de 14 MB), aplica as migrações e os seeds.
 - A base de dados fica no IndexedDB com um nome que inclui uma impressão digital do esquema (`learnvestor-demo-<hash>`). Quando as migrações ou o conteúdo mudam, a demo publicada começa numa base de dados nova e apaga as antigas, em vez de correr código novo sobre tabelas antigas.
 - Se uma primeira visita for interrompida a meio, a base de dados incompleta é apagada e criada de novo.
 - Depois de cada pedido que altera dados, a API força a gravação no IndexedDB antes de responder. O que a app mostra como feito sobrevive a um refresh.
-- Em cada visita, as cotações de exemplo recebem a data atual, para as compras nunca falharem por preços "velhos".
+- Em cada visita, as cotações de exemplo recebem a data atual, para as compras nunca falharem por preços "velhos", e fica guardado o ponto do dia no gráfico da carteira.
 - Se o IndexedDB não estiver disponível (algumas janelas privadas), a demo funciona na mesma em memória, mas nada fica guardado.
 
 ## 8. Build e publicação

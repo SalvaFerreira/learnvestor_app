@@ -10,12 +10,9 @@ import 'models.dart';
 /// authoritative; the only direct table access is read-only reference data and the few
 /// profile fields users may edit.
 class Repository {
-  Repository(this._client, {this.realtime = true});
+  Repository(this._client);
 
   final SupabaseClient _client;
-
-  /// False in the browser demo, which has no Realtime server.
-  final bool realtime;
   static const _uuid = Uuid();
 
   Future<T> _rpc<T>(String fn, [Map<String, dynamic>? params]) async {
@@ -58,20 +55,6 @@ class Repository {
   Future<LessonResult> completePractice(String sessionId, Map<String, Object?> answers) async =>
       LessonResult.fromJson(await _rpc<Json>('complete_practice', {'p_session_id': sessionId, 'p_answers': answers}));
 
-  /// [reason]: wrong_answer, typo, unclear or other.
-  Future<void> reportContent({
-    required String lessonId,
-    required String exerciseId,
-    required String reason,
-    String? message,
-  }) =>
-      _rpc<void>('report_content', {
-        'p_lesson_id': lessonId,
-        'p_exercise_id': exerciseId,
-        'p_reason': reason,
-        'p_message': message,
-      });
-
   Future<HeartsInfo> refillHearts() async => HeartsInfo.fromJson(await _rpc<Json>('refill_hearts'));
 
   Future<Portfolio> getPortfolio() async => Portfolio.fromJson(await _rpc<Json>('get_portfolio'));
@@ -95,45 +78,10 @@ class Repository {
     return [for (final r in rows) Instrument.fromJson(r)];
   }
 
-  /// Live quotes: a REST snapshot first (so prices show even if Realtime is unavailable),
-  /// then the updates market-data-sync pushes through Supabase Realtime.
-  Stream<Map<String, Quote>> watchQuotes() {
-    final quotes = <String, Quote>{};
-    RealtimeChannel? channel;
-    late final StreamController<Map<String, Quote>> controller;
-    controller = StreamController(
-      onListen: () async {
-        try {
-          final rows = await _client.from('quotes_latest').select('symbol, price, change_pct, as_of');
-          for (final r in rows) {
-            final q = Quote.fromJson(r);
-            quotes[q.symbol] = q;
-          }
-          controller.add(Map.of(quotes));
-        } catch (e, st) {
-          controller.addError(e, st);
-        }
-        if (!realtime) return;
-        channel = _client
-            .channel('public:quotes_latest')
-            .onPostgresChanges(
-              event: PostgresChangeEvent.all,
-              schema: 'public',
-              table: 'quotes_latest',
-              callback: (payload) {
-                if (payload.newRecord.isEmpty) return;
-                final q = Quote.fromJson(payload.newRecord);
-                quotes[q.symbol] = q;
-                controller.add(Map.of(quotes));
-              },
-            )
-            .subscribe();
-      },
-      onCancel: () async {
-        if (channel != null) await _client.removeChannel(channel!);
-      },
-    );
-    return controller.stream;
+  /// The sample quotes (they do not change while the demo is open).
+  Future<Map<String, Quote>> getQuotes() async {
+    final rows = await _client.from('quotes_latest').select('symbol, price, change_pct, as_of');
+    return {for (final r in rows) r['symbol'] as String: Quote.fromJson(r)};
   }
 
   /// Units of each currency per 1 EUR.
@@ -147,7 +95,8 @@ class Repository {
     return [for (final a in data) Achievement.fromJson(a as Json)];
   }
 
-  Future<void> deleteAccount() async {
+  /// "Reset progress": deletes the anonymous user and, by cascade, all of their data.
+  Future<void> resetProgress() async {
     final res = await _client.functions.invoke('delete-account', method: HttpMethod.post);
     if (res.status != 200) throw const AppException(AppError.unknown);
   }
@@ -163,13 +112,10 @@ enum AppError {
   attemptClosed,
   insufficientGems,
   heartsFull,
-  maxStreakFreezes,
   insufficientCash,
   insufficientShares,
   amountTooSmall,
   quoteUnavailable,
-  usernameTaken,
-  usernameNotAllowed,
   nothingToPractice,
   invalidProfile,
   timezoneChangeTooSoon,
@@ -192,15 +138,12 @@ class AppException implements Exception {
           'attempt_closed' || 'attempt_not_found' => AppError.attemptClosed,
           'insufficient_gems' => AppError.insufficientGems,
           'hearts_full' => AppError.heartsFull,
-          'max_streak_freezes' => AppError.maxStreakFreezes,
           'insufficient_cash' => AppError.insufficientCash,
           'insufficient_shares' => AppError.insufficientShares,
           'amount_too_small' || 'invalid_amount' || 'invalid_quantity' => AppError.amountTooSmall,
           'quote_unavailable' || 'fx_unavailable' || 'unknown_symbol' => AppError.quoteUnavailable,
-          'username_taken' => AppError.usernameTaken,
-          'username_not_allowed' => AppError.usernameNotAllowed,
           'nothing_to_practice' => AppError.nothingToPractice,
-          'invalid_profile' || 'invalid_age_bracket' || 'terms_not_accepted' => AppError.invalidProfile,
+          'invalid_profile' => AppError.invalidProfile,
           'timezone_change_too_soon' => AppError.timezoneChangeTooSoon,
           _ => AppError.unknown,
         },

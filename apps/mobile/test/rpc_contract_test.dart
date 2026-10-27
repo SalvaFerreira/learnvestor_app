@@ -12,9 +12,7 @@ Object? fixture(String name) => jsonDecode(File('test/fixtures/$name.json').read
 void main() {
   test('get_my_state', () {
     final state = PlayerState.fromJson(fixture('get_my_state')! as Json);
-    expect(state.profile.username, 'fixture_user');
     expect(state.profile.locale, 'pt');
-    expect(state.profile.onboarded, isTrue);
     expect(state.stats.lessonsCompleted, 1);
     expect(state.stats.hearts, state.stats.maxHearts, reason: 'the practice session gave back the heart lost in the lesson');
     expect(state.stats.levelProgress, inInclusiveRange(0, 1));
@@ -86,13 +84,9 @@ void main() {
     expect(portfolio.totalValue, closeTo(portfolio.cash + portfolio.holdingsValue, 0.01));
   });
 
-  test('achievements and leaderboard', () {
+  test('achievements', () {
     final achievements = [for (final a in fixture('get_my_achievements')! as List) Achievement.fromJson(a as Json)];
     expect(achievements.firstWhere((a) => a.id == 'first_lesson').unlocked, isTrue);
     expect(achievements.firstWhere((a) => a.id == 'first_trade').title, 'Primeira Transação');
-
-    final board = Leaderboard.fromJson(fixture('get_weekly_leaderboard')! as Json);
-    expect(board.entries.single.isMe, isTrue);
-    expect(board.myRank, 1);
   });
 }

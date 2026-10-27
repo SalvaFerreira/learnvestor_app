@@ -23,17 +23,6 @@ jobs:
           npm ci --prefix tools/db-tests
           npm test --prefix tools/db-tests
 
-  edge-functions:
-    name: Edge Functions
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-      - run: deno check supabase/functions/*/index.ts
-      - run: deno test supabase/functions
-
   mobile:
     name: Flutter app
     runs-on: ubuntu-latest

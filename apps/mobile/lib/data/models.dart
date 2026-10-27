@@ -9,30 +9,24 @@ DateTime? _date(Object? v) => v == null ? null : DateTime.parse(v as String).toL
 class Profile {
   const Profile({
     required this.id,
-    required this.username,
     required this.locale,
     required this.timezone,
     required this.dailyGoalXp,
-    required this.onboarded,
     this.countryCode,
   });
 
   factory Profile.fromJson(Json j) => Profile(
         id: j['id'] as String,
-        username: j['username'] as String?,
         locale: j['locale'] as String,
         timezone: j['timezone'] as String,
         dailyGoalXp: toInt(j['daily_goal_xp']),
-        onboarded: j['onboarded'] as bool,
         countryCode: j['country_code'] as String?,
       );
 
   final String id;
-  final String? username;
   final String locale;
   final String timezone;
   final int dailyGoalXp;
-  final bool onboarded;
   final String? countryCode;
 }
 
@@ -49,7 +43,6 @@ class Stats {
     required this.streak,
     required this.streakLongest,
     required this.streakExtendedToday,
-    required this.streakFreezes,
     required this.lessonsCompleted,
     required this.coinsEarned,
     required this.xpToday,
@@ -67,7 +60,6 @@ class Stats {
         streak: toInt(j['streak']),
         streakLongest: toInt(j['streak_longest']),
         streakExtendedToday: j['streak_extended_today'] as bool? ?? false,
-        streakFreezes: toInt(j['streak_freezes']),
         lessonsCompleted: toInt(j['lessons_completed']),
         coinsEarned: toDouble(j['coins_earned']),
         xpToday: toInt(j['xp_today']),
@@ -84,7 +76,6 @@ class Stats {
   final int streak;
   final int streakLongest;
   final bool streakExtendedToday;
-  final int streakFreezes;
   final int lessonsCompleted;
   final double coinsEarned;
   final int xpToday;
@@ -97,21 +88,15 @@ class Stats {
 class Economy {
   const Economy({
     required this.refillHeartsGemCost,
-    required this.streakFreezeGemCost,
-    required this.maxStreakFreezes,
     required this.minTradeEur,
   });
 
   factory Economy.fromJson(Json j) => Economy(
         refillHeartsGemCost: toInt(j['refill_hearts_gem_cost']),
-        streakFreezeGemCost: toInt(j['streak_freeze_gem_cost']),
-        maxStreakFreezes: toInt(j['max_streak_freezes']),
         minTradeEur: toDouble(j['min_trade_eur']),
       );
 
   final int refillHeartsGemCost;
-  final int streakFreezeGemCost;
-  final int maxStreakFreezes;
   final double minTradeEur;
 }
 
@@ -608,37 +593,4 @@ class Achievement {
   final DateTime? unlockedAt;
 
   bool get unlocked => unlockedAt != null;
-}
-
-class LeaderboardEntry {
-  const LeaderboardEntry({required this.rank, required this.username, required this.xp, required this.isMe});
-
-  factory LeaderboardEntry.fromJson(Json j) => LeaderboardEntry(
-        rank: toInt(j['rank']),
-        username: j['username'] as String,
-        xp: toInt(j['xp']),
-        isMe: j['is_me'] as bool,
-      );
-
-  final int rank;
-  final String username;
-  final int xp;
-  final bool isMe;
-}
-
-class Leaderboard {
-  const Leaderboard({required this.entries, this.myRank, this.myXp = 0});
-
-  factory Leaderboard.fromJson(Json j) {
-    final me = j['me'] as Json?;
-    return Leaderboard(
-      entries: [for (final e in j['entries'] as List) LeaderboardEntry.fromJson(e as Json)],
-      myRank: me == null ? null : toInt(me['rank']),
-      myXp: toInt(me?['xp']),
-    );
-  }
-
-  final List<LeaderboardEntry> entries;
-  final int? myRank;
-  final int myXp;
 }

@@ -1,8 +1,7 @@
 -- Market data cache and the virtual portfolio.
 --
--- Clients never talk to the market data provider: the market-data-sync Edge Function
--- refreshes quotes_latest/quotes_daily/fx_rates on a schedule (fixed cost, independent of
--- the number of users) and clients read the cache.
+-- Prices are sample data (supabase/seeds/20_dev_market_data.sql); the demo moves their
+-- timestamps to "now" on every visit so trades never hit stale quotes.
 -- All portfolio money is VIRTUAL euros earned in lessons; it can never be bought or withdrawn.
 
 create table public.instruments (
@@ -133,7 +132,7 @@ as $$
   where p.portfolio_id = p_portfolio
 $$;
 
--- Daily point for the portfolio chart; scheduled by pg_cron (see *_cron.sql).
+-- Daily point for the portfolio chart; the demo takes one on every visit (refreshDemoData).
 create or replace function private.snapshot_portfolios()
 returns int
 language plpgsql
@@ -149,14 +148,5 @@ begin
     set cash = excluded.cash, value = excluded.value;
   get diagnostics v_count = row_count;
   return v_count;
-end;
-$$;
-
--- Realtime price updates for open Explore/Portfolio screens (only where the publication exists).
-do $$
-begin
-  if exists (select 1 from pg_publication where pubname = 'supabase_realtime') then
-    alter publication supabase_realtime add table public.quotes_latest;
-  end if;
 end;
 $$;

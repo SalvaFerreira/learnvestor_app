@@ -322,7 +322,7 @@ class _DemoCard extends ConsumerWidget {
     );
     if (confirmed != true || !context.mounted) return;
     try {
-      await ref.read(repositoryProvider).deleteAccount();
+      await ref.read(repositoryProvider).resetProgress();
       // Back to the start screen, which creates a fresh learner with full hearts.
       await ref.read(supabaseProvider).auth.signOut();
     } catch (e) {

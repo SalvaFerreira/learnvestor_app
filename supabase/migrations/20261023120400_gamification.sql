@@ -14,7 +14,6 @@ create table public.user_stats (
   streak_longest    int not null default 0 check (streak_longest >= 0),
   -- Last day (in the user's timezone) with a completed lesson.
   streak_last_day   date,
-  streak_freezes    int not null default 0 check (streak_freezes >= 0),
   lessons_completed int not null default 0,
   coins_earned      numeric(14,2) not null default 0,
   updated_at        timestamptz not null default now()
@@ -233,9 +232,8 @@ as $$
   select (now() at time zone coalesce((select p.timezone from public.profiles p where p.id = p_user), 'UTC'))::date
 $$;
 
--- Streak as it should be displayed today, without mutating anything. Missed days are
--- covered by streak freezes, which are consumed when the learner comes back.
-create or replace function private.effective_streak(p_current int, p_last_day date, p_freezes int, p_today date)
+-- Streak as it should be displayed today, without mutating anything: a missed day resets it.
+create or replace function private.effective_streak(p_current int, p_last_day date, p_today date)
 returns int
 language sql
 immutable
@@ -244,7 +242,6 @@ as $$
   select case
     when p_last_day is null then 0
     when p_last_day >= p_today - 1 then p_current
-    when (p_today - p_last_day - 1) <= p_freezes then p_current
     else 0
   end
 $$;
@@ -257,8 +254,6 @@ set search_path = ''
 as $$
 declare
   s public.user_stats;
-  v_missed int;
-  v_used int := 0;
   v_current int;
   v_extended boolean := true;
 begin
@@ -272,23 +267,16 @@ begin
   elsif s.streak_last_day = p_today - 1 then
     v_current := s.streak_current + 1;
   else
-    v_missed := p_today - s.streak_last_day - 1;
-    if v_missed <= s.streak_freezes then
-      v_used := v_missed;
-      v_current := s.streak_current + 1;
-    else
-      v_current := 1;
-    end if;
+    v_current := 1;
   end if;
 
   update public.user_stats
      set streak_current = v_current,
          streak_longest = greatest(streak_longest, v_current),
-         streak_last_day = greatest(coalesce(streak_last_day, p_today), p_today),
-         streak_freezes = streak_freezes - v_used
+         streak_last_day = greatest(coalesce(streak_last_day, p_today), p_today)
    where user_id = p_user;
 
-  return jsonb_build_object('current', v_current, 'extended_today', v_extended, 'freezes_used', v_used);
+  return jsonb_build_object('current', v_current, 'extended_today', v_extended);
 end;
 $$;
 

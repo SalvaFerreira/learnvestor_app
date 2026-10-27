@@ -1,34 +1,22 @@
 # LearnVestor: app Flutter
 
-Flutter 3.38, com Riverpod 3 (estado), go_router (navegação), supabase_flutter (utilizador anónimo, RPCs, Realtime), fl_chart e Sentry. Não há login nem compras: no primeiro arranque a app cria um utilizador anónimo para o dispositivo. Os textos estão em EN e PT (`lib/l10n/*.arb`, gerados com `flutter gen-l10n`).
+Flutter 3.38, com Riverpod 3 (estado), go_router (navegação), supabase_flutter (utilizador anónimo, RPCs e leituras) e fl_chart. É publicada como demo web: não há login nem compras, e no primeiro arranque a app cria um utilizador anónimo. Os textos estão em EN e PT (`lib/l10n/*.arb`, gerados com `flutter gen-l10n`).
 
 ## Configuração (`--dart-define`)
 
-| Variável | Obrigatória | Notas |
-|---|---|---|
-| `SUPABASE_URL` | sim (exceto na demo) | `https://<ref>.supabase.co` |
-| `SUPABASE_PUBLISHABLE_KEY` | sim (exceto na demo) | Chave pública do projeto (publishable/anon). Nunca uses a secret/service-role. |
-| `DEMO` | não | `true` gera a demo no browser: a app fala com a API de demonstração dentro da página e não precisa de `SUPABASE_URL` nem de chave. Usada pelo `tools/web-demo`. |
-| `SENTRY_DSN` | não | Ativa o reporte de erros, sem dados pessoais. |
-| `APP_ENV` | não | `development`, `staging` ou `production` (aparece no Sentry). |
-
-O mais simples é guardar estes valores num ficheiro por ambiente e usar `--dart-define-from-file`:
-
-```bash
-flutter run --dart-define-from-file=env/staging.json
-flutter build appbundle --release --obfuscate --split-debug-info=build/symbols --dart-define-from-file=env/production.json
-flutter build ipa --release --obfuscate --split-debug-info=build/symbols --dart-define-from-file=env/production.json
-```
-
-(`env/*.json` não deve ir para o git.)
+| Variável | Notas |
+|---|---|
+| `DEMO` | `true` gera a demo no browser: a app fala com a API de demonstração dentro da página. Usada pelo `tools/web-demo`. |
+| `SUPABASE_URL` e `SUPABASE_PUBLISHABLE_KEY` | Só para desenvolver com `flutter run` contra o `tools/db-tests/dev-server.mjs` (ver o [README principal](../../README.md)). |
 
 ## Estrutura
 
 ```
 lib/
 ├── app/          MaterialApp, router (arranque → menu principal) e shell com navegação
-├── core/         configuração, tema (cores dos mockups), formatação
-├── data/         modelos (JSON das RPCs) e Repository (única porta para o Supabase)
+├── core/         configuração, tema, formatação
+├── data/         modelos (JSON das RPCs) e Repository (única porta para a API)
+├── services/     DemoHttpClient: entrega os pedidos à API de demonstração dentro da página
 ├── state/        providers Riverpod
 ├── features/     start (cria o utilizador anónimo), home (menu principal, com reiniciar progresso e feedback), learn (+ lição), explore (+ trade), portfolio, tools
 └── ui/           componentes partilhados e mensagens de erro localizadas

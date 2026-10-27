@@ -1,16 +1,11 @@
 // Lessons, XP, hearts, streaks and achievements.
 import assert from 'node:assert/strict';
 import { before, beforeEach, describe, test } from 'node:test';
-import { backdateAttempt, correctAnswers, createDb, createUser, onboard, passLesson, rpc, sql } from '../harness.mjs';
+import { backdateAttempt, correctAnswers, createDb, createUser, passLesson, rpc, sql } from '../harness.mjs';
 
 let db;
-let n = 0;
 
-async function newLearner(meta) {
-  const uid = await createUser(db, meta);
-  await onboard(db, uid, `learner${++n}`);
-  return uid;
-}
+const newLearner = (meta) => createUser(db, { country: 'PT', ...meta });
 
 const state = (uid) => rpc(db, uid, 'get_my_state');
 
@@ -27,7 +22,6 @@ describe('signup', () => {
     assert.equal(s.profile.country_code, 'PT');
     assert.equal(s.stats.hearts, 6);
     assert.equal(Number(s.portfolio.cash), 100);
-    assert.equal(s.profile.onboarded, false);
   });
 
   test('falls back to safe defaults for invalid metadata', async () => {
@@ -54,10 +48,7 @@ describe('learning path', () => {
   });
 
   test('Portugal-only lessons are hidden for learners elsewhere', async () => {
-    const uid = await createUser(db);
-    await rpc(db, uid, 'complete_onboarding', {
-      p_username: `abroad${++n}`, p_age_bracket: '25-34', p_daily_goal_xp: 20, p_country_code: 'ES', p_terms_version: 'v1',
-    });
+    const uid = await newLearner({ country: 'ES' });
     const path = await rpc(db, uid, 'get_learning_path');
     assert.ok(!path.some((t) => t.id === 'taxes'), 'the whole taxes track is PT-only');
     await assert.rejects(rpc(db, uid, 'start_lesson', { p_lesson_id: 'gross-vs-net' }), /lesson_not_found/);
@@ -228,12 +219,12 @@ describe('hearts', () => {
 
 describe('streaks', () => {
   let uid;
-  const setStreak = (current, daysAgo, freezes = 0) =>
+  const setStreak = (current, daysAgo) =>
     sql(
       db,
       `update public.user_stats set streak_current = $2, streak_longest = greatest(streak_longest, $2),
-         streak_last_day = (now() at time zone 'UTC')::date - $3::int, streak_freezes = $4 where user_id = $1`,
-      [uid, current, daysAgo, freezes],
+         streak_last_day = (now() at time zone 'UTC')::date - $3::int where user_id = $1`,
+      [uid, current, daysAgo],
     );
 
   beforeEach(async () => {
@@ -246,19 +237,11 @@ describe('streaks', () => {
     assert.equal(result.streak.current, 5);
   });
 
-  test('a missed day without freezes resets the streak', async () => {
+  test('a missed day resets the streak', async () => {
     await setStreak(4, 2);
     assert.equal((await state(uid)).stats.streak, 0);
     const result = await passLesson(db, uid, 'what-is-a-bank');
     assert.equal(result.streak.current, 1);
-  });
-
-  test('a streak freeze covers a missed day', async () => {
-    await setStreak(4, 2, 1);
-    assert.equal((await state(uid)).stats.streak, 4);
-    const result = await passLesson(db, uid, 'what-is-a-bank');
-    assert.equal(result.streak.current, 5);
-    assert.equal(result.streak.freezes_used, 1);
   });
 
   test('a second lesson on the same day does not extend it again', async () => {
@@ -281,23 +264,7 @@ describe('free for everyone', () => {
   });
 });
 
-describe('social and GDPR', () => {
-  test('weekly leaderboard ranks by XP earned this week', async () => {
-    const a = await newLearner();
-    const b = await newLearner();
-    await passLesson(db, a, 'what-is-a-bank');
-    await passLesson(db, b, 'risk-vs-reward');
-    const board = await rpc(db, a, 'get_weekly_leaderboard');
-    const me = board.entries.find((e) => e.is_me);
-    assert.ok(me, 'caller appears in the ranking');
-    assert.equal(Number(me.xp), 25);
-    assert.equal(board.me.rank, me.rank);
-    // risk-vs-reward gives more XP (35 + 5) than what-is-a-bank (20 + 5)
-    const xps = board.entries.map((e) => Number(e.xp));
-    assert.deepEqual(xps, [...xps].sort((x, y) => y - x));
-    assert.ok(b);
-  });
-
+describe('achievements and reset', () => {
   test('achievements list shows progress', async () => {
     const uid = await newLearner();
     await passLesson(db, uid, 'what-is-a-bank');
@@ -310,20 +277,11 @@ describe('social and GDPR', () => {
     assert.equal(five.unlocked_at, null);
   });
 
-  test('export contains the user data and nothing from other users', async () => {
-    const uid = await newLearner();
-    await passLesson(db, uid, 'what-is-a-bank');
-    const data = await rpc(db, uid, 'export_my_data');
-    assert.equal(data.profile.id, uid);
-    assert.equal(data.lesson_progress.length, 1);
-    assert.ok(data.xp_events.every((e) => e.user_id === uid));
-  });
-
-  test('deleting the auth user removes all their data', async () => {
+  test('deleting the auth user (Reset progress) removes all their data', async () => {
     const uid = await newLearner();
     await passLesson(db, uid, 'what-is-a-bank');
     await sql(db, 'delete from auth.users where id = $1', [uid]);
-    for (const table of ['profiles', 'user_stats', 'portfolios', 'lesson_attempts', 'xp_events', 'currency_ledger', 'consents']) {
+    for (const table of ['profiles', 'user_stats', 'portfolios', 'lesson_attempts', 'xp_events', 'currency_ledger']) {
       const column = table === 'profiles' ? 'id' : 'user_id';
       const rows = await sql(db, `select 1 from public.${table} where ${column} = $1`, [uid]);
       assert.equal(rows.length, 0, table);

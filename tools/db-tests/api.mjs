@@ -3,37 +3,24 @@
 //   Auth  : anonymous sign-in (there are no logins), refresh, user, logout
 //   REST  : RPCs, simple selects (eq filters + order) and profile PATCH
 //   Funcs : delete-account
-// Realtime is not implemented (the app falls back to the REST snapshot of quotes).
+// Realtime is not implemented (the app reads the sample quotes once).
 //
 // No Node APIs here: dev-server.mjs serves it over HTTP and the web demo
 // (tools/web-demo) calls it inside the browser.
 
-import { as, onboard, sql } from './db.mjs';
+import { as, sql } from './db.mjs';
 
 const IDENT = /^[a-z_][a-z0-9_]*$/;
 const TOKEN_TTL = 3600;
 
-const DEMO_LEARNERS = [['ana_invests', 180], ['joao_etf', 120], ['marta_bolsa', 95], ['rui_poupa', 40]];
-
-/** A few other learners so the weekly leaderboard is not empty. */
-export async function seedDemoLearners(db) {
-  for (const [username, xp] of DEMO_LEARNERS) {
-    const [{ id }] = await sql(db, 'insert into auth.users (is_anonymous) values (true) returning id');
-    await onboard(db, id, username);
-    await sql(db, `insert into public.xp_events (user_id, amount, reason, local_date) values ($1, $2, 'demo', current_date)`, [id, xp]);
-    await sql(db, 'update public.user_stats set xp = $2, level = private.level_for_xp($2) where user_id = $1', [id, xp]);
-  }
-}
-
 /**
- * For a database that is kept between sessions (the web demo): the sample quotes and the
- * demo learners' XP are moved to "now", so trades never hit stale prices and the weekly
- * leaderboard is never empty.
+ * For a database that is kept between sessions (the web demo): the sample quotes are moved
+ * to "now", so trades never hit stale prices, and today's point of the portfolio chart is saved.
  */
 export async function refreshDemoData(db) {
   await sql(db, 'update public.quotes_latest set as_of = now()');
   await sql(db, 'update public.fx_rates set as_of = current_date');
-  await sql(db, `update public.xp_events set created_at = now(), local_date = current_date where reason = 'demo'`);
+  await sql(db, 'select private.snapshot_portfolios()');
 }
 
 // ---- JWT (HS256 with WebCrypto, available in browsers and Node) -----------------------------

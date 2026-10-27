@@ -2,16 +2,11 @@
 import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
 import { before, describe, test } from 'node:test';
-import { createDb, createUser, onboard, rpc, sql } from '../harness.mjs';
+import { createDb, createUser, rpc, sql } from '../harness.mjs';
 
 let db;
-let n = 0;
 
-async function investor() {
-  const uid = await createUser(db);
-  await onboard(db, uid, `investor${++n}`);
-  return uid;
-}
+const investor = () => createUser(db, { country: 'PT' });
 
 const trade = (uid, args) => rpc(db, uid, 'place_trade', { p_idempotency_key: randomUUID(), ...args });
 
@@ -115,7 +110,7 @@ describe('portfolio views', () => {
     await sql(db, `update public.quotes_latest set price = 50 where symbol = 'AAPL'`);
   });
 
-  test('daily snapshot job records every portfolio', async () => {
+  test('the daily snapshot records every portfolio', async () => {
     const [{ count }] = await sql(db, 'select private.snapshot_portfolios() as count');
     const [{ portfolios }] = await sql(db, 'select count(*)::int as portfolios from public.portfolios');
     assert.equal(count, portfolios);

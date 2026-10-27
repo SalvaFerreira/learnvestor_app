@@ -1,16 +1,14 @@
 // RLS policies and grants: what each API role can and cannot do.
 import assert from 'node:assert/strict';
 import { before, describe, test } from 'node:test';
-import { as, createDb, createUser, onboard, rpc, sql } from '../harness.mjs';
+import { as, createDb, createUser, rpc, sql } from '../harness.mjs';
 
 let db, alice, bob;
 
 before(async () => {
   db = await createDb();
-  alice = await createUser(db);
-  bob = await createUser(db);
-  await onboard(db, alice, 'alice');
-  await onboard(db, bob, 'bob');
+  alice = await createUser(db, { country: 'PT' });
+  bob = await createUser(db, { country: 'PT' });
 });
 
 describe('anonymous visitors', () => {
@@ -49,7 +47,7 @@ describe('signed-in users', () => {
     const [row] = await sql(db, 'select locale, display_name from public.profiles where id = $1', [alice]);
     assert.deepEqual(row, { locale: 'pt', display_name: 'Alice' });
 
-    await assert.rejects(as(db, alice, (q) => q(`update public.profiles set onboarded_at = null where id = $1`, [alice])), /permission denied/);
+    await assert.rejects(as(db, alice, (q) => q(`update public.profiles set created_at = now() where id = $1`, [alice])), /permission denied/);
     const changed = await as(db, alice, (q) => q(`update public.profiles set locale = 'pt' where id = $1 returning id`, [bob]));
     assert.equal(changed.length, 0, 'RLS hides other profiles from UPDATE');
   });
@@ -76,23 +74,5 @@ describe('signed-in users', () => {
     assert.ok(instruments.length > 10);
     const quotes = await as(db, alice, (q) => q('select symbol, price from public.quotes_latest'));
     assert.ok(quotes.length > 10);
-  });
-});
-
-describe('onboarding', () => {
-  test('rejects duplicate usernames (case-insensitive) and invalid ages', async () => {
-    const carol = await createUser(db);
-    await assert.rejects(onboard(db, carol, 'ALICE'), /username_taken/);
-    await assert.rejects(
-      rpc(db, carol, 'complete_onboarding', {
-        p_username: 'carol', p_age_bracket: '13-15', p_daily_goal_xp: 30, p_country_code: 'PT', p_terms_version: 'v1',
-      }),
-      /invalid_age_bracket/,
-    );
-  });
-
-  test('records consents', async () => {
-    const rows = await sql(db, 'select kind, granted from public.consents where user_id = $1 order by kind', [alice]);
-    assert.deepEqual(rows.map((r) => r.kind), ['analytics', 'marketing', 'privacy', 'terms']);
   });
 });

@@ -1,7 +1,7 @@
 // The demo API (api.mjs) used by dev-server.mjs and the web demo.
 import assert from 'node:assert/strict';
 import { before, describe, test } from 'node:test';
-import { createApi, refreshDemoData, seedDemoLearners } from '../api.mjs';
+import { createApi, refreshDemoData } from '../api.mjs';
 import { createDb, sql } from '../harness.mjs';
 
 const BASE = 'http://demo.local';
@@ -9,7 +9,6 @@ let db;
 
 before(async () => {
   db = await createDb();
-  await seedDemoLearners(db);
 });
 
 async function call(api, method, path, { token, body } = {}) {
@@ -32,7 +31,6 @@ describe('demo API', () => {
     const state = await call(api, 'POST', '/rest/v1/rpc/get_my_state', { token: session.access_token });
     assert.equal(state.status, 200);
     assert.equal(state.data.profile.locale, 'pt');
-    assert.equal(state.data.profile.onboarded, false);
   });
 
   test('sessions survive a restart of the API (a page reload in the browser)', async () => {
@@ -67,16 +65,14 @@ describe('demo API', () => {
     assert.equal((await sql(db, 'select 1 from auth.users where id = $1', [session.user.id])).length, 0);
   });
 
-  test('refreshDemoData keeps quotes tradable and demo learners on this week\'s leaderboard', async () => {
+  test('refreshDemoData keeps quotes tradable and saves today\'s portfolio point', async () => {
     await sql(db, `update public.quotes_latest set as_of = now() - interval '30 days'`);
-    await sql(db, `update public.xp_events set created_at = now() - interval '30 days' where reason = 'demo'`);
     await refreshDemoData(db);
 
     const [{ stale }] = await sql(db, `select count(*)::int as stale from public.quotes_latest where as_of < now() - interval '1 hour'`);
     assert.equal(stale, 0);
-    const api = createApi(db);
-    const { data: session } = await call(api, 'POST', '/auth/v1/signup', { body: {} });
-    const board = await call(api, 'POST', '/rest/v1/rpc/get_weekly_leaderboard', { token: session.access_token });
-    assert.ok(board.data.entries.some((e) => e.username === 'ana_invests'));
+    const [{ missing }] = await sql(db, `select count(*)::int as missing from public.portfolios p
+      where not exists (select 1 from public.portfolio_snapshots s where s.portfolio_id = p.id and s.day = current_date)`);
+    assert.equal(missing, 0);
   });
 });

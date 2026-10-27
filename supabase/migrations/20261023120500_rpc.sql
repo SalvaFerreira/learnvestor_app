@@ -112,15 +112,12 @@ begin
   return jsonb_build_object(
     'profile', jsonb_build_object(
       'id', p.id,
-      'username', p.username,
       'display_name', p.display_name,
       'locale', p.locale,
       'timezone', p.timezone,
       'country_code', p.country_code,
-      'age_bracket', p.age_bracket,
       'daily_goal_xp', p.daily_goal_xp,
-      'display_currency', p.display_currency,
-      'onboarded', p.onboarded_at is not null),
+      'display_currency', p.display_currency),
     'stats', jsonb_build_object(
       'xp', s.xp,
       'level', s.level,
@@ -130,10 +127,9 @@ begin
       'hearts', e.hearts,
       'max_hearts', c.max_hearts,
       'next_heart_at', e.next_heart_at,
-      'streak', private.effective_streak(s.streak_current, s.streak_last_day, s.streak_freezes, v_today),
+      'streak', private.effective_streak(s.streak_current, s.streak_last_day, v_today),
       'streak_longest', s.streak_longest,
       'streak_extended_today', coalesce(s.streak_last_day = v_today, false),
-      'streak_freezes', s.streak_freezes,
       'lessons_completed', s.lessons_completed,
       'coins_earned', s.coins_earned,
       'xp_today', v_xp_today),
@@ -143,55 +139,7 @@ begin
       'total_value', pf.cash + v_holdings),
     'economy', jsonb_build_object(
       'refill_hearts_gem_cost', c.refill_hearts_gem_cost,
-      'streak_freeze_gem_cost', c.streak_freeze_gem_cost,
-      'max_streak_freezes', c.max_streak_freezes,
       'min_trade_eur', c.min_trade_eur));
-end;
-$$;
-
-create or replace function public.complete_onboarding(
-  p_username text,
-  p_age_bracket text,
-  p_daily_goal_xp int,
-  p_country_code text,
-  p_terms_version text,
-  p_marketing_opt_in boolean default false,
-  p_analytics_opt_in boolean default false)
-returns jsonb
-language plpgsql
-security definer
-set search_path = ''
-as $$
-declare
-  v_uid uuid := private.require_user();
-begin
-  if p_age_bracket is null or p_age_bracket not in ('16-17', '18-24', '25-34', '35-44', '45-54', '55+') then
-    raise exception 'invalid_age_bracket';
-  end if;
-  if p_terms_version is null or length(p_terms_version) = 0 then
-    raise exception 'terms_not_accepted';
-  end if;
-
-  begin
-    update public.profiles
-       set username = p_username,
-           age_bracket = p_age_bracket,
-           daily_goal_xp = p_daily_goal_xp,
-           country_code = upper(nullif(p_country_code, '')),
-           onboarded_at = coalesce(onboarded_at, now())
-     where id = v_uid;
-  exception
-    when unique_violation then raise exception 'username_taken';
-    when check_violation then raise exception 'invalid_profile';
-  end;
-
-  insert into public.consents (user_id, kind, version, granted) values
-    (v_uid, 'terms', p_terms_version, true),
-    (v_uid, 'privacy', p_terms_version, true),
-    (v_uid, 'marketing', p_terms_version, coalesce(p_marketing_opt_in, false)),
-    (v_uid, 'analytics', p_terms_version, coalesce(p_analytics_opt_in, false));
-
-  return public.get_my_state();
 end;
 $$;
 
@@ -577,32 +525,6 @@ begin
 end;
 $$;
 
-create or replace function public.buy_streak_freeze()
-returns jsonb
-language plpgsql
-security definer
-set search_path = ''
-as $$
-declare
-  v_uid uuid := private.require_user();
-  c private.game_config := private.config();
-  s public.user_stats;
-begin
-  select * into s from public.user_stats where user_id = v_uid for update;
-  if s.streak_freezes >= c.max_streak_freezes then raise exception 'max_streak_freezes'; end if;
-  if s.gems < c.streak_freeze_gem_cost then raise exception 'insufficient_gems'; end if;
-
-  update public.user_stats
-     set gems = gems - c.streak_freeze_gem_cost, streak_freezes = streak_freezes + 1
-   where user_id = v_uid
-  returning * into s;
-  insert into public.currency_ledger (user_id, currency, amount, reason)
-  values (v_uid, 'gems', -c.streak_freeze_gem_cost, 'streak_freeze');
-
-  return jsonb_build_object('gems', s.gems, 'streak_freezes', s.streak_freezes);
-end;
-$$;
-
 -- Virtual trading -------------------------------------------------------------------------
 
 -- Executes at the server's cached price, never a client-supplied one. Either p_quantity
@@ -768,44 +690,7 @@ begin
 end;
 $$;
 
--- Social / achievements -------------------------------------------------------------------
-
--- Weekly XP ranking (UTC weeks). At larger scale this moves to Redis sorted sets with
--- leagues of ~30 learners; the RPC contract can stay the same.
-create or replace function public.get_weekly_leaderboard()
-returns jsonb
-language plpgsql
-stable
-security definer
-set search_path = ''
-as $$
-declare
-  v_uid uuid := private.require_user();
-  v_start timestamptz := date_trunc('week', now());
-  v_result jsonb;
-begin
-  with totals as (
-    select x.user_id, sum(x.amount)::bigint as xp
-    from public.xp_events x
-    join public.profiles p on p.id = x.user_id and p.username is not null
-    where x.created_at >= v_start
-    group by x.user_id
-  ), ranked as (
-    select t.user_id, t.xp, rank() over (order by t.xp desc) as rnk from totals t
-  )
-  select jsonb_build_object(
-           'week_start', v_start,
-           'entries', coalesce((
-             select jsonb_agg(jsonb_build_object(
-                      'rank', r.rnk, 'username', p.username, 'xp', r.xp, 'is_me', r.user_id = v_uid)
-                    order by r.rnk, p.username)
-             from (select * from ranked order by rnk limit 50) r
-             join public.profiles p on p.id = r.user_id), '[]'::jsonb),
-           'me', (select jsonb_build_object('rank', r.rnk, 'xp', r.xp) from ranked r where r.user_id = v_uid))
-    into v_result;
-  return v_result;
-end;
-$$;
+-- Achievements ----------------------------------------------------------------------------
 
 create or replace function public.get_my_achievements(p_locale text default 'en')
 returns jsonb
@@ -847,36 +732,5 @@ begin
     left join public.achievement_translations t on t.achievement_id = a.id and t.locale = v_locale
     left join public.achievement_translations te on te.achievement_id = a.id and te.locale = 'en'
     left join public.user_achievements ua on ua.achievement_id = a.id and ua.user_id = v_uid), '[]'::jsonb);
-end;
-$$;
-
--- GDPR ------------------------------------------------------------------------------------
-
--- Right of access / portability: everything we store about the caller in one document.
--- (Account deletion is handled by the delete-account Edge Function; all user data
--- cascades from auth.users.)
-create or replace function public.export_my_data()
-returns jsonb
-language plpgsql
-stable
-security definer
-set search_path = ''
-as $$
-declare
-  v_uid uuid := private.require_user();
-begin
-  return jsonb_build_object(
-    'exported_at', now(),
-    'profile', (select to_jsonb(p) from public.profiles p where p.id = v_uid),
-    'consents', (select coalesce(jsonb_agg(to_jsonb(c) order by c.created_at), '[]') from public.consents c where c.user_id = v_uid),
-    'stats', (select to_jsonb(s) from public.user_stats s where s.user_id = v_uid),
-    'lesson_progress', (select coalesce(jsonb_agg(to_jsonb(x)), '[]') from public.lesson_progress x where x.user_id = v_uid),
-    'lesson_attempts', (select coalesce(jsonb_agg(to_jsonb(x) order by x.started_at), '[]') from public.lesson_attempts x where x.user_id = v_uid),
-    'xp_events', (select coalesce(jsonb_agg(to_jsonb(x) order by x.created_at), '[]') from public.xp_events x where x.user_id = v_uid),
-    'currency_ledger', (select coalesce(jsonb_agg(to_jsonb(x) order by x.created_at), '[]') from public.currency_ledger x where x.user_id = v_uid),
-    'achievements', (select coalesce(jsonb_agg(to_jsonb(x)), '[]') from public.user_achievements x where x.user_id = v_uid),
-    'portfolio', (select to_jsonb(x) from public.portfolios x where x.user_id = v_uid),
-    'positions', (select coalesce(jsonb_agg(to_jsonb(x)), '[]') from public.positions x where x.user_id = v_uid),
-    'trades', (select coalesce(jsonb_agg(to_jsonb(x) order by x.executed_at), '[]') from public.trades x where x.user_id = v_uid));
 end;
 $$;

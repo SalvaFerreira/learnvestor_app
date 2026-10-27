@@ -20,7 +20,7 @@ to authenticated;
 
 -- The user's own rows (filtered by RLS)
 grant select on
-  public.profiles, public.consents,
+  public.profiles,
   public.user_stats, public.lesson_attempts, public.lesson_progress,
   public.xp_events, public.currency_ledger, public.user_achievements,
   public.portfolios, public.positions, public.trades, public.portfolio_snapshots
@@ -30,21 +30,15 @@ to authenticated;
 grant update (display_name, locale, timezone, display_currency, daily_goal_xp, country_code)
   on public.profiles to authenticated;
 
-grant insert on public.consents to authenticated;
-
 -- RPCs for signed-in users
 grant execute on function
   public.get_my_state(),
-  public.complete_onboarding(text, text, int, text, text, boolean, boolean),
   public.get_learning_path(text),
   public.start_lesson(text, text),
   public.lose_heart(uuid),
   public.complete_lesson(uuid, jsonb),
   public.refill_hearts(),
-  public.buy_streak_freeze(),
   public.place_trade(text, text, uuid, numeric, numeric),
   public.get_portfolio(),
-  public.get_weekly_leaderboard(),
-  public.get_my_achievements(text),
-  public.export_my_data()
+  public.get_my_achievements(text)
 to authenticated;

@@ -9,7 +9,7 @@
   "positions": [
     {
       "name": "Apple Inc.",
-      "as_of": "2026-10-27T17:27:48.199+00:00",
+      "as_of": "2026-10-27T21:25:38.806+00:00",
       "price": 238.99,
       "sector": "technology",
       "symbol": "AAPL",
@@ -23,7 +23,7 @@
     },
     {
       "name": "Galp Energia",
-      "as_of": "2026-10-27T17:27:48.199+00:00",
+      "as_of": "2026-10-27T21:25:38.806+00:00",
       "price": 17.1,
       "sector": "energy",
       "symbol": "GALP.LS",
@@ -39,21 +39,21 @@
   "total_value": 130,
   "recent_trades": [
     {
-      "id": "2b84d226-00da-479d-939e-84b4a99c7e94",
+      "id": "b9d29ac7-2f4e-41c8-9e37-ea7a2ed6d4de",
       "side": "buy",
       "symbol": "GALP.LS",
       "quantity": 1.5,
       "amount_eur": 25.65,
-      "executed_at": "2026-10-27T17:27:48.243+00:00",
+      "executed_at": "2026-10-27T21:25:38.848+00:00",
       "realized_pnl": null
     },
     {
-      "id": "dfb235a5-7a00-491c-b6dc-52dfbd50e9b2",
+      "id": "c73e5da9-d7ac-4e42-b848-38c71f19bfc5",
       "side": "buy",
       "symbol": "AAPL",
       "quantity": 0.22595,
       "amount_eur": 50,
-      "executed_at": "2026-10-27T17:27:48.239+00:00",
+      "executed_at": "2026-10-27T21:25:38.843+00:00",
       "realized_pnl": null
     }
   ],

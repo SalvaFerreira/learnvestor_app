@@ -1,4 +1,4 @@
--- Core: schemas, shared helpers, game configuration, profiles and consents.
+-- Core: schemas, shared helpers, game configuration and profiles.
 --
 -- Conventions used across all migrations:
 --   * public  : tables and RPCs reachable through the Supabase API. Every table has RLS on.
@@ -36,8 +36,6 @@ create table private.game_config (
   attempt_ttl_minutes      int     not null default 180,
   max_attempts_per_hour    int     not null default 60,
   refill_hearts_gem_cost   int     not null default 50,
-  streak_freeze_gem_cost   int     not null default 100,
-  max_streak_freezes       int     not null default 2,
   quote_max_age_hours      int     not null default 120,
   min_trade_eur            numeric(14,2) not null default 1.00,
   max_trades_per_hour      int     not null default 120
@@ -62,22 +60,16 @@ as $$ select exists (select 1 from pg_catalog.pg_timezone_names where name = p_t
 
 create table public.profiles (
   id                  uuid primary key references auth.users (id) on delete cascade,
-  username            text check (username ~ '^[A-Za-z0-9_]{3,20}$'),
   display_name        text check (char_length(display_name) <= 40),
   country_code        char(2) check (country_code ~ '^[A-Z]{2}$'),
   locale              text not null default 'en' check (locale in ('en', 'pt')),
   timezone            text not null default 'UTC',
   timezone_changed_at timestamptz,
   display_currency    char(3) not null default 'EUR',
-  -- Consumer accounts are 16+; we keep a bracket instead of a birth date (data minimisation).
-  age_bracket         text check (age_bracket in ('16-17', '18-24', '25-34', '35-44', '45-54', '55+')),
   daily_goal_xp       int not null default 30 check (daily_goal_xp in (10, 20, 30, 50)),
-  onboarded_at        timestamptz,
   created_at          timestamptz not null default now(),
   updated_at          timestamptz not null default now()
 );
-
-create unique index profiles_username_lower_key on public.profiles (lower(username));
 
 alter table public.profiles enable row level security;
 
@@ -116,24 +108,3 @@ create trigger profiles_validate before update on public.profiles
 
 create trigger profiles_touch before update on public.profiles
   for each row execute function private.touch_updated_at();
-
--- Consents (GDPR): append-only record of what the user agreed to and when.
-
-create table public.consents (
-  id         bigint generated always as identity primary key,
-  user_id    uuid not null references auth.users (id) on delete cascade,
-  kind       text not null check (kind in ('terms', 'privacy', 'marketing', 'analytics')),
-  version    text not null,
-  granted    boolean not null,
-  created_at timestamptz not null default now()
-);
-
-create index consents_user_idx on public.consents (user_id, kind, created_at desc);
-
-alter table public.consents enable row level security;
-
-create policy "consents: read own" on public.consents
-  for select to authenticated using (user_id = (select auth.uid()));
-
-create policy "consents: insert own" on public.consents
-  for insert to authenticated with check (user_id = (select auth.uid()));

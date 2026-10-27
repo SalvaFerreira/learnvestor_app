@@ -1,7 +1,7 @@
 # LearnVestor curriculum: the single source of truth for tracks, units, lesson order
 # and regions. Every lesson is free. Each lesson listed here is "planned" until a file exists in
-# content/lessons/<track>/<lesson-id>.json ("draft"), and only "reviewed" lessons are
-# published to production.
+# content/lessons/<track>/<lesson-id>.json ("draft") and "reviewed" once a person has checked it.
+# The demo shows drafts and reviewed lessons.
 #
 #   goals        what the learner must be able to do after the lesson (input for drafting)
 #   facts        facts the lesson must teach correctly; time-sensitive ones get valid_until

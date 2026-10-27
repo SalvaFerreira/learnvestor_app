@@ -48,17 +48,6 @@ export async function sql(db, text, params = []) {
   return (await db.query(text, params)).rows;
 }
 
-/** Completes onboarding with sensible defaults. */
-export async function onboard(db, uid, username) {
-  return rpc(db, uid, 'complete_onboarding', {
-    p_username: username,
-    p_age_bracket: '18-24',
-    p_daily_goal_xp: 30,
-    p_country_code: 'PT',
-    p_terms_version: '2026-10',
-  });
-}
-
 /** Builds the all-correct answers object from a start_lesson payload. */
 export function correctAnswers(lesson) {
   return Object.fromEntries(lesson.exercises.filter((e) => 'answer' in e).map((e) => [e.id, e.answer]));

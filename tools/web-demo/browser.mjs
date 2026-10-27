@@ -6,7 +6,7 @@
 // Supabase request to window.learnvestorDemoApi instead of the network.
 
 import { PGlite } from '@electric-sql/pglite';
-import { createApi, refreshDemoData, seedDemoLearners } from '../db-tests/api.mjs';
+import { createApi, refreshDemoData } from '../db-tests/api.mjs';
 import { applySql } from '../db-tests/db.mjs';
 import schema from './generated/schema.mjs';
 
@@ -33,7 +33,6 @@ async function openDb(assets, dataDir) {
     return openDb(assets, dataDir);
   }
   await applySql(db, schema.files);
-  await seedDemoLearners(db);
   await db.exec('create table auth.demo_ready ()');
   return db;
 }

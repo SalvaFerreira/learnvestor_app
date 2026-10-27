@@ -2,18 +2,16 @@
   "name": "@learnvestor/content",
   "private": true,
   "type": "module",
-  "description": "Curriculum, lessons, achievements and instruments as code: validated, drafted with AI, reviewed by people, compiled to SQL.",
+  "description": "Curriculum, lessons, achievements and instruments as code: validated, drafted with AI, reviewed by people, compiled to SQL for the demo.",
   "scripts": {
     "build": "node scripts/build.mjs",
     "check": "node scripts/build.mjs --check",
     "status": "node scripts/status.mjs",
-    "draft": "node scripts/draft.mjs",
-    "publish:db": "node scripts/publish.mjs"
+    "draft": "node scripts/draft.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",
     "ajv": "^8.17.1",
-    "pg": "^8.13.1",
     "yaml": "^2.9.1"
   }
 }
